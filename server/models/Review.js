@@ -4,15 +4,19 @@ const reviewSchema = new Schema({
     reviewText: {
         type: String,
         required: true,
-        min: 6
+        minlength: 6
     },
     createdAt: {
         type: Date,
         default: Date.now,
         // may add getter util to adjust date
     },
-    username: {
-        type: String,
-        required: true
+    reviewBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
-})
+});
+
+const Review = model('Review', reviewSchema);
+
+module.exports = Review
