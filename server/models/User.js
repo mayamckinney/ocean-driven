@@ -33,6 +33,10 @@ const userSchema = new Schema({
     boats: [{
         type: Schema.Types.ObjectId,
         ref: 'Boat',
+    }],
+    reviews: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Review'
     }]
 });
 
