@@ -17,6 +17,10 @@ const featureSchema = new Schema({
 })
 
 const boatSchema = new Schema({
+    image: {
+        type: String,
+        required: true
+    },
     boatType: {
         type: String,
         required: true
