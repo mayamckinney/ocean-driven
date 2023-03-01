@@ -1,3 +1,23 @@
 {
-    "name": "Ocean Driven"
-}
+    "name": "Ocean Driven",
+    "version": "1.0.0",
+    "description": "",
+    "engines": {
+      "node": "16.17.0",
+      "npm": "8.15.0"
+    },
+    "scripts": {
+      "start": "cd client && npm start",
+      "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+      "install": "cd server && npm i && cd ../client && npm i",
+      "seed": "cd server && npm run seed",
+      "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "concurrently": "^5.1.0"
+    }
+  }
+  
