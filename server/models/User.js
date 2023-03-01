@@ -27,8 +27,7 @@ const userSchema = new Schema({
     boats: [{
         type: Schema.Types.ObjectId,
         ref: 'Boat',
-    }],
-    id: false
+    }]
 });
 
 const User = model('user', userSchema);
