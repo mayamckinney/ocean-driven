@@ -1,0 +1,27 @@
+[
+  {
+    "username": "Brian Kernighan",
+    "email": "bkernighan@oceandriven.com",
+    "password": "password01"
+  },
+  {
+    "username": "Max Kanat-Alexander",
+    "email": "mkanatalexander@oceandriven.com",
+    "password": "password02"
+  },
+  {
+    "username": "Kent Beck",
+    "email": "kbeck@oceandriven.com",
+    "password": "password04"
+  },
+  {
+    "username": "Edward V. Berard",
+    "email": "evberard@oceandriven.com",
+    "password": "password05"
+  },
+  {
+    "username": "Alan Kay",
+    "email": "akay@oceandriven.com",
+    "password": "password06"
+  }
+]
