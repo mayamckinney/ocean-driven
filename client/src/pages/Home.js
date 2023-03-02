@@ -4,8 +4,6 @@ import { Box, Image } from "@chakra-ui/react";
 // Test page to see if Chakra UI is working
 import BoatsTest from "./BoatsTest";
 
-// import img from '../../public/images/'
-
 const Home = () => {
   return (
     <Box>
@@ -18,7 +16,7 @@ const Home = () => {
           objectFit='cover'
           />
       </Box>
-      
+
       <BoatsTest />
     </Box>
   );
