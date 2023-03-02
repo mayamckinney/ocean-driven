@@ -1,21 +1,5 @@
 const { Schema, model } = require('mongoose')
 
-const featureSchema = new Schema({
-    occupancy: {
-        type: Number,
-        required: true
-    },
-    foodServices: {
-        type: Boolean,
-        required: true
-    },
-    music: {
-        type: Boolean,
-        required: true
-    },
-    other: [String]
-})
-
 const boatSchema = new Schema({
     image: {
         type: String,
@@ -45,7 +29,19 @@ const boatSchema = new Schema({
         type: String,
         required: true
     },
-    features: featureSchema
+    occupancy: {
+        type: Number,
+        required: true
+    },
+    foodServices: {
+        type: Boolean,
+        required: true
+    },
+    music: {
+        type: Boolean,
+        required: true
+    },
+    otherFeatures: [String]
 })
 
 const Boat = model('Boat', boatSchema)
