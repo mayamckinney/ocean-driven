@@ -1,0 +1,112 @@
+[
+    {
+        "boatType": "Sailboat",
+        "title": "Ocean Blue",
+        "priceRate": 150,
+        "description": "Luxurious 40-ft sailboat with 3 cabins and a full kitchen",
+        "destination": "Miami",
+        "image": "images/boat1.jpg",
+        "occupancy": 6,
+        "foodServices": true,
+        "music": true
+    },
+    {
+        "boatType": "Catamaran",
+        "title": "Sunny Cat",
+        "priceRate": 250,
+        "description": "Spacious 50-ft catamaran with 4 cabins and a large deck",
+        "destination": "Bahamas",
+        "image": "images/boat2.jpg",
+        "occupancy": 6,
+        "foodServices": true,
+        "music": true
+    },
+    {
+        "boatType": "Motorboat",
+        "title": "Sea Cruiser",
+        "priceRate": 200,
+        "description": "Fast 35-ft motorboat with 2 cabins and a sun deck",
+        "destination": "Miami",
+        "image": "images/boat3.jpg",
+        "occupancy": 10,
+        "foodServices": true,
+        "music": true
+    },
+    {
+        "boatType": "Sailboat",
+        "title": "Sea Breeze",
+        "priceRate": 180,
+        "description": "Classic 30-ft sailboat with a cozy cabin and a dining area",
+        "destination": "Miami",
+        "image": "images/boat4.jpg",
+        "occupancy": 8,
+        "foodServices": true,
+        "music": false
+    },
+    {
+        "boatType": "Yacht",
+        "title": "Ocean King",
+        "priceRate": 500,
+        "description": "Elegant 70-ft yacht with 5 cabins and a jacuzzi on deck",
+        "destination": "Miami",
+        "image": "images/boat5.jpg",
+        "occupancy": 6,
+        "foodServices": true,
+        "music": true
+    },
+    {
+        "boatType": "Sailboat",
+        "title": "Wind Dancer",
+        "priceRate": 120,
+        "description": "Sporty 25-ft sailboat with a single cabin and a small galley",
+        "destination": "Miami",
+        "image": "images/boat6.jpg",
+        "occupancy": 12,
+        "foodServices": true,
+        "music": true
+    },
+    {
+        "boatType": "Motorboat",
+        "title": "Island Hopper",
+        "priceRate": 220,
+        "description": "Comfortable 40-ft motorboat with 2 cabins and a barbecue grill",
+        "destination": "Miami",
+        "image": "images/boat7.jpg",
+        "occupancy": 10,
+        "foodServices": false,
+        "music": true
+    },
+    {
+        "boatType": "Catamaran",
+        "title": "Sea Explorer",
+        "priceRate": 280,
+        "description": "Modern 55-ft catamaran with 4 cabins and a spacious saloon",
+        "destination": "Miami",
+        "image": "images/boat8.jpg",
+        "occupancy": 20,
+        "foodServices": true,
+        "music": true
+    },
+    {
+        "boatType": "Sailboat",
+        "title": "Sea Spirit",
+        "priceRate": 160,
+        "description": "Classic 35-ft sailboat with 2 cabins and a cozy cockpit",
+        "destination": "Bahamas",
+        "image": "images/boat9.jpg",
+        "occupancy": 16,
+        "foodServices": true,
+        "music": true
+    },
+    {
+        "boatType": "Yacht",
+        "title": "Sea Pearl",
+        "priceRate": 450,
+        "description": "Luxurious 60-ft yacht with 4 cabins and a spacious flybridge",
+        "destination": "Bahamas",
+        "image": "images/boat8.jpg",
+        "occupancy": 26,
+        "foodServices": true,
+        "music": true
+    }
+]
