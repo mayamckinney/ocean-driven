@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -10,6 +10,7 @@ import { setContext } from '@apollo/client/link/context';
 
 import NavBar from './components/NavBar'
 import Home from './pages/Home'
+import BoatPage from './pages/BoatPage'
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -41,6 +42,10 @@ function App() {
             <Route
               path='/'
               element={<Home />}
+            />
+            <Route
+              path='/boat'
+              element={<BoatPage />}
             />
           </Routes>
         </div>
