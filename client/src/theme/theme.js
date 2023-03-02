@@ -3,6 +3,7 @@ import { extendTheme, theme as base, withDefaultColorScheme, withDefaultVariant 
 
 const customTheme = extendTheme({
     colors: {
+        // base --> https://smart-swatch.netlify.app/#ebfffb
         primary: {
             50: '#e5fffa',
             100: '#bbfef0',
@@ -15,6 +16,7 @@ const customTheme = extendTheme({
             800: '#114c3e',
             900: '#001a14',
         },
+        // base --> https://smart-swatch.netlify.app/#7efaff
         secondary: {
             50: '#daffff',
             100: '#affdff',
@@ -27,6 +29,7 @@ const customTheme = extendTheme({
             800: '#004a4e',
             900: '#001b1c'
         },
+        // base --> https://smart-swatch.netlify.app/#13abc4
         tertiary: {
             50: '#dafdff',
             100: '#b1f0fb',
@@ -39,6 +42,7 @@ const customTheme = extendTheme({
             800: '#003e49',
             900: '#00161c',
         },
+        // base --> https://smart-swatch.netlify.app/#3161a3
         quaternary: {
             50: '#e4f2ff',
             100: '#c0d6f2',
@@ -51,18 +55,6 @@ const customTheme = extendTheme({
             800: '#0c233f',
             900: '#000d1c',
         },
-        brand: {
-            50: '#daffff',
-            100: '#affdff',
-            200: '#80faff',
-            300: '#52f8ff',
-            400: '#31f5fe',
-            500: '#24dce5',
-            600: '#12acb3',
-            700: '#007b80',
-            800: '#004a4e',
-            900: '#001b1c'
-        }
     },
     fonts: {
         // All headings will use josefin fonts but fallback to default theme fonts 
