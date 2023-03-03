@@ -10,7 +10,7 @@ const NavBar = () => {
             bg='white'
             w={"full"}
             justifyContent='space-between'
-            pos='fixed'
+            // pos='fixed'
             top={0}
             zIndex={1}
             boxShadow='base'

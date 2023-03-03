@@ -2,12 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import BoatCard from "../components/BoatCard";
-import boatSeed from "./boatSeeds.json";
 import { SimpleGrid } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 
+import { useQuery } from "@apollo/client";
+import { QUERY_BOATS, QUERY_USERS } from "../utils/queries";
+import { useEffect } from "react";
+
+
 const BoatTest = () => {
-  let arr = boatSeed;
+
+  const { loading, error, data } = useQuery(QUERY_BOATS);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  let arr= data.boats;
+
   return (
     <div>
       {/* Add link to BoatForm here */}
