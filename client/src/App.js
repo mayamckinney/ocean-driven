@@ -12,6 +12,8 @@ import NavBar from './components/NavBar'
 import Home from './pages/Home'
 import BoatPage from './pages/BoatPage'
 import BoatForm from './components/BoatForm'
+// import Login from './pages/Login'
+// import Signup from './pages/Signup'
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -49,6 +51,14 @@ function App() {
               element={<BoatPage />}
             />
             <Route path='/boatform' element={<BoatForm />}></Route>
+            {/* <Route
+              path='/login'
+              element={<Login />}
+            /> */}
+            {/* <Route
+              path='/signup'
+              element={<Signup />}
+            /> */}
           </Routes>
         </div>
       </Router>
