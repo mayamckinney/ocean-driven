@@ -20,8 +20,6 @@ export const QUERY_BOATS = gql`
             boatType
             title
             priceRate
-            booked
-            reviews
             description
             destination
             occupancy

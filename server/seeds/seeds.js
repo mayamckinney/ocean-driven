@@ -8,11 +8,11 @@ db.once("open", async () => {
   try {
 
     console.log("deleting users...")
-    await User.deleteMany({});
+    // await User.deleteMany({});
     console.log("deleting boats...")
     await Boat.deleteMany({});
 
-    await User.create(userSeeds);
+    // await User.create(userSeeds);
     await Boat.create(boatSeeds);
 
     let users = await User.find({});
