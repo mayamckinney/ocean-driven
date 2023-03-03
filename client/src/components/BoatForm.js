@@ -16,7 +16,7 @@ import {
   CardHeader,
   Heading,
   CardBody,
-  Select
+  Select,
 } from "@chakra-ui/react";
 
 const BoatForm = () => {
@@ -78,110 +78,120 @@ const BoatForm = () => {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <Heading margin="auto" textAlign={"center"}>
-          Boat Form
-        </Heading>
-      </CardHeader>
-      <CardBody>
-        <Box maxWidth="800px" margin="auto">
-          <form onSubmit={handleSubmit}>
-            <FormControl id="image" isRequired>
-              <FormLabel>Image</FormLabel>
-              <Input type="file" onChange={(e) => setImage(e.target.value)} />
-              <Image src={image} alt="" maxW="200px" my="4" />
-            </FormControl>
-            <FormControl id="boatType" isRequired mt="4">
-              <FormLabel>Boat Type</FormLabel>
-              {/* <Input
+    <Box
+      mt={{ base: 18, md: 20, lg: "24" }}
+      borderWidth="1px"
+      borderRadius="md"
+      borderColor={"secondary.100"}
+      padding="1"
+    >
+      <Card>
+        <CardHeader>
+          <Heading margin="auto" textAlign={"center"}>
+            Boat Form
+          </Heading>
+        </CardHeader>
+        <CardBody>
+          <Box maxWidth="800px" margin="auto">
+            <form onSubmit={handleSubmit}>
+              <FormControl id="image" isRequired>
+                <FormLabel>Image</FormLabel>
+                <Input type="file" onChange={(e) => setImage(e.target.value)} />
+                <Image src={image} alt="" maxW="200px" my="4" />
+              </FormControl>
+              <FormControl id="boatType" isRequired mt="4">
+                <FormLabel>Boat Type</FormLabel>
+                {/* <Input
                 type="text"
                 placeholder="Enter boat type"
                 value={boatType}
                 onChange={(e) => setBoatType(e.target.value)}
               /> */}
-              <Select placeholder="Select boat type">
-                {boatTypes.map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl id="title" isRequired mt="4">
-              <FormLabel>Title</FormLabel>
-              <Input
-                type="text"
-                placeholder="Enter title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              <FormHelperText>Title is required</FormHelperText>
-              {formError && (
-                <FormErrorMessage color="red.500">{formError}</FormErrorMessage>
-              )}
-            </FormControl>
-            <FormControl id="priceRate" isRequired mt="4">
-              <FormLabel>Price Rate</FormLabel>
-              <Input
-                type="number"
-                placeholder="Enter price rate"
-                value={priceRate}
-                onChange={(e) => setPriceRate(e.target.value)}
-              />
-            </FormControl>
-            <FormControl id="description" isRequired mt="4">
-              <FormLabel>Description</FormLabel>
-              <Input
-                type="text"
-                placeholder="Enter description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </FormControl>
-            <FormControl id="destination" isRequired mt="4">
-              <FormLabel>Destination</FormLabel>
-              <Input
-                type="text"
-                placeholder="Enter destination"
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-              />
-            </FormControl>
-            <FormControl id="occupancy" isRequired mt="4">
-              <FormLabel>Occupancy</FormLabel>
-              <Input
-                type="number"
-                placeholder="Enter occupancy"
-                value={occupancy}
-                onChange={(e) => setOccupancy(Number(e.target.value))}
-              />
-            </FormControl>
-            <FormControl id="foodServices" isRequired mt="4">
-              <FormLabel>Food Services</FormLabel>
-              <Checkbox
-                type="checkbox"
-                placeholder="Enter food services"
-                value={foodServices}
-                onChange={(e) => setFoodServices(e.target.checked)}
-              />
-            </FormControl>
-            <FormControl id="music" isRequired mt="4">
-              <FormLabel>Music</FormLabel>
-              <Checkbox
-                type="checkbox"
-                placeholder="Enter music"
-                value={music}
-                onChange={(e) => setMusic(e.target.checked)}
-              />
-            </FormControl>
-            <Button type="submit" colorScheme="teal" mt="4">
-              Submit
-            </Button>
-          </form>
-        </Box>
-      </CardBody>
-    </Card>
+                <Select placeholder="Select boat type">
+                  {boatTypes.map((type) => (
+                    <option key={type} value={type}>
+                      {type}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl id="title" isRequired mt="4">
+                <FormLabel>Title</FormLabel>
+                <Input
+                  type="text"
+                  placeholder="Enter title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+                <FormHelperText>Title is required</FormHelperText>
+                {formError && (
+                  <FormErrorMessage color="red.500">
+                    {formError}
+                  </FormErrorMessage>
+                )}
+              </FormControl>
+              <FormControl id="priceRate" isRequired mt="4">
+                <FormLabel>Price Rate</FormLabel>
+                <Input
+                  type="number"
+                  placeholder="Enter price rate"
+                  value={priceRate}
+                  onChange={(e) => setPriceRate(e.target.value)}
+                />
+              </FormControl>
+              <FormControl id="description" isRequired mt="4">
+                <FormLabel>Description</FormLabel>
+                <Input
+                  type="text"
+                  placeholder="Enter description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </FormControl>
+              <FormControl id="destination" isRequired mt="4">
+                <FormLabel>Destination</FormLabel>
+                <Input
+                  type="text"
+                  placeholder="Enter destination"
+                  value={destination}
+                  onChange={(e) => setDestination(e.target.value)}
+                />
+              </FormControl>
+              <FormControl id="occupancy" isRequired mt="4">
+                <FormLabel>Occupancy</FormLabel>
+                <Input
+                  type="number"
+                  placeholder="Enter occupancy"
+                  value={occupancy}
+                  onChange={(e) => setOccupancy(Number(e.target.value))}
+                />
+              </FormControl>
+              <FormControl id="foodServices" isRequired mt="4">
+                <FormLabel>Food Services</FormLabel>
+                <Checkbox
+                  type="checkbox"
+                  placeholder="Enter food services"
+                  value={foodServices}
+                  onChange={(e) => setFoodServices(e.target.checked)}
+                />
+              </FormControl>
+              <FormControl id="music" isRequired mt="4">
+                <FormLabel>Music</FormLabel>
+                <Checkbox
+                  type="checkbox"
+                  placeholder="Enter music"
+                  value={music}
+                  onChange={(e) => setMusic(e.target.checked)}
+                />
+              </FormControl>
+              <Button type="submit" mt="4">
+                Submit
+              </Button>
+            </form>
+          </Box>
+        </CardBody>
+      </Card>
+    </Box>
   );
 };
 

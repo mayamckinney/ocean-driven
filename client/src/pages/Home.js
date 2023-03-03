@@ -17,6 +17,18 @@ import {
 import BoatsTest from "./BoatsTest";
 
 const Home = () => {
+  
+  const boatTypes = [
+    "Sailboat",
+    "Powerboat",
+    "Fishing boat",
+    "Pontoon boat",
+    "Kayak/Canoe",
+    "Yacht",
+    "Catamaran",
+    "Houseboat",
+  ];
+
   const [formState, setFormState] = useState({ destination: '', from: '', to: '', boatType: '' });
 
   const handleChange = (event) => {
@@ -86,9 +98,11 @@ const Home = () => {
                 bg='secondary.50'
                 onChange={handleChange}
               >
-                <option value='yacht'>Yacht</option>
-                <option value='fishing'>Fishing Boat</option>
-                <option value='houseboat'>House Boat</option>
+               {boatTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
               </Select>
             </GridItem>
           </Grid>
