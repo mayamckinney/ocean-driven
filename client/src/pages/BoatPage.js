@@ -18,6 +18,8 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { FaMapMarkerAlt, FaUser, FaDollarSign } from "react-icons/fa";
 
+import BookingForm from "../components/BookingForm";
+
 const BoatPage = () => {
   const location = useLocation();
 
@@ -38,6 +40,9 @@ const BoatPage = () => {
       >
         <Box>
           <Image src={props.image} width="100%" />
+          <Text size="lg">
+            🔹Included onboard: water & soft drinks, ice, towels, and a cooler
+          </Text>
         </Box>
         <Box>
           <Card>
@@ -106,10 +111,10 @@ const BoatPage = () => {
             <CardBody>
               <Text size="md">{props.description}</Text>
             </CardBody>
+            <CardFooter>
+              <BookingForm props={props} />
+            </CardFooter>
           </Card>
-          <Text size="lg">
-            🔹Included onboard: water & soft drinks, ice, towels, and a cooler
-          </Text>
         </Box>
       </Grid>
     </Card>
