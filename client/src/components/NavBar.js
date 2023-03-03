@@ -1,18 +1,22 @@
 import React from "react";
 import { Box, Flex, UnorderedList, ListItem, Link, Image, Heading } from "@chakra-ui/react";
-import {Link as RouteLink} from 'react-router-dom';
+import { Link as RouteLink } from 'react-router-dom';
 
 
 const NavBar = () => {
 
     return (
         <Flex
-        as="nav"
-        align="center"
-        justify="space-between"
-        wrap="wrap"
-        padding={6}
-        color="white"
+            bg='white'
+            w={"full"}
+            justifyContent='space-between'
+            pos='fixed'
+            top={0}
+            zIndex={1}
+            boxShadow='base'
+            p={2}
+            as="nav"
+            wrap="wrap"
         >
             <Box alignSelf='center' display='flex'>
                 {/* Source: DALL·E */}
@@ -23,7 +27,7 @@ const NavBar = () => {
                     borderRadius={30}
                 />
                 <Box>
-                    <Heading as='h1' color='secondary.800' ml={3} mt={{base: 1, md: 2.5}} fontSize={{ base: 'xl', md: '4xl'}}  alignSelf='center'>Ocean Driven</Heading>
+                    <Heading as='h1' color='secondary.800' ml={3} mt={{ base: 1, md: 2.5 }} fontSize={{ base: 'xl', md: '4xl' }} alignSelf='center'>Ocean Driven</Heading>
                 </Box>
             </Box>
 
@@ -36,7 +40,7 @@ const NavBar = () => {
                         </Link>
                     </ListItem>
                     <ListItem>
-                    <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={3} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/signup" >
+                        <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={3} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/signup" >
                             Signup
                         </Link>
                     </ListItem>
