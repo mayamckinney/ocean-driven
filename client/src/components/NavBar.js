@@ -16,7 +16,6 @@ const NavBar = () => {
             boxShadow='base'
             p={2}
             as="nav"
-            wrap="wrap"
         >
             <Box alignSelf='center' display='flex'>
                 {/* Source: DALL·E */}
