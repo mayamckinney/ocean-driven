@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Flex, UnorderedList, ListItem, Link, Image, Heading } from "@chakra-ui/react";
+import {Link as RouteLink} from 'react-router-dom';
 
 
 const NavBar = () => {
@@ -34,28 +35,30 @@ const NavBar = () => {
 
                 <UnorderedList styleType='none' display='flex' mb={2}>
                     <ListItem>
-                        <Link style={{ textDecoration: 'none' }} mr={3} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} href="/login" >
-                            Login/Signup
+                        <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={3} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/login" >
+                            Login
                         </Link>
                     </ListItem>
                     <ListItem>
+                    <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={3} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/signup" >
+                            Signup
+                        </Link>
                     </ListItem>
                     <ListItem>
-                        <Link style={{ textDecoration: 'none' }} mr={4} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} href="/logout">
+                        <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={4} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/logout">
                             Logout
                         </Link>
                     </ListItem>
                 </UnorderedList>
 
-
                 <UnorderedList styleType={"none"} display='flex' justifyContent='flex-end'>
                     <ListItem>
-                        <Link style={{ textDecoration: 'none' }} fontSize='xl' mr={2} py={1} px={2} borderRadius='md' _hover={{ background: 'secondary.100', fontWeight: 'semibold' }} href="/home">
+                        <Link as={RouteLink} style={{ textDecoration: 'none' }} fontSize='xl' mr={2} py={1} px={2} borderRadius='md' _hover={{ background: 'secondary.100', fontWeight: 'semibold' }} to="/">
                             Home
                         </Link>
                     </ListItem>
                     <ListItem>
-                        <Link style={{ textDecoration: 'none' }} fontSize='xl' mr={2} py={1} px={2} borderRadius='md' _hover={{ background: 'secondary.100', fontWeight: 'semibold' }} href="/profile">
+                        <Link as={RouteLink} style={{ textDecoration: 'none' }} fontSize='xl' mr={2} py={1} px={2} borderRadius='md' _hover={{ background: 'secondary.100', fontWeight: 'semibold' }} to="/profile">
                             Profile
                         </Link>
                     </ListItem>

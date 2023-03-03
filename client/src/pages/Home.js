@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Image,
@@ -17,6 +17,18 @@ import {
 import BoatsTest from "./BoatsTest";
 
 const Home = () => {
+  const [formState, setFormState] = useState({ destination: '', from: '', to: '', boatType: '' });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    })
+  }
+
+
   return (
     <Box>
       {/* Hero Image */}
@@ -38,37 +50,48 @@ const Home = () => {
             <GridItem w='100%'>
               <FormLabel>Where:</FormLabel>
               <Input
+                id='destination'
+                name="destination"
                 type='text'
                 bg='secondary.50'
+                onChange={handleChange}
               />
             </GridItem>
             <GridItem w='100%'>
-              <FormLabel mt={{base: 3, md: 0}}>From:</FormLabel>
+              <FormLabel mt={{ base: 3, md: 0 }}>From:</FormLabel>
               <Input
                 type='date'
+                id="from"
+                name="from"
                 bg='secondary.50'
+                onChange={handleChange}
               />
             </GridItem>
             <GridItem w='100%'>
-              <FormLabel mt={{base: 3, md: 0}}>To:</FormLabel>
+              <FormLabel mt={{ base: 3, md: 0 }}>To:</FormLabel>
               <Input
                 type='date'
+                id="to"
+                name="to"
                 bg='secondary.50'
+                onChange={handleChange}
               />
             </GridItem>
             <GridItem w='100%'>
-              <FormLabel mt={{base: 3, md: 0}}>Boat:</FormLabel>
-              <Select placeholder="Select the type of boat you want to rent..." bg='secondary.50' >
+              <FormLabel mt={{ base: 3, md: 0 }}>Boat:</FormLabel>
+              <Select
+                id="boatType"
+                name="boatType"
+                placeholder="Select the type of boat you want to rent..."
+                bg='secondary.50'
+                onChange={handleChange}
+              >
                 <option value='yacht'>Yacht</option>
                 <option value='fishing'>Fishing Boat</option>
                 <option value='houseboat'>House Boat</option>
               </Select>
             </GridItem>
           </Grid>
-
-
-
-
         </FormControl>
         <Button type="submit" mt={3} w='full'>Search</Button>
       </Box>
