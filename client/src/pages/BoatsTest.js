@@ -11,7 +11,7 @@ const BoatTest = () => {
   return (
     <div>
       {/* Add link to BoatForm here */}
-      <Button colorScheme="teal" variant="solid">
+      <Button>
         <Link to="/boatform">Add a Boat</Link>
       </Button>
       <SimpleGrid columns={[1, 2, 3]} spacing={4}>
