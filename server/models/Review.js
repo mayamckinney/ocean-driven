@@ -11,12 +11,10 @@ const reviewSchema = new Schema({
         default: Date.now,
         // may add getter util to adjust date
     },
-    reviewBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+    reviewAuthor: {
+        type: String,
+        required: true
     }
 });
 
-const Review = model('Review', reviewSchema);
-
-module.exports = Review
+module.exports = reviewSchema

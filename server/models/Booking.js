@@ -9,12 +9,11 @@ const bookingSchema = new Schema({
         type: Date,
         required: true
     },
-    bookedBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+    user: {
+        type: String,
+        required: true
     }
 })
 
-const Booking = model('Booking', bookingSchema)
 
-module.exports = Booking
+module.exports = bookingSchema
