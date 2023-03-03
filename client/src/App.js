@@ -10,6 +10,7 @@ import { setContext } from '@apollo/client/link/context';
 
 import NavBar from './components/NavBar'
 import Home from './pages/Home'
+import Profile from './pages/Profile';
 import BoatPage from './pages/BoatPage'
 import BoatForm from './components/BoatForm'
 // import Login from './pages/Login'
@@ -45,6 +46,10 @@ function App() {
             <Route
               path='/'
               element={<Home />}
+            />
+            <Route
+              path='/profile'
+              element={<Profile />}
             />
             <Route
               path='/boat'
