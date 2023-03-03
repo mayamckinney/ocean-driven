@@ -7,13 +7,12 @@ const NavBar = () => {
 
     return (
         <Flex
-            bg='white'
-            w={"full"}
-            justifyContent='space-between'
-            pos='fixed'
-            zIndex={1}
-            boxShadow='base'
-            p={2}
+        as="nav"
+        align="center"
+        justify="space-between"
+        wrap="wrap"
+        padding={6}
+        color="white"
         >
             <Box alignSelf='center' display='flex'>
                 {/* Source: DALL·E */}
@@ -27,9 +26,6 @@ const NavBar = () => {
                     <Heading as='h1' color='secondary.800' ml={3} mt={{base: 1, md: 2.5}} fontSize={{ base: 'xl', md: '4xl'}}  alignSelf='center'>Ocean Driven</Heading>
                 </Box>
             </Box>
-
-
-
 
             <Flex flexDirection='column' justifyContent='flex-end'>
 
