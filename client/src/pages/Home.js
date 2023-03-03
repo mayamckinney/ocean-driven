@@ -38,7 +38,7 @@ const Home = () => {
           src="/images/placeholder-coast.jpeg"
           alt="a beautiful coast"
           w={'full'}
-          h={{ base: '50vh', lg: '100vh' }}
+          h={{ base: '25vh', lg: '50vh' }}
           objectFit='cover'
         />
       </Box>

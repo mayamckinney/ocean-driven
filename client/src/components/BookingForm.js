@@ -37,9 +37,12 @@ function BookingForm() {
             required
           />
         </FormControl>
-        <Button type="submit" colorScheme="blue">
+        <FormControl>
+        <FormLabel>🛥️</FormLabel>
+        <Button p={15} type="submit" colorScheme="blue">
           Book
         </Button>
+        </FormControl>
       </HStack>
     </form>
   );
