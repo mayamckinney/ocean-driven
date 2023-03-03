@@ -12,8 +12,8 @@ import NavBar from './components/NavBar'
 import Home from './pages/Home'
 import BoatPage from './pages/BoatPage'
 import BoatForm from './components/BoatForm'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
+// import Login from './pages/Login'
+// import Signup from './pages/Signup'
 
 const httpLink = createHttpLink({
   uri: '/graphql',
