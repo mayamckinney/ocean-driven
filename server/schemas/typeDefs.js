@@ -1,21 +1,13 @@
 const { gql } = require('apollo-server-express');
 
-const typeDefs = gql`{
-    type User {
-        _id: ID
-        username: String
-        email: String
-        password: String
-        boats: [Boat]
-        renter: Boolean
-    }
+const typeDefs = gql`
 
     type Boat {
         _id: ID
         image: String
         boatType: String
         title: String
-        priceRate: Number
+        priceRate: Float
         booked: [Booking]
         reviews: [Review]
         description: String
@@ -24,6 +16,15 @@ const typeDefs = gql`{
         foodServices: Boolean
         music: Boolean
         otherFeatures: [String]
+    }
+
+    type User {
+        _id: ID
+        username: String
+        email: String
+        password: String
+        boats: [Boat]
+        renter: Boolean
     }
 
     type Auth {
@@ -39,20 +40,9 @@ const typeDefs = gql`{
 
     type Booking {
         _id: ID
-        from: Date
-        to: Date
+        from: String
+        to: String
         user: String
-    }
-
-    type Mutation {
-        loginUser(email: String!, password: String!): Auth
-        addUser(email: String!, password: String!, username: String!, renter: Boolean!): Auth
-        addBoat(image: String!, boatType: String!, title: String!, priceRate: Int!, description: String!, destination: String!, occupancy: Int!, foodServices: Boolean!, music: Boolean!, otherFeatures: [String!]): Boat
-        removeBoat(boatId: ID!): Boat
-        addBooking(boatId: ID!, from: Date!, to: Date!, user: String): Booking
-        removeBooking(bookingId: ID!): Booking
-        addReview(boatId: ID!, reviewText: String, reviewAuthor: String): Review
-        removeReview(boatId: ID!, reviewId): Review
     }
 
     type Query {
@@ -61,7 +51,17 @@ const typeDefs = gql`{
         boats: [Boat]
         boat(boatId: ID!): Boat
     }
-}
+
+    type Mutation {
+        loginUser(email: String!, password: String!): Auth
+        addUser(email: String!, password: String!, username: String!, renter: Boolean!): Auth
+        addBoat(image: String!, boatType: String!, title: String!, priceRate: Int!, description: String!, destination: String!, occupancy: Int!, foodServices: Boolean!, music: Boolean!, otherFeatures: [String!]): Boat
+        removeBoat(boatId: ID!): Boat
+        addBooking(boatId: ID!, from: String!, to: String!, user: String): Booking
+        removeBooking(bookingId: ID!): Booking
+        addReview(boatId: ID!, reviewText: String, reviewAuthor: String): Review
+        removeReview(boatId: ID!, reviewId: Int): Review
+    }
 `;
 
 module.exports = typeDefs;
