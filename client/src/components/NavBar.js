@@ -8,20 +8,19 @@ const NavBar = () => {
     return (
         <Flex
             bg='white'
-            w={"full"}
+            w="full"
             justifyContent='space-between'
-            // pos='fixed'
+            pos='fixed'
             top={0}
             zIndex={1}
             boxShadow='base'
             p={2}
             as="nav"
-            wrap="wrap"
         >
             <Box alignSelf='center' display='flex'>
                 {/* Source: DALL·E */}
                 <Image
-                    src="/images/DALL·E_icon_placeholder1.png"
+                    src="/images/icon_placeholder1.png"
                     alt="yacht icon"
                     w={14}
                     borderRadius={30}
