@@ -15,6 +15,7 @@ const NavBar = () => {
             p={2}
         >
             <Box alignSelf='center' display='flex'>
+                {/* Source: DALL·E */}
                 <Image
                     src="/images/DALL·E_icon_placeholder1.png"
                     alt="yacht icon"
