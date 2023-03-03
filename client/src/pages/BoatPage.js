@@ -42,11 +42,11 @@ const BoatPage = () => {
   const props = location.state.props;
   return (
     <>
-      <Card
-        m={5}
+      <Box
+        mt={{ base: 18, md: 20, lg: '24' }}
         borderWidth="1px"
         borderRadius="md"
-        borderColor={"tertiary.100"}
+        borderColor={"secondary.100"}
         padding="1"
       >
         <Grid
@@ -59,10 +59,25 @@ const BoatPage = () => {
             <Text size="lg">
               🔹Included onboard: water & soft drinks, ice, towels, and a cooler
             </Text>
+            <Box
+              // bg="secondary.100"
+              boxShadow="md"
+              // w={{ base: "95%", md: "95%" }}
+              // h="10vh"
+              mx="auto"
+              my={3}
+              p={5}
+              borderRadius={6}
+            >
+              <Button onClick={onOpen} width={200}>
+                Write review
+                <Icon as={FaPen} boxSize={6} />
+              </Button>
+            </Box>
           </Box>
           <Box>
             <Card>
-              <CardHeader bg={"secondary.100"}>
+              <CardHeader bg={"secondary.400"}>
                 <Heading>{props.title}</Heading>
                 <Text>{props.boatType}</Text>
               </CardHeader>
@@ -118,32 +133,20 @@ const BoatPage = () => {
                     </Flex>
                   </ListItem>
                 </UnorderedList>
-              </CardBody>
-            </Card>
-            <Card>
-              <CardHeader>
                 <Heading size="lg">Boat Details</Heading>
-              </CardHeader>
-              <CardBody>
                 <Text size="md">{props.description}</Text>
               </CardBody>
-              <CardFooter>
-                <BookingForm props={props} />
-              </CardFooter>
-              <Button onClick={onOpen} width={200}>
-                Write review
-                <Icon as={FaPen} boxSize={6} />
-              </Button>
             </Card>
+            <BookingForm props={props} />
           </Box>
         </Grid>
-      </Card>
-      <Modal isOpen={isOpen} onClose={onClose} size={'4xl'}>
+      </Box>
+      <Modal isOpen={isOpen} onClose={onClose} size={"4xl"}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader bg="secondary.100">Reviews</ModalHeader>
           <ModalCloseButton />
-          <ReviewForm/>
+          <ReviewForm />
           <ModalBody></ModalBody>
           <ModalFooter>
             <Button mr={3} onClick={onClose}>
