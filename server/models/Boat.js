@@ -1,4 +1,6 @@
 const { Schema, model } = require('mongoose')
+const bookingSchema = require('./Booking')
+const reviewSchema = require('./Review')
 
 const boatSchema = new Schema({
     image: {
@@ -17,10 +19,8 @@ const boatSchema = new Schema({
         type: Number,
         required: true
     },
-    booked: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Booking'
-    }],
+    booked: [bookingSchema],
+    reviews: [reviewSchema],
     description: {
         type: String,
         required: true
