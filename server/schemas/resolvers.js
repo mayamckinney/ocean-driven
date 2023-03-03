@@ -87,12 +87,12 @@ const resolvers = {
       );
       return boat;
     },
-    addBooking: async (parent, { boatId, from, to }, context) => {
+    addBooking: async (parent, { boatId, from, to, user }, context) => {
       return await Boat.findOneAndUpdate(
         { _id: boatId },
         {
           $addToSet: {
-            booked: { from, to, user: context.user.username },
+            booked: { from, to, user: user },
           },
         },
         {
