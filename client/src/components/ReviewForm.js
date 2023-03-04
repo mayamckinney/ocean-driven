@@ -11,7 +11,9 @@ import {
   Spacer,
   Divider,
   SimpleGrid,
-  useToast
+  useToast,
+  FormControl,
+  FormLabel
 } from '@chakra-ui/react';
 
 const ReviewForm = () => {
@@ -42,16 +44,17 @@ const ReviewForm = () => {
   ];
 
   return (
-    <Box >
+    <Box mt={4}>
       <VStack spacing={4} align="start">
-        <Heading>Write a review</Heading>
-        <Textarea
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          placeholder="Write your comment here"
-          size="lg"
-        />
-        {/* <Select
+        <FormControl>
+          <FormLabel fontSize='xl'>What did you think of your experience?</FormLabel>
+          <Textarea
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            placeholder="Write your comment here"
+            size="lg"
+          />
+          {/* <Select
           value={stars}
           onChange={(e) => setStars(e.target.value)}
           placeholder="Select number of stars"
@@ -63,9 +66,10 @@ const ReviewForm = () => {
           <option value="4">4 stars</option>
           <option value="5">5 stars</option>
         </Select> */}
-        <Button onClick={handleSubmit}>
-          Submit
-        </Button>
+          <Button onClick={handleSubmit} mt={2} w='full'>
+            Submit
+          </Button>
+        </FormControl>
       </VStack>
       <Divider my={8} />
       <Box>

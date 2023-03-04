@@ -45,7 +45,7 @@ const BoatPage = () => {
     <>
       <Box
         mt={24}
-        mx={{base: 2, lg: 0}}
+        mx={{ base: 2, lg: 0 }}
       >
         {/* Heading Container */}
         <Box mb={2}>
@@ -176,15 +176,23 @@ const BoatPage = () => {
       <Modal isOpen={isOpen} onClose={onClose} size={"4xl"}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader bg="secondary.100">Reviews</ModalHeader>
+          {/* Modal Header */}
+          <ModalHeader bg="secondary.100">
+            <Heading as='h3' fontSize='3xl'>Reviews</Heading>
+          </ModalHeader>
+
           <ModalCloseButton />
-          <ReviewForm />
-          <ModalBody></ModalBody>
+
+          <ModalBody>
+            <ReviewForm />
+          </ModalBody>
+
           <ModalFooter>
             <Button mr={3} onClick={onClose}>
               Close
             </Button>
           </ModalFooter>
+          
         </ModalContent>
       </Modal>
     </>
