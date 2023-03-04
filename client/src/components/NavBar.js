@@ -33,7 +33,7 @@ const NavBar = () => {
 
             <Flex flexDirection='column' justifyContent='flex-end'>
 
-                <UnorderedList styleType='none' display='flex' mb={2}>
+                <UnorderedList styleType='none' display='flex' mb={2} justifyContent='flex-end'>
                 {!Auth.loggedIn() ? (
                     <>
                     <ListItem> 
@@ -42,7 +42,7 @@ const NavBar = () => {
                         </Link>
                     </ListItem> 
                     <ListItem>
-                        <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={3} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/signup" >
+                        <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={5} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/signup" >
                             Signup
                         </Link>
                     </ListItem>
