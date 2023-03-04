@@ -45,7 +45,13 @@ const BoatPage = () => {
     <>
       <Box
         mt={24}
+        mx={{base: 2, lg: 0}}
       >
+        {/* Heading Container */}
+        <Box mb={2}>
+          <Heading as='h3' fontSize='3xl' textAlign='center'>{props.title}</Heading>
+          <Text textAlign='center'>{props.boatType}</Text>
+        </Box>
 
         <Grid
           templateColumns='repeat(12, 1fr)'
@@ -61,22 +67,16 @@ const BoatPage = () => {
 
               {/* Button Container */}
               <Box
-                // bg="secondary.100"
-                // boxShadow="base"
-                // w={{ base: "95%", md: "95%" }}
-                // h="10vh"
                 mx="auto"
-                // my={3}
-                // p={4}
                 borderRadius={6}
               >
-              {/* Boat Image */}
-              <Image src={props.image} width="100%" borderRadius={4} />
+                {/* Boat Image */}
+                <Image src={props.image} width="100%" borderRadius={4} />
 
-              {/* Image Caption */}
-              <Text>
-                🔹 Included onboard: water & soft drinks, ice, towels, and a cooler
-              </Text>
+                {/* Image Caption */}
+                <Text>
+                  🔹 Included onboard: water & soft drinks, ice, towels, and a cooler
+                </Text>
                 {/* Booking Form */}
                 <BookingForm props={props} />
 
@@ -89,15 +89,16 @@ const BoatPage = () => {
             <Box>
               <Card>
 
-                {/* Card Header */}
-                <CardHeader bg={"secondary.400"}>
-                  <Heading as='h3' fontSize='3xl'>{props.title}</Heading>
-                  <Text>{props.boatType}</Text>
-                </CardHeader>
-
                 <CardBody>
 
-                  <UnorderedList listStyleType="none">
+                  {/* Boat Details */}
+                  <Heading fontSize='2xl' mt={2} mb={2}>Boat Details</Heading>
+
+                  <Divider />
+
+                  <Text mt={6}>{props.description}</Text>
+
+                  <UnorderedList listStyleType="none" mt={4}>
 
                     {/* Destination */}
                     <ListItem mb={4}>
@@ -154,13 +155,6 @@ const BoatPage = () => {
                     </ListItem>
 
                   </UnorderedList>
-
-                  {/* Boat Details */}
-                  <Heading fontSize='2xl' mt={10} mb={2}>Boat Details</Heading>
-
-                  <Divider />
-
-                  <Text mt={6}>{props.description}</Text>
 
                   <Button onClick={onOpen} width='full' mt={4}>
                     Write review
