@@ -53,7 +53,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        loginUser(email: String!, password: String!): Auth
+        login(email: String!, password: String!): Auth
         addUser(email: String!, password: String!, username: String!, renter: Boolean!): Auth
         addBoat(image: String!, boatType: String!, title: String!, priceRate: Int!, description: String!, destination: String!, occupancy: Int!, foodServices: Boolean!, music: Boolean!, otherFeatures: [String!]): Boat
         removeBoat(boatId: ID!): Boat

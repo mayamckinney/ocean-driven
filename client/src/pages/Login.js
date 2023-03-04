@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Container,
   Input,
@@ -6,22 +6,24 @@ import {
   FormLabel,
   FormHelperText,
   Text,
-  Button, 
-  Link
-} from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
+  Button,
+  Link,
+  Box,
+} from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { LOGIN } from "../utils/mutations";
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 const Login = (props) => {
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login, { data }] = useMutation(LOGIN_USER);
-  const navigate = useNavigate()
+  const [formState, setFormState] = useState({ email: "", password: "" });
+  const [login, { data }] = useMutation(LOGIN);
+  const navigate = useNavigate();
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
+    console.log("handleChange", event.target);
 
     setFormState({
       ...formState,
@@ -37,7 +39,7 @@ const Login = (props) => {
       const { data } = await login({
         variables: { ...formState },
       });
-
+      console.log("data", data);
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
@@ -45,36 +47,52 @@ const Login = (props) => {
 
     // clear form values
     setFormState({
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     });
 
     if (data) {
-      navigate('/')
+      navigate("/");
     }
   };
 
   return (
-    <main>
-      <Container maxW='750px' my='50px' centerContent>
-        <Container maxW='675px' my='25px' centerContent>
+    <Box mt={24} mx={{ base: 2, lg: 0 }}>
+      <Container maxW="750px" my="50px" centerContent>
+        <Container maxW="675px" my="25px" centerContent>
           <form onSubmit={handleFormSubmit}>
             <FormControl isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type='email' value={formState.email} onChange={handleChange} />
+              <Input
+                type="email"
+                name="email"
+                value={formState.email}
+                onChange={handleChange}
+              />
               <FormHelperText>We'll never share your email.</FormHelperText>
             </FormControl>
             <FormControl isRequired>
               <FormLabel>Password</FormLabel>
-              <Input type='password' value={formState.email} onChange={handleChange} />
+              <Input
+                type="password"
+                name="password"
+                value={formState.password}
+                onChange={handleChange}
+              />
             </FormControl>
-            <Button type='submit'>Login</Button>
+            <Button type="submit">Login</Button>
           </form>
         </Container>
-        <Text>No account yet? <Link color='blue' href='/signup'>Sign up</Link> instead!</Text>
+        <Text>
+          No account yet?{" "}
+          <Link color="blue" href="/signup">
+            Sign up
+          </Link>{" "}
+          instead!
+        </Text>
       </Container>
-    </main>
-  )
-}
+    </Box>
+  );
+};
 
-export default Login
+export default Login;
