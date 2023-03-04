@@ -45,6 +45,8 @@ const ReviewForm = () => {
 
   return (
     <Box mt={4}>
+
+      {/* Form */}
       <VStack spacing={4} align="start">
         <FormControl>
           <FormLabel fontSize='xl'>What did you think of your experience?</FormLabel>
@@ -71,11 +73,16 @@ const ReviewForm = () => {
           </Button>
         </FormControl>
       </VStack>
+
       <Divider my={8} />
+
+      {/* Reviews */}
       <Box>
-        <Heading mb={4}>
+
+        <Heading mb={4} fontSize='3xl'>
           Reviews
         </Heading>
+
         <Flex>
           <Spacer />
           {/* <Select placeholder="Sort by">
@@ -83,7 +90,8 @@ const ReviewForm = () => {
             <option value="rating">Rating</option>
           </Select> */}
         </Flex>
-        <SimpleGrid columns={1} spacing={4} my={4} maxH="300px" overflowY="scroll">
+
+        <SimpleGrid columns={1} spacing={1} my={2} maxH="300px" overflowY="scroll">
           {olderReviews.map((review, index) => (
             <Box key={index} bg="white" p={4} borderRadius="md">
               <HStack mb={2}>

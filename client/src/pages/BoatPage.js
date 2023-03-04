@@ -173,12 +173,12 @@ const BoatPage = () => {
       </Box>
 
       {/* Review Modal */}
-      <Modal isOpen={isOpen} onClose={onClose} size={"4xl"}>
+      <Modal isOpen={isOpen} onClose={onClose} size={"3xl"}>
         <ModalOverlay />
         <ModalContent>
           {/* Modal Header */}
           <ModalHeader bg="secondary.100">
-            <Heading as='h3' fontSize='3xl'>Reviews</Heading>
+            <Heading as='h3' fontSize='3xl'>Add a Reviews</Heading>
           </ModalHeader>
 
           <ModalCloseButton />
@@ -192,7 +192,7 @@ const BoatPage = () => {
               Close
             </Button>
           </ModalFooter>
-          
+
         </ModalContent>
       </Modal>
     </>
