@@ -10,7 +10,6 @@ import {
   Link,
   Box,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../utils/mutations";
 
@@ -18,8 +17,7 @@ import Auth from "../utils/auth";
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: "", password: "" });
-  const [login, { data }] = useMutation(LOGIN);
-  const navigate = useNavigate();
+  const [login] = useMutation(LOGIN);
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -50,10 +48,6 @@ const Login = (props) => {
       email: "",
       password: "",
     });
-
-    if (data) {
-      navigate("/");
-    }
   };
 
   return (
@@ -85,7 +79,7 @@ const Login = (props) => {
         </Container>
         <Text>
           No account yet?{" "}
-          <Link color="blue" href="/signup">
+          <Link color="blue" href="../#/signup">
             Sign up
           </Link>{" "}
           instead!

@@ -9,8 +9,6 @@ import {
   Checkbox,
   Box
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 
@@ -24,8 +22,7 @@ const Signup = (props) => {
     renter: false,
   });
 
-  const [addUser, { error, data }] = useMutation(ADD_USER);
-  const navigate = useNavigate();
+  const [addUser, { error }] = useMutation(ADD_USER);
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -59,10 +56,6 @@ console.log(event.target)
       Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
-    }
-
-    if (data) {
-      navigate("/");
     }
   };
 
@@ -98,7 +91,7 @@ console.log(event.target)
               onChange={handleChange}
             />
           </FormControl>
-          <FormControl isRequired>
+          <FormControl>
             <FormLabel>
               Are you a boat owner looking to rent out your boat?
             </FormLabel>
