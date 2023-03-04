@@ -6,12 +6,13 @@ import {
   Input,
   HStack,
   Box,
+  Flex,
 } from "@chakra-ui/react";
 
 import { useMutation } from "@apollo/client";
 import { ADD_BOOKING } from "../utils/mutations";
 
-function BookingForm({props}) {
+function BookingForm({ props }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [addBooking, { error }] = useMutation(ADD_BOOKING);
@@ -20,7 +21,7 @@ function BookingForm({props}) {
     event.preventDefault();
     // Your booking logic here
     let boatID = props._id;
-    
+
     const mutationResponse = addBooking({
       variables: {
         boatId: boatID,
@@ -36,15 +37,14 @@ function BookingForm({props}) {
   return (
     <Box
       bg="secondary.400"
-      boxShadow="md"
-      // w={{ base: "95%", md: "95%" }}
+      boxShadow="base"
       mx="auto"
       my={3}
-      p={5}
+      p={4}
       borderRadius={6}
     >
       <form onSubmit={handleSubmit}>
-        <HStack spacing={3}>
+        <Flex flexDirection={{base: 'column', md: 'row'}}>
           <FormControl>
             <FormLabel>Start Date</FormLabel>
             <Input
@@ -55,7 +55,7 @@ function BookingForm({props}) {
               bg="secondary.50"
             />
           </FormControl>
-          <FormControl>
+          <FormControl mt={{base: 3, md: 0}} ml={{md: 2}}>
             <FormLabel>End Date</FormLabel>
             <Input
               type="date"
@@ -65,8 +65,8 @@ function BookingForm({props}) {
               bg="secondary.50"
             />
           </FormControl>
-        </HStack>
-        <Button p={15}  mt={3} w='full' type="submit">
+        </Flex>
+        <Button p={15} mt={3} w='full' type="submit">
           Book
         </Button>
       </form>

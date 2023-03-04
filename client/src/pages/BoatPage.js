@@ -14,6 +14,7 @@ import {
   ListItem,
   Divider,
   Button,
+  GridItem,
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
@@ -43,116 +44,155 @@ const BoatPage = () => {
   return (
     <>
       <Box
-        mt={{ base: 18, md: 20, lg: '24' }}
-        borderWidth="1px"
-        borderRadius="md"
-        borderColor={"secondary.100"}
-        padding="1"
+        mt={24}
+        mx={{ base: 2, lg: 0 }}
       >
+        {/* Heading Container */}
+        <Box mb={2}>
+          <Heading as='h3' fontSize='3xl' textAlign='center'>{props.title}</Heading>
+          <Text textAlign='center'>{props.boatType}</Text>
+        </Box>
+
         <Grid
-          templateColumns={["1fr", null, "7fr 3fr"]}
-          gap={4}
-          autoFlow={["dense", null, "row"]}
+          templateColumns='repeat(12, 1fr)'
+          gap={2}
         >
-          <Box>
-            <Image src={props.image} width="100%" />
-            <Text size="lg">
-              🔹Included onboard: water & soft drinks, ice, towels, and a cooler
-            </Text>
-            <Box
-              // bg="secondary.100"
-              boxShadow="md"
-              // w={{ base: "95%", md: "95%" }}
-              // h="10vh"
-              mx="auto"
-              my={3}
-              p={5}
-              borderRadius={6}
-            >
-              <Button onClick={onOpen} width={200}>
-                Write review
-                <Icon as={FaPen} boxSize={6} />
-              </Button>
+
+          <GridItem colSpan={{ base: 0, lg: 2 }} />
+
+          <GridItem colSpan={{ base: 12, lg: 4 }}>
+            {/* Boat Image Card */}
+            <Box>
+
+
+              {/* Button Container */}
+              <Box
+                mx="auto"
+                borderRadius={6}
+              >
+                {/* Boat Image */}
+                <Image src={props.image} width="100%" borderRadius={4} />
+
+                {/* Image Caption */}
+                <Text>
+                  🔹 Included onboard: water & soft drinks, ice, towels, and a cooler
+                </Text>
+                {/* Booking Form */}
+                <BookingForm props={props} />
+
+              </Box>
             </Box>
-          </Box>
-          <Box>
-            <Card>
-              <CardHeader bg={"secondary.400"}>
-                <Heading>{props.title}</Heading>
-                <Text>{props.boatType}</Text>
-              </CardHeader>
-              <CardBody>
-                <UnorderedList listStyleType="none">
-                  <ListItem pb={5}>
-                    <Flex alignItems="center">
-                      <Icon as={FaMapMarkerAlt} boxSize={6} />
-                      <Text>{props.destination}</Text>
-                    </Flex>
-                  </ListItem>
+          </GridItem>
+
+          <GridItem colSpan={{ base: 12, lg: 4 }}>
+            {/* Boat Info Card */}
+            <Box>
+              <Card>
+
+                <CardBody>
+
+                  {/* Boat Details */}
+                  <Heading fontSize='2xl' mt={2} mb={2}>Boat Details</Heading>
+
                   <Divider />
-                  <ListItem pb={5}>
-                    <Flex alignItems="center">
-                      <Icon as={FaUser} boxSize={6} />
-                      <Text>Up to {props.occupancy} passengers</Text>
-                    </Flex>
-                  </ListItem>
-                  <ListItem pb={5}>
-                    <Flex alignItems="center">
-                      <Icon as={FaDollarSign} boxSize={6} />
-                      <Text>from ${props.priceRate} USD</Text>
-                    </Flex>
-                  </ListItem>
-                </UnorderedList>
-              </CardBody>
-            </Card>
-            <Card>
-              <CardHeader>
-                <Heading size="lg">Features</Heading>
-              </CardHeader>
-              <CardBody>
-                <UnorderedList listStyleType="none">
-                  <ListItem pb={5}>
-                    <Flex alignItems="center">
-                      <Heading size="md">
-                        Food Services: {props.foodServices ? " Yes" : " No"}
-                      </Heading>
-                    </Flex>
-                  </ListItem>
-                  <ListItem pb={5}>
-                    <Flex alignItems="center">
-                      <Heading size="md">
-                        Music: {props.music ? " Yes" : " No"}
-                      </Heading>
-                    </Flex>
-                  </ListItem>
-                  <ListItem pb={5}>
-                    <Flex alignItems="center">
-                      <Heading size="md">
-                        Additional Features: {props.otherFeatures}
-                      </Heading>
-                    </Flex>
-                  </ListItem>
-                </UnorderedList>
-                <Heading size="lg">Boat Details</Heading>
-                <Text size="md">{props.description}</Text>
-              </CardBody>
-            </Card>
-            <BookingForm props={props} />
-          </Box>
+
+                  <Text mt={6}>{props.description}</Text>
+
+                  <UnorderedList listStyleType="none" mt={4}>
+
+                    {/* Destination */}
+                    <ListItem mb={4}>
+                      <Flex alignItems="center">
+                        <Icon as={FaMapMarkerAlt} mr={3} boxSize={4} />
+                        <Text>{props.destination}</Text>
+                      </Flex>
+                    </ListItem>
+
+                    {/* Passengers */}
+                    <ListItem mt={4}>
+                      <Flex alignItems="center">
+                        <Icon as={FaUser} mr={3} boxSize={4} />
+                        <Text>Up to {props.occupancy} passengers</Text>
+                      </Flex>
+                    </ListItem>
+
+                    {/* Price Rate */}
+                    <ListItem mt={4}>
+                      <Flex alignItems="center">
+                        <Icon as={FaDollarSign} mr={3} boxSize={5} />
+                        <Text>from ${props.priceRate} USD</Text>
+                      </Flex>
+                    </ListItem>
+
+                  </UnorderedList>
+
+                  {/* Features */}
+                  <Heading as='h3' mt={10} mb={2} fontSize='2xl'>Features</Heading>
+
+                  <Divider />
+
+                  <UnorderedList listStyleType="none">
+
+                    {/* Food Services */}
+                    <ListItem mt={6}>
+                      <Text fontSize="md">
+                        <Text as='b' mr={2}>Food Services:</Text> {props.foodServices ? " Yes" : " No"}
+                      </Text>
+                    </ListItem>
+
+                    {/* Music */}
+                    <ListItem mt={2}>
+                      <Text fontSize="md">
+                        <Text as='b' mr={2}>Music:</Text> {props.music ? " Yes" : " No"}
+                      </Text>
+                    </ListItem>
+
+                    {/* Addtional Features */}
+                    <ListItem mt={2} mb={4}>
+                      <Text fontSize="md">
+                        <Text as='b' mr={2}>Additional Features:</Text> {props.otherFeatures.length > 1 ? props.otherFeatures : 'None'}
+                      </Text>
+                    </ListItem>
+
+                  </UnorderedList>
+
+                  <Button onClick={onOpen} width='full' mt={4}>
+                    Write review
+                    <Icon as={FaPen} ml={3} boxSize={3} />
+                  </Button>
+
+                </CardBody>
+              </Card>
+
+            </Box>
+          </GridItem>
+
+          <GridItem colSpan={{ base: 0, lg: 2 }} />
+
         </Grid>
       </Box>
-      <Modal isOpen={isOpen} onClose={onClose} size={"4xl"}>
+
+      {/* Review Modal */}
+      <Modal isOpen={isOpen} onClose={onClose} size={"3xl"}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader bg="secondary.100">Reviews</ModalHeader>
+          {/* Modal Header */}
+          <ModalHeader bg="secondary.100">
+            <Heading as='h3' fontSize='3xl'>Add a Reviews</Heading>
+          </ModalHeader>
+
           <ModalCloseButton />
-          <ReviewForm />
-          <ModalBody></ModalBody>
+
+          <ModalBody>
+            <ReviewForm />
+          </ModalBody>
+
           <ModalFooter>
             <Button mr={3} onClick={onClose}>
               Close
             </Button>
           </ModalFooter>
+
         </ModalContent>
       </Modal>
     </>
