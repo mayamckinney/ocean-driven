@@ -1,27 +1,26 @@
 import { gql } from '@apollo/client'
 
-// export const LOGIN_USER = gql`
-//     mutation loginUser($email: String!, $password: String!) {
-//         loginUser(email: $email, password: $password) {
-//             token
-//             user {
-//               _id
-//               username
-//         }
-//     }
-// `
+export const LOGIN = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        _id
+      }
+    }
+  }
+`;
 
-// export const ADD_USER = gql`
-//   mutation addUser($username: String!, $email: String!, $password: String!, $renter: Boolean!) {
-//     addUser(username: $username, email: $email, password: $password, renter: $renter) {
-//       token
-//       user {
-//         _id
-//         username
-//       }
-//     }
-//   }
-// `
+export const ADD_USER = gql`
+mutation addUser($email: String!, $password: String!, $username: String!, $renter: Boolean!) {
+  addUser(email: $email, password: $password, username: $username, renter: $renter) {
+    token
+    user {
+      _id
+    }
+  }
+}
+`
 
 // export const ADD_BOAT = gql`
 //   mutation addBoat($image: String!, $boatType: String!, $title: String!, $priceRate: Int!, $description: String!, $destination: String!, $occupancy: Int!, $foodServices: Boolean!, $music: Boolean!, $otherFeatures: [String!]) {

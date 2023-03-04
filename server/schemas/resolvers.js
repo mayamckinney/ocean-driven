@@ -19,26 +19,28 @@ const resolvers = {
     },
   },
   Mutation: {
-    loginUser: async (parent, { email, password }) => {
+    login: async (parent, {email, password}) => {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError("No user found with this email address");
+        throw new AuthenticationError('Incorrect credentials');
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError("Incorrect credentials");
+        throw new AuthenticationError('Incorrect credentials');
       }
 
       const token = signToken(user);
 
       return { token, user };
     },
-    addUser: async (parent, { username, email, password, renter }) => {
-      const user = await User.create({ username, email, password, renter });
+    addUser: async (parent, args) => {
+  
+      const user = await User.create(args);
       const token = signToken(user);
+
       return { token, user };
     },
     addBoat: async (

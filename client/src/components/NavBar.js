@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Flex, UnorderedList, ListItem, Link, Image, Heading } from "@chakra-ui/react";
 import { Link as RouteLink } from 'react-router-dom';
+import Auth from "../utils/auth";
 
 
 const NavBar = () => {
@@ -33,21 +34,24 @@ const NavBar = () => {
             <Flex flexDirection='column' justifyContent='flex-end'>
 
                 <UnorderedList styleType='none' display='flex' mb={2}>
-                    <ListItem>
+                {!Auth.loggedIn() ? (
+                    <>
+                    <ListItem> 
                         <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={3} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/login" >
                             Login
                         </Link>
-                    </ListItem>
+                    </ListItem> 
                     <ListItem>
                         <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={3} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/signup" >
                             Signup
                         </Link>
                     </ListItem>
+                    </> ) : (
                     <ListItem>
-                        <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={4} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/logout">
+                        <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={4} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/" onClick={() => Auth.logout()}>
                             Logout
                         </Link>
-                    </ListItem>
+                    </ListItem> )}
                 </UnorderedList>
 
                 <UnorderedList styleType={"none"} display='flex' justifyContent='flex-end'>
