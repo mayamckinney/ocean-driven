@@ -58,6 +58,7 @@ const resolvers = {
       },
       context
     ) => {
+      
       const boat = await Boat.create({
         image,
         boatType,
@@ -70,11 +71,16 @@ const resolvers = {
         music,
         otherFeatures,
       });
-
-      await User.findOneAndUpdate(
+      
+      if(!context.user) {
+        throw new AuthenticationError('You need to be logged in!');
+      }
+     
+      let user = await User.findOneAndUpdate(
         { _id: context.user._id },
         { $addToSet: { boats: boat._id } }
       );
+      
       return boat;
     },
     removeBoat: async (parent, { boatId }) => {
