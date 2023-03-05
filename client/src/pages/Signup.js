@@ -60,8 +60,8 @@ console.log(event.target)
   };
 
   return (
-    <Box mt={24} mx={{ base: 2, lg: 0 }}>
-      <Container maxW="750px" my="50px" centerContent>
+    <Box mt={[ 24, 32, 40 ]} mx="auto">
+      <Container maxW="750px" my="50px" centerContent boxShadow='lg'>
         <form onSubmit={handleFormSubmit}>
           <FormControl isRequired>
             <FormLabel>Email address</FormLabel>
@@ -70,8 +70,9 @@ console.log(event.target)
               name="email"
               value={formState.email}
               onChange={handleChange}
+              mb={2}
             />
-            <FormHelperText>We'll never share your email.</FormHelperText>
+            <FormHelperText mb={2}>We'll never share your email.</FormHelperText>
           </FormControl>
           <FormControl isRequired>
             <FormLabel>Username</FormLabel>
@@ -80,6 +81,7 @@ console.log(event.target)
               name="username"
               value={formState.username}
               onChange={handleChange}
+              mb={2}
             />
           </FormControl>
           <FormControl isRequired>
@@ -89,15 +91,16 @@ console.log(event.target)
               name="password"
               value={formState.password}
               onChange={handleChange}
+              mb={2}
             />
           </FormControl>
-          <FormControl>
+          <FormControl mb={2}>
             <FormLabel>
               Are you a boat owner looking to rent out your boat?
             </FormLabel>
             <Checkbox name="renter" onChange={handleIsChecked} />
           </FormControl>
-          <Button type="submit">Sign Up</Button>
+          <Button type="submit" w='full' mb={5}>Sign Up</Button>
         </form>
       </Container>
       {error && <div>{error.message}</div>}

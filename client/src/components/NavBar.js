@@ -20,14 +20,18 @@ const NavBar = () => {
         >
             <Box alignSelf='center' display='flex'>
                 {/* Source: DALL·E */}
-                <Image
+{/*                 <Image
                     src="/images/icon_placeholder1.png"
                     alt="yacht icon"
                     w={14}
                     borderRadius={30}
-                />
+                /> */}
                 <Box>
-                    <Heading as='h1' color='secondary.800' ml={3} mt={{ base: 1, md: 2.5 }} display={{base: 'none', md: 'inline-block'}} fontSize={{ base: 'xl', md: '4xl' }} alignSelf='center'>Ocean Driven</Heading>
+                    <Image
+                        src="/images/oceandrivenlogo.png"
+                        alt="ocean driven logo"
+                        w={300}
+                    />
                 </Box>
             </Box>
 

@@ -51,8 +51,8 @@ const Login = (props) => {
   };
 
   return (
-    <Box mt={24} mx={{ base: 2, lg: 0 }}>
-      <Container maxW="750px" my="50px" centerContent>
+    <Box mt={[ 24, 32, 40 ]} mx="auto">
+      <Container maxW="750px" my="50px" centerContent boxShadow='lg' rounded='lg'>
         <Container maxW="675px" my="25px" centerContent>
           <form onSubmit={handleFormSubmit}>
             <FormControl isRequired>
@@ -62,8 +62,9 @@ const Login = (props) => {
                 name="email"
                 value={formState.email}
                 onChange={handleChange}
+                mb={2}
               />
-              <FormHelperText>We'll never share your email.</FormHelperText>
+              <FormHelperText mb={2}>We'll never share your email.</FormHelperText>
             </FormControl>
             <FormControl isRequired>
               <FormLabel>Password</FormLabel>
@@ -72,12 +73,13 @@ const Login = (props) => {
                 name="password"
                 value={formState.password}
                 onChange={handleChange}
+                mb={2}
               />
             </FormControl>
-            <Button type="submit">Login</Button>
+            <Button type="submit" w='full' mb={2}>Login</Button>
           </form>
         </Container>
-        <Text>
+        <Text mb={5}>
           No account yet?{" "}
           <Link color="blue" href="../#/signup">
             Sign up
