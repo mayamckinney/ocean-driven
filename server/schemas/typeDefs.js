@@ -36,6 +36,7 @@ const typeDefs = gql`
         _id: ID
         reviewText: String
         reviewAuthor: String
+        createdAt: String
     }
 
     type Booking {
@@ -59,7 +60,7 @@ const typeDefs = gql`
         removeBoat(boatId: ID!): Boat
         addBooking(boatId: ID!, from: String!, to: String!, user: String!): Boat
         removeBooking(bookingId: ID!): Booking
-        addReview(boatId: ID!, reviewText: String, reviewAuthor: String!): Review
+        addReview(boatId: ID!, reviewText: String, reviewAuthor: String!): Boat
         removeReview(boatId: ID!, reviewId: Int): Review
     }
 `;

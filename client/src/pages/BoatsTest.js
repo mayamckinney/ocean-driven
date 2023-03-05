@@ -19,6 +19,8 @@ const BoatTest = () => {
 
   let arr= data.boats;
 
+  console.log("boats", arr);
+
   return (
     <div>
       {/* Add link to BoatForm here */}
