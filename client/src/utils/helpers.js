@@ -52,3 +52,23 @@ export function idbPromise(storeName, method, object) {
     };
   });
 }
+
+export function formatDate(milliseconds) {
+  let date = new Date(milliseconds);
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  let year = date.getFullYear().toString().slice(2);
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+
+  const zeroPad = (value) => {
+    return value < 10 ? `0${value}` : value;
+  }
+
+  month = zeroPad(month);
+  day = zeroPad(day);
+  hours = zeroPad(hours);
+  minutes = zeroPad(minutes);
+
+  return `${month}/${day}/${year} ${hours}:${minutes}`;
+}

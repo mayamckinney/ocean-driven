@@ -184,7 +184,7 @@ const BoatPage = () => {
           <ModalCloseButton />
 
           <ModalBody>
-            <ReviewForm />
+            <ReviewForm props={props}/>
           </ModalBody>
 
           <ModalFooter>

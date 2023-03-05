@@ -98,15 +98,18 @@ export const ADD_BOOKING = gql`
 //   }
 // `
 
-// export const ADD_REVIEW = gql`
-//   mutation addReview($boatId: ID!, $reviewText: String!, $reviewAuthor: String) {
-//     addReview(boatId: $boatId, reviewText: $reviewText, reviewAuthor: $reviewAuthor) {
-//         _id
-//         reviewText
-//         reviewAuthor
-//     }
-//   }
-// `
+export const ADD_REVIEW = gql`
+mutation addReview($boatId: ID!, $reviewAuthor: String!, $reviewText: String) {
+  addReview(boatId: $boatId, reviewAuthor: $reviewAuthor, reviewText: $reviewText) {
+    reviews {
+      reviewAuthor
+      reviewText
+      createdAt
+    }
+    title
+  }
+}
+`
 
 // export const REMOVE_REVIEW = gql`
 //   mutation removeReview($boatId: ID!, $reviewId: ID!) {
