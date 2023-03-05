@@ -140,11 +140,11 @@ const Profile = () => {
 
 
             {/* Boats */}
-            {/* <Box mt={4}>
+            <Box mt={4}>
                 <Heading as='h4' fontSize='2xl' mt={3}>Boats:</Heading>
                 {/* Load Boat Card that matches user ID */}
 
-            </Box> */}
+            </Box>
         </Flex>
     );
 };
