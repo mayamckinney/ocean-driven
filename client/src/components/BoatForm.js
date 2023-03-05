@@ -9,17 +9,19 @@ import {
   FormLabel,
   Image,
   Input,
-  Radio,
-  RadioGroup,
-  Text,
   Card,
   CardHeader,
   Heading,
   CardBody,
   Select,
+  useToast,
 } from "@chakra-ui/react";
 
-const BoatForm = () => {
+import { useMutation } from "@apollo/client";
+import { ADD_BOAT } from "../utils/mutations";
+import Auth from "../utils/auth";
+
+function BoatForm() {
   const [image, setImage] = useState("");
   const [boatType, setBoatType] = useState("");
   const [title, setTitle] = useState("");
@@ -30,6 +32,9 @@ const BoatForm = () => {
   const [foodServices, setFoodServices] = useState(false);
   const [music, setMusic] = useState(false);
   const [formError, setFormError] = useState(null);
+
+  const [addBoat, { error }] = useMutation(ADD_BOAT);
+  const toast = useToast()
 
   const boatTypes = [
     "Sailboat",
@@ -42,14 +47,14 @@ const BoatForm = () => {
     "Houseboat",
   ];
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
     // Validate form data here
-    if (title.trim() === "") {
-      setFormError("Title is required");
-      return;
-    }
+    // if (title.trim() === "") {
+    //   setFormError("Title is required");
+    //   return;
+    // }
 
     // Submit form data to server here
     console.log({
@@ -64,17 +69,46 @@ const BoatForm = () => {
       music,
     });
 
-    // Reset form fields
-    setImage("");
-    setBoatType("");
-    setTitle("");
-    setPriceRate("");
-    setDescription("");
-    setDestination("");
-    setOccupancy(1);
-    setFoodServices(false);
-    setMusic(false);
-    setFormError(null);
+    try {
+      const { data } = await addBoat({
+        variables: {
+          image,
+          title,
+          boatType,
+          priceRate,
+          description,
+          destination,
+          occupancy,
+          foodServices,
+          music: false,
+          otherFeatures: ["Kayak", "Fishing gear"],
+        }
+      });
+      console.log(data);
+
+
+      toast({
+        title: `Boat ${title}  craeted.`,
+        description: 'Thank you!',
+        status: 'success',
+        duration: 3000,
+        isClosable: true
+      })
+
+       // Reset form fields
+       setImage("");
+       setBoatType("");
+       setTitle("");
+       setPriceRate("");
+       setDescription("");
+       setDestination("");
+       setOccupancy(1);
+       setFoodServices(false);
+       setMusic(false);
+       setFormError(null);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -94,20 +128,14 @@ const BoatForm = () => {
         <CardBody>
           <Box maxWidth="800px" margin="auto">
             <form onSubmit={handleSubmit}>
-              <FormControl id="image" isRequired>
+              <FormControl id="image" /*isRequired*/>
                 <FormLabel>Image</FormLabel>
                 <Input type="file" onChange={(e) => setImage(e.target.value)} />
                 <Image src={image} alt="" maxW="200px" my="4" />
               </FormControl>
-              <FormControl id="boatType" isRequired mt="4">
+              <FormControl id="boatType" /*isRequired*/ mt="4">
                 <FormLabel>Boat Type</FormLabel>
-                {/* <Input
-                type="text"
-                placeholder="Enter boat type"
-                value={boatType}
-                onChange={(e) => setBoatType(e.target.value)}
-              /> */}
-                <Select placeholder="Select boat type">
+                <Select placeholder="Select boat type" onChange={(e) => setBoatType(e.target.value)}>
                   {boatTypes.map((type) => (
                     <option key={type} value={type}>
                       {type}
@@ -136,10 +164,10 @@ const BoatForm = () => {
                   type="number"
                   placeholder="Enter price rate"
                   value={priceRate}
-                  onChange={(e) => setPriceRate(e.target.value)}
+                  onChange={(e) => setPriceRate(Number(e.target.value))}
                 />
               </FormControl>
-              <FormControl id="description" isRequired mt="4">
+              <FormControl id="description" /*isRequired*/ mt="4">
                 <FormLabel>Description</FormLabel>
                 <Input
                   type="text"
@@ -148,7 +176,7 @@ const BoatForm = () => {
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </FormControl>
-              <FormControl id="destination" isRequired mt="4">
+              <FormControl id="destination" /*isRequired*/ mt="4">
                 <FormLabel>Destination</FormLabel>
                 <Input
                   type="text"
@@ -166,7 +194,7 @@ const BoatForm = () => {
                   onChange={(e) => setOccupancy(Number(e.target.value))}
                 />
               </FormControl>
-              <FormControl id="foodServices" isRequired mt="4">
+              <FormControl id="foodServices" /*isRequired*/ mt="4">
                 <FormLabel>Food Services</FormLabel>
                 <Checkbox
                   type="checkbox"
@@ -175,7 +203,7 @@ const BoatForm = () => {
                   onChange={(e) => setFoodServices(e.target.checked)}
                 />
               </FormControl>
-              <FormControl id="music" isRequired mt="4">
+              <FormControl id="music" /*isRequired*/ mt="4">
                 <FormLabel>Music</FormLabel>
                 <Checkbox
                   type="checkbox"
@@ -193,6 +221,6 @@ const BoatForm = () => {
       </Card>
     </Box>
   );
-};
+}
 
 export default BoatForm;

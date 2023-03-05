@@ -5,41 +5,41 @@ const reviewSchema = require('./Review')
 const boatSchema = new Schema({
     image: {
         type: String,
-        required: true
+        // required: true
     },
     boatType: {
         type: String,
-        required: true
+        // required: true
     },
     title: {
         type: String,
-        required: true
+        // required: true
     },
     priceRate: {
         type: Number,
-        required: true
+        // required: true
     },
     booked: [bookingSchema],
     reviews: [reviewSchema],
     description: {
         type: String,
-        required: true
+        // required: true
     },
     destination: {
         type: String,
-        required: true
+        // required: true
     },
     occupancy: {
         type: Number,
-        required: true
+        // required: true
     },
     foodServices: {
         type: Boolean,
-        required: true
+        // required: true
     },
     music: {
         type: Boolean,
-        required: true
+        // required: true
     },
     otherFeatures: [String]
 })

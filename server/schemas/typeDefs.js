@@ -7,7 +7,7 @@ const typeDefs = gql`
         image: String
         boatType: String
         title: String
-        priceRate: Float
+        priceRate: Int
         booked: [Booking]
         reviews: [Review]
         description: String
@@ -55,7 +55,7 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(email: String!, password: String!, username: String!, renter: Boolean!): Auth
-        addBoat(image: String!, boatType: String!, title: String!, priceRate: Int!, description: String!, destination: String!, occupancy: Int!, foodServices: Boolean!, music: Boolean!, otherFeatures: [String!]): Boat
+        addBoat(image: String, boatType: String, title: String, priceRate: Int, description: String, destination: String, occupancy: Int, foodServices: Boolean, music: Boolean, otherFeatures: [String]): Boat
         removeBoat(boatId: ID!): Boat
         addBooking(boatId: ID!, from: String!, to: String!, user: String!): Boat
         removeBooking(bookingId: ID!): Booking

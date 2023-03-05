@@ -22,23 +22,23 @@ mutation addUser($email: String!, $password: String!, $username: String!, $rente
 }
 `
 
-// export const ADD_BOAT = gql`
-//   mutation addBoat($image: String!, $boatType: String!, $title: String!, $priceRate: Int!, $description: String!, $destination: String!, $occupancy: Int!, $foodServices: Boolean!, $music: Boolean!, $otherFeatures: [String!]) {
-//     addBoat(image: $image, boatType: $boatType, title: $title, priceRate: $priceRate, description: $description, destination: $destination, occupancy: $occupancy, foodServices: $foodServices, music: $music, otherFeatures: $otherFeatures) {
-//         _id
-//         image
-//         boatType
-//         title
-//         priceRate
-//         description
-//         destination
-//         occupancy
-//         foodServices
-//         music
-//         otherFeatures
-//     }
-//   }
-// `
+export const ADD_BOAT = gql`
+  mutation addBoat($image: String, $boatType: String, $title: String, $priceRate: Int, $description: String, $destination: String, $occupancy: Int, $foodServices: Boolean, $music: Boolean, $otherFeatures: [String]) {
+    addBoat(image: $image, boatType: $boatType, title: $title, priceRate: $priceRate, description: $description, destination: $destination, occupancy: $occupancy, foodServices: $foodServices, music: $music, otherFeatures: $otherFeatures) {
+        _id
+        image
+        boatType
+        title
+        priceRate
+        description
+        destination
+        occupancy
+        foodServices
+        music
+        otherFeatures
+    }
+  }
+`
 
 // export const REMOVE_BOAT = gql`
 //   mutation removeBoat($boatId: ID!) {
