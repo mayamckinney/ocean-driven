@@ -24,7 +24,7 @@ const BoatCard = ({ props }) => {
         <Stack divider={<StackDivider />} spacing="4">
           <Box bg={'white.100'}>
             <Link to={{ pathname: "/boat"}} state={{ props }}>
-              <Image src={props.image} alt="Boat 1" />
+              <Image src={props.image} alt={props.title} />
             </Link>
             <Badge>from ${props.priceRate} </Badge>
             <Text pt="2" fontSize="sm">

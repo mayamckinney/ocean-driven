@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
     Box,
     Flex,
@@ -7,17 +7,30 @@ import {
     Image,
     Card,
     CardBody,
-    CardFooter,
     Divider,
     UnorderedList,
     ListItem,
     Button,
     Grid,
     GridItem
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import BoatCard from "../components/BoatCard";
+import Auth from "../utils/auth";
+
+// Include later
+// {(user.boats || []).map((boat, index) => 
+//     {
+//         return (
+//             <div key={index}>
+//                 <Text>{boat.title}</Text>
+//                 {/* <BoatCard key={index} props={x}></BoatCard> */}
+//             </div>
+//         );
+//     })}
 
 const Profile = () => {
-
+    // const user = Auth.getProfile().data;
     return (
         <Flex mt={24} mx={4} flexDirection='column'>
             <Box mb={4}>
@@ -29,7 +42,7 @@ const Profile = () => {
                 gap={2}
             >
                 {/* Spacer */}
-                <GridItem colSpan={{ base: 0, md: 1, lg: 2}} />
+                <GridItem colSpan={{ base: 0, md: 1, lg: 2 }} />
 
                 {/* Image */}
                 <GridItem colSpan={{ base: 12, md: 4 }}>
@@ -40,7 +53,7 @@ const Profile = () => {
                             alt='user profile'
                             maxWidth='90%'
                             borderRadius={30}
-                            mt={{base: 3, md: 10}}
+                            mt={{ base: 3, md: 10 }}
                             mx={{ base: 'auto', md: 0 }}
                         />
                     </Box>
@@ -61,14 +74,16 @@ const Profile = () => {
                                 {/* Username */}
                                 <ListItem mb={4}>
                                     <Text fontSize='xl'>
-                                        <Text as='b' mr={2}>Username: </Text>Fozzi Bear
+                                        <Text as='b' mr={2}>Username: </Text>
+                                        {/* {user.username} */}
                                     </Text>
                                 </ListItem>
 
                                 {/* Email */}
                                 <ListItem>
                                     <Text fontSize='xl'>
-                                        <Text as='b' mr={2}>Email: </Text>fozzi@wakawaka.com
+                                        <Text as='b' mr={2}>Email: </Text>
+                                        {/* {user.email} */}
                                     </Text>
                                 </ListItem>
 
@@ -79,12 +94,12 @@ const Profile = () => {
                 </GridItem>
 
                 {/* Spacer */}
-                <GridItem colSpan={{ base: 0, md: 1, lg: 2}} />
+                <GridItem colSpan={{ base: 0, md: 1, lg: 2 }} />
 
                 {/* Bookings */}
                 <GridItem colSpan={{ base: 12, md: 4 }}>
                     {/* Bookings */}
-                    <Box mt={{base: 4, md: 10}} mx={{base: 0, md: 3, lg: 10}}>
+                    <Box mt={{ base: 4, md: 10 }} mx={{ base: 0, md: 3, lg: 10 }}>
                         <Heading as='h3' fontSize='2xl' mt={3}>Bookings:</Heading>
 
                         <Card mt={6}>
@@ -144,7 +159,9 @@ const Profile = () => {
                 <Heading as='h4' fontSize='2xl' mt={3}>Boats:</Heading>
                 {/* Load Boat Card that matches user ID */}
 
+                
             </Box>
+
         </Flex>
     );
 };

@@ -6,7 +6,7 @@ const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 const resolvers = {
   Query: {
     boats: async () => {
-      return await Boat.find();
+      return await Boat.find().populate("booked").populate("reviews");
     },
     boat: async (parent, { boatId }) => {
       return await Boat.findOne({ _id: boatId });
@@ -19,17 +19,17 @@ const resolvers = {
     },
   },
   Mutation: {
-    login: async (parent, {email, password}) => {
+    login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError("Incorrect credentials");
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError("Incorrect credentials");
       }
 
       const token = signToken(user);
@@ -37,7 +37,6 @@ const resolvers = {
       return { token, user };
     },
     addUser: async (parent, args) => {
-  
       const user = await User.create(args);
       const token = signToken(user);
 
@@ -59,6 +58,7 @@ const resolvers = {
       },
       context
     ) => {
+      
       const boat = await Boat.create({
         image,
         boatType,
@@ -71,11 +71,16 @@ const resolvers = {
         music,
         otherFeatures,
       });
-
-      await User.findOneAndUpdate(
+      
+      if(!context.user) {
+        throw new AuthenticationError('You need to be logged in!');
+      }
+     
+      let user = await User.findOneAndUpdate(
         { _id: context.user._id },
         { $addToSet: { boats: boat._id } }
       );
+      
       return boat;
     },
     removeBoat: async (parent, { boatId }) => {
@@ -94,12 +99,8 @@ const resolvers = {
         { _id: boatId },
         {
           $addToSet: {
-            booked: { from, to, user: user },
+            booked: { from, to, user: context.user.username },
           },
-        },
-        {
-          new: true,
-          runValidators: true,
         }
       );
     },
@@ -116,14 +117,19 @@ const resolvers = {
         { new: true }
       );
     },
-    addReview: async (parent, { boatId, reviewText }, context) => {
-      return await Boat.findOneAndUpdate(
+    addReview: async (
+      parent,
+      { boatId, reviewText, reviewAuthor },
+      context
+    ) => {
+      // const user = context.user ? context.user.username : reviewAuthor;
+      const boat = await Boat.findOneAndUpdate(
         { _id: boatId },
         {
           $addToSet: {
             reviews: {
               reviewText,
-              user: context.user.username,
+              reviewAuthor
             },
           },
         },
@@ -132,6 +138,8 @@ const resolvers = {
           runValidators: true,
         }
       );
+      
+      return boat;
     },
     removeReview: async (parent, { boatId, reviewId }) => {
       return await Boat.findOneAndUpdate(

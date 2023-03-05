@@ -26,6 +26,18 @@ export const QUERY_BOATS = gql`
             foodServices
             music
             otherFeatures
+            reviews {
+                _id
+                reviewAuthor
+                reviewText
+                createdAt
+              }
+            booked {
+                _id
+                from
+                to
+                user
+            }
         }
     }
 `

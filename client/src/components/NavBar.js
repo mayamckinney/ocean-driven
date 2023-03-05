@@ -20,19 +20,24 @@ const NavBar = () => {
         >
             <Box alignSelf='center' display='flex'>
                 {/* Source: DALL·E */}
-                <Image
+{/*                 <Image
                     src="/images/icon_placeholder1.png"
                     alt="yacht icon"
                     w={14}
                     borderRadius={30}
-                />
+                /> */}
                 <Box>
-                    <Heading as='h1' color='secondary.800' ml={3} mt={{ base: 1, md: 2.5 }} display={{base: 'none', md: 'inline-block'}} fontSize={{ base: 'xl', md: '4xl' }} alignSelf='center'>Ocean Driven</Heading>
+                    <Image
+                        src="/images/oceandrivenlogo.png"
+                        alt="ocean driven logo"
+                        w={300}
+                    />
                 </Box>
             </Box>
 
-            <Flex flexDirection='column' justifyContent='flex-end'>
+            <Flex flexDirection='column' justifyContent='space-around' alignItems='flex-end' >
 
+                {/* Top row */}
                 <UnorderedList styleType='none' display='flex' mb={2} justifyContent='flex-end'>
                 {!Auth.loggedIn() ? (
                     <>
@@ -54,6 +59,7 @@ const NavBar = () => {
                     </ListItem> )}
                 </UnorderedList>
 
+                {/* Second Row */}
                 <UnorderedList styleType={"none"} display='flex' justifyContent='flex-end'>
                     <ListItem>
                         <Link as={RouteLink} style={{ textDecoration: 'none' }} fontSize={{base: 'lg', md: 'xl'}} mr={2} py={1} px={2} borderRadius='md' _hover={{ background: 'secondary.100', fontWeight: 'semibold' }} to="/">

@@ -42,12 +42,12 @@ const Home = () => {
 
 
   return (
-    <Box mt={20}>
+    <Box mt={[ 16, 24, 32 ]}>
       {/* Hero Image */}
       {/* Source: https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F5119297%2Fpexels-photo-5119297.jpeg&imgrefurl=https%3A%2F%2Fwww.pexels.com%2Fphoto%2Fsea-landscape-beach-vacation-5119297%2F&tbnid=UcSt2_Ng6zzlQM&vet=12ahUKEwjnwLavj779AhVwO0QIHYXfBDUQMygyegQIARBn..i&docid=aeYbV3eUbsRq4M&w=3264&h=2448&itg=1&q=tropical%20coast&hl=en&ved=2ahUKEwjnwLavj779AhVwO0QIHYXfBDUQMygyegQIARBn */}
       <Box>
         <Image
-          src="/images/placeholder-coast.jpeg"
+          src="/images/herood.png"
           alt="a beautiful coast"
           w={'full'}
           h={{ base: '40vh', lg: '50vh' }}
@@ -56,11 +56,11 @@ const Home = () => {
       </Box>
 
       {/* Search Form */}
-      <Box bg='secondary.400' boxShadow='md' w={{ base: "90%", md: "75%" }} mx='auto' my={3} px={5} py={4} borderRadius={6}>
+      <Box bgGradient='linear(to-t, secondary.400, secondary.500)' boxShadow='md' w={{ base: "90%", md: "75%" }} mx='auto' my={3} px={5} py={4} borderRadius={6}>
         <FormControl>
           <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(4, 1fr)' }}>
-            <GridItem w='100%'>
-              <FormLabel>Where:</FormLabel>
+            <GridItem w='100%' pr={[2, 3]}>
+              <FormLabel color='secondary.50'>Where:</FormLabel>
               <Input
                 id='destination'
                 name="destination"
@@ -69,8 +69,8 @@ const Home = () => {
                 onChange={handleChange}
               />
             </GridItem>
-            <GridItem w='100%'>
-              <FormLabel mt={{ base: 3, md: 0 }}>From:</FormLabel>
+            <GridItem w='100%' pr={[2, 3]}>
+              <FormLabel mt={{ base: 3, md: 0 }} color='secondary.50'>From:</FormLabel>
               <Input
                 type='date'
                 id="from"
@@ -79,8 +79,8 @@ const Home = () => {
                 onChange={handleChange}
               />
             </GridItem>
-            <GridItem w='100%'>
-              <FormLabel mt={{ base: 3, md: 0 }}>To:</FormLabel>
+            <GridItem w='100%' pr={[2, 3]}>
+              <FormLabel mt={{ base: 3, md: 0 }} color='secondary.50'>To:</FormLabel>
               <Input
                 type='date'
                 id="to"
@@ -89,8 +89,8 @@ const Home = () => {
                 onChange={handleChange}
               />
             </GridItem>
-            <GridItem w='100%'>
-              <FormLabel mt={{ base: 3, md: 0 }}>Boat:</FormLabel>
+            <GridItem w='100%' pr={[2, 3]}>
+              <FormLabel mt={{ base: 3, md: 0 }} color='secondary.50'>Boat:</FormLabel>
               <Select
                 id="boatType"
                 name="boatType"
