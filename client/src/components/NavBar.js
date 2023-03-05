@@ -48,7 +48,7 @@ const NavBar = () => {
                     </ListItem>
                     </> ) : (
                     <ListItem>
-                        <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={4} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/" onClick={() => Auth.logout()}>
+                        <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={5} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/" onClick={() => Auth.logout()}>
                             Logout
                         </Link>
                     </ListItem> )}
