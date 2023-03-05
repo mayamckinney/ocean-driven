@@ -2,11 +2,11 @@ const { Schema, model } = require('mongoose')
 
 const bookingSchema = new Schema({
     from: {
-        type: Date,
+        type: String,
         required: true
     },
     to: {
-        type: Date,
+        type: String,
         required: true
     },
     user: {

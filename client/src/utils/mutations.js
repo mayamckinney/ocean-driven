@@ -59,12 +59,30 @@ mutation addUser($email: String!, $password: String!, $username: String!, $rente
 // `
 
 export const ADD_BOOKING = gql`
-  mutation addBooking($boatId: ID!, $from: String!, $to: String!, $user: String) {
+  mutation addBooking($boatId: ID!, $from: String!, $to: String!, $user: String!) {
     addBooking(boatId: $boatId, from: $from, to: $to, user: $user) {
-        _id
+      _id
+      boatType
+      booked {
         from
         to
         user
+        _id
+      }
+      description
+      destination
+      foodServices
+      image
+      music
+      occupancy
+      priceRate
+      otherFeatures
+      reviews {
+        _id
+        reviewAuthor
+        reviewText
+      }
+      title
     }
   }
 `
