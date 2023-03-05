@@ -4,34 +4,47 @@ import {
   FormControl,
   FormLabel,
   Input,
-  HStack,
   Box,
   Flex,
+  useToast
 } from "@chakra-ui/react";
 
 import { useMutation } from "@apollo/client";
 import { ADD_BOOKING } from "../utils/mutations";
+import Auth from '../utils/auth'
 
 function BookingForm({ props }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [addBooking, { error }] = useMutation(ADD_BOOKING);
+  const [addBooking] = useMutation(ADD_BOOKING);
+  const toast = useToast()
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // Your booking logic here
-    let boatID = props._id;
 
-    const mutationResponse = addBooking({
+    try {
+      const { data } = await addBooking({
       variables: {
-        boatId: boatID,
+        boatId: props._id,
         from: `${startDate}`,
         to: `${endDate}`,
-        user: "user"
+        user: Auth.getProfile().data.username
       },
     });
-
-    console.log(mutationResponse);
+    
+    setStartDate("")
+    setEndDate("")
+    toast({
+      title: 'Booking submitted',
+      description: 'Thank you!',
+      status: 'success',
+      duration: 3000,
+      isClosable: true
+    })
+    } catch (err) {
+      console.error(err)
+    }
   };
 
   return (

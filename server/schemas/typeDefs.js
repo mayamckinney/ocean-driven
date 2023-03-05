@@ -57,9 +57,9 @@ const typeDefs = gql`
         addUser(email: String!, password: String!, username: String!, renter: Boolean!): Auth
         addBoat(image: String!, boatType: String!, title: String!, priceRate: Int!, description: String!, destination: String!, occupancy: Int!, foodServices: Boolean!, music: Boolean!, otherFeatures: [String!]): Boat
         removeBoat(boatId: ID!): Boat
-        addBooking(boatId: ID!, from: String!, to: String!, user: String): Booking
+        addBooking(boatId: ID!, from: String!, to: String!, user: String!): Boat
         removeBooking(bookingId: ID!): Booking
-        addReview(boatId: ID!, reviewText: String, reviewAuthor: String): Review
+        addReview(boatId: ID!, reviewText: String, reviewAuthor: String!): Review
         removeReview(boatId: ID!, reviewId: Int): Review
     }
 `;

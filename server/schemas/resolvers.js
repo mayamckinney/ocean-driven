@@ -94,12 +94,8 @@ const resolvers = {
         { _id: boatId },
         {
           $addToSet: {
-            booked: { from, to, user: user },
+            booked: { from, to, user: context.user.username },
           },
-        },
-        {
-          new: true,
-          runValidators: true,
         }
       );
     },
