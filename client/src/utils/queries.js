@@ -32,6 +32,12 @@ export const QUERY_BOATS = gql`
                 reviewText
                 createdAt
               }
+            booked {
+                _id
+                from
+                to
+                user
+            }
         }
     }
 `

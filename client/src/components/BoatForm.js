@@ -113,7 +113,7 @@ function BoatForm() {
 
   return (
     <Box
-      mt={{ base: 18, md: 20, lg: "24" }}
+      mt={{ base: 18, md: 20, lg: 36 }}
       borderWidth="1px"
       borderRadius="md"
       borderColor={"secondary.100"}
