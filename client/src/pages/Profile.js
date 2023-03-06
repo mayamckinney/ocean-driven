@@ -16,21 +16,25 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import BoatCard from "../components/BoatCard";
+
+import { useQuery } from "@apollo/client";
+import { QUERY_ME } from "../utils/queries";
+
 import Auth from "../utils/auth";
 
-// Include later
-// {(user.boats || []).map((boat, index) => 
-//     {
-//         return (
-//             <div key={index}>
-//                 <Text>{boat.title}</Text>
-//                 {/* <BoatCard key={index} props={x}></BoatCard> */}
-//             </div>
-//         );
-//     })}
 
 const Profile = () => {
     // const user = Auth.getProfile().data;
+
+    const { data } = useQuery(QUERY_ME);
+    const user = data?.me || {};
+
+    if (!Auth.loggedIn()) {
+        return (
+            <Heading as='h4' mt={40} textAlign='center'>You must be logged in to view your profile.</Heading>
+        )
+    }
+
     return (
         <Flex mt={24} mx={4} flexDirection='column'>
             <Box mb={4}>
@@ -75,7 +79,7 @@ const Profile = () => {
                                 <ListItem mb={4}>
                                     <Text fontSize='xl'>
                                         <Text as='b' mr={2}>Username: </Text>
-                                        {/* {user.username} */}
+                                        {user.username}
                                     </Text>
                                 </ListItem>
 
@@ -83,7 +87,7 @@ const Profile = () => {
                                 <ListItem>
                                     <Text fontSize='xl'>
                                         <Text as='b' mr={2}>Email: </Text>
-                                        {/* {user.email} */}
+                                        {user.email}
                                     </Text>
                                 </ListItem>
 
@@ -159,7 +163,17 @@ const Profile = () => {
                 <Heading as='h4' fontSize='2xl' mt={3}>Boats:</Heading>
                 {/* Load Boat Card that matches user ID */}
 
-                
+                {user.boats.length > 0
+                    ? (user.boats || []).map((boat, index) => {
+                        return (
+                            <div key={index}>
+                                <Text>{boat.title}</Text>
+                                {/* <BoatCard key={index} props={x}></BoatCard> */}
+                            </div>
+                        );
+                    })
+                    : <Text>You have no boats yet</Text>
+                    }
             </Box>
 
         </Flex>
