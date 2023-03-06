@@ -163,7 +163,7 @@ const Profile = () => {
                 <Heading as='h4' fontSize='2xl' mt={3}>Boats:</Heading>
                 {/* Load Boat Card that matches user ID */}
 
-                {user.boats.length > 0
+                {(user.boats || []).length > 0
                     ? (user.boats || []).map((boat, index) => {
                         return (
                             <div key={index}>
