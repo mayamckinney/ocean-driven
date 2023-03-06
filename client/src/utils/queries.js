@@ -61,3 +61,35 @@ export const QUERY_SINGLE_BOAT = gql`
         }
     }
 `
+export const QUERY_ME = gql`
+query Me {
+    me {
+      _id
+      username
+      email
+      renter
+      boats {
+        boatType
+        destination
+        description
+        foodServices
+        image
+        music
+        occupancy
+        otherFeatures
+        priceRate
+        title
+        booked {
+          from
+          to
+          user
+        }
+        reviews {
+          createdAt
+          reviewAuthor
+          reviewText
+        }
+      }
+    }
+  }
+`;

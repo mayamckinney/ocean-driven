@@ -35,9 +35,10 @@ const NavBar = () => {
                 </Box>
             </Box>
 
-            <Flex flexDirection='column' justifyContent='flex-end'>
+            <Flex flexDirection='column' justifyContent='space-around' alignItems='flex-end' >
 
-                <UnorderedList styleType='none' display='flex' mb={2}>
+                {/* Top row */}
+                <UnorderedList styleType='none' display='flex' mb={2} justifyContent='flex-end'>
                 {!Auth.loggedIn() ? (
                     <>
                     <ListItem> 
@@ -46,18 +47,19 @@ const NavBar = () => {
                         </Link>
                     </ListItem> 
                     <ListItem>
-                        <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={3} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/signup" >
+                        <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={5} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/signup" >
                             Signup
                         </Link>
                     </ListItem>
                     </> ) : (
                     <ListItem>
-                        <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={4} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/" onClick={() => Auth.logout()}>
+                        <Link as={RouteLink} style={{ textDecoration: 'none' }} mr={5} _hover={{ fontWeight: 'semibold', color: 'secondary.700' }} to="/" onClick={() => Auth.logout()}>
                             Logout
                         </Link>
                     </ListItem> )}
                 </UnorderedList>
 
+                {/* Second Row */}
                 <UnorderedList styleType={"none"} display='flex' justifyContent='flex-end'>
                     <ListItem>
                         <Link as={RouteLink} style={{ textDecoration: 'none' }} fontSize={{base: 'lg', md: 'xl'}} mr={2} py={1} px={2} borderRadius='md' _hover={{ background: 'secondary.100', fontWeight: 'semibold' }} to="/">
