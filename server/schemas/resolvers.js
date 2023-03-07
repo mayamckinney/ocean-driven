@@ -89,7 +89,7 @@ const resolvers = {
       
       return boat;
     },
-    removeBoat: async (parent, { boatId }) => {
+    removeBoat: async (parent, { boatId }, context) => {
       const boat = await Boat.findOneAndDelete({
         _id: boatId,
       });

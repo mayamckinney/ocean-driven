@@ -40,23 +40,23 @@ export const ADD_BOAT = gql`
   }
 `
 
-// export const REMOVE_BOAT = gql`
-//   mutation removeBoat($boatId: ID!) {
-//     removeBoat(boatId: $boatId) {
-//         _id
-//         image
-//         boatType
-//         title
-//         priceRate
-//         description
-//         destination
-//         occupancy
-//         foodServices
-//         music
-//         otherFeatures
-//     }
-//   }
-// `
+export const REMOVE_BOAT = gql`
+  mutation removeBoat($boatId: ID!) {
+    removeBoat(boatId: $boatId) {
+        _id
+        image
+        boatType
+        title
+        priceRate
+        description
+        destination
+        occupancy
+        foodServices
+        music
+        otherFeatures
+    }
+  }
+`
 
 export const ADD_BOOKING = gql`
   mutation addBooking($boatId: ID!, $from: String!, $to: String!, $user: String!) {
@@ -87,16 +87,34 @@ export const ADD_BOOKING = gql`
   }
 `
 
-// export const REMOVE_BOOKING = gql`
-//   mutation removeBooking($boatId: ID!, $bookingId: ID!) {
-//     removeBooking(boatId: $boatId, bookingId: $bookingId) {
-//         _id
-//         from
-//         to
-//         user 
-//     }
-//   }
-// `
+export const REMOVE_BOOKING = gql`
+  mutation removeBooking($boatId: ID!, $bookingId: ID!) {
+    removeBooking(boatId: $boatId, bookingId: $bookingId) {
+      _id
+      boatType
+      booked {
+        from
+        to
+        user
+        _id
+      }
+      description
+      destination
+      foodServices
+      image
+      music
+      occupancy
+      priceRate
+      otherFeatures
+      reviews {
+        _id
+        reviewAuthor
+        reviewText
+      }
+      title 
+    }
+  }
+`
 
 export const ADD_REVIEW = gql`
 mutation addReview($boatId: ID!, $reviewAuthor: String!, $reviewText: String) {
@@ -111,12 +129,31 @@ mutation addReview($boatId: ID!, $reviewAuthor: String!, $reviewText: String) {
 }
 `
 
-// export const REMOVE_REVIEW = gql`
-//   mutation removeReview($boatId: ID!, $reviewId: ID!) {
-//     removeReview(boatId: $boatId, reviewId, $reviewId) {
-//         _id
-//         reviewText
-//         reviewAuthor
-//     }
-//   }
-// `
+export const REMOVE_REVIEW = gql`
+  mutation removeReview($boatId: ID!, $reviewId: ID!) {
+    removeReview(boatId: $boatId, reviewId: $reviewId) {
+      _id
+      boatType
+      booked {
+        from
+        to
+        user
+        _id
+      }
+      description
+      destination
+      foodServices
+      image
+      music
+      occupancy
+      priceRate
+      otherFeatures
+      reviews {
+        _id
+        reviewAuthor
+        reviewText
+      }
+      title 
+    }
+  }
+`
