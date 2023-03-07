@@ -87,16 +87,16 @@ export const ADD_BOOKING = gql`
   }
 `
 
-// export const REMOVE_BOOKING = gql`
-//   mutation removeBooking($boatId: ID!, $bookingId: ID!) {
-//     removeBooking(boatId: $boatId, bookingId: $bookingId) {
-//         _id
-//         from
-//         to
-//         user 
-//     }
-//   }
-// `
+export const REMOVE_BOOKING = gql`
+  mutation removeBooking($boatId: ID!, $bookingId: ID!) {
+    removeBooking(boatId: $boatId, bookingId: $bookingId) {
+        _id
+        from
+        to
+        user 
+    }
+  }
+`
 
 export const ADD_REVIEW = gql`
 mutation addReview($boatId: ID!, $reviewAuthor: String!, $reviewText: String) {
