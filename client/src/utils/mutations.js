@@ -23,7 +23,7 @@ mutation addUser($email: String!, $password: String!, $username: String!, $rente
 `
 
 export const ADD_BOAT = gql`
-  mutation addBoat($image: String, $boatType: String, $title: String, $priceRate: Int, $description: String, $destination: String, $occupancy: Int, $foodServices: Boolean, $music: Boolean, $otherFeatures: [String]) {
+  mutation addBoat($image: String!, $boatType: String!, $title: String!, $priceRate: Int!, $description: String!, $destination: String!, $occupancy: Int!, $foodServices: Boolean!, $music: Boolean!, $otherFeatures: String!) {
     addBoat(image: $image, boatType: $boatType, title: $title, priceRate: $priceRate, description: $description, destination: $destination, occupancy: $occupancy, foodServices: $foodServices, music: $music, otherFeatures: $otherFeatures) {
         _id
         image
@@ -90,28 +90,11 @@ export const ADD_BOOKING = gql`
 export const REMOVE_BOOKING = gql`
   mutation removeBooking($boatId: ID!, $bookingId: ID!) {
     removeBooking(boatId: $boatId, bookingId: $bookingId) {
-      _id
-      boatType
-      booked {
+        _id
         from
         to
-        user
-        _id
-      }
-      description
-      destination
-      foodServices
-      image
-      music
-      occupancy
-      priceRate
-      otherFeatures
-      reviews {
-        _id
-        reviewAuthor
-        reviewText
-      }
-      title 
+        user 
+
     }
   }
 `
