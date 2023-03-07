@@ -107,7 +107,7 @@ const Profile = () => {
 
                     {
                         user.renter === false ? (
-                            <BookingList />
+                            <BookingList username={user.username} />
                         ) : (
                             <BoatList boats={user.boats} />
                         )

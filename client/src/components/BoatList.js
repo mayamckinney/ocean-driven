@@ -1,19 +1,10 @@
 import React from "react";
 import {
     Box,
-    Flex,
     Heading,
     Text,
-    Image,
-    Card,
-    CardBody,
-    Divider,
-    UnorderedList,
-    ListItem,
-    Button,
-    Grid,
-    GridItem
 } from "@chakra-ui/react";
+import BoatCard from "./BoatCard";
 
 const BoatList = ({ boats }) => {
 
