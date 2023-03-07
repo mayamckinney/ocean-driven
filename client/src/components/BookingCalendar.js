@@ -20,7 +20,7 @@ function BookingCalendar({ props }) {
 
   let bookingEvents = [];
 
-  (bookings || []).forEach((booking) => {
+  bookings?.forEach((booking) => {
     let event = {
       id: createEventId(),
       title: "Booked",

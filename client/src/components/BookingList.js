@@ -25,7 +25,7 @@ const BookingList = ({ username }) => {
     const [removeBooking, { error }] = useMutation(REMOVE_BOOKING);
 
     // Builds an array that only contains boats with bookings
-    const bookedBoats = data?.boats.filter(boat => boat.booked.length > 0) || [];
+    const bookedBoats = data?.boats.filter(boat => boat.booked?.length > 0) || [];
 
     // function to find books for this user
     const findUserBookings = (bookedBoats) => {

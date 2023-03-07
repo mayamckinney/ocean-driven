@@ -152,7 +152,7 @@ function BoatPage () {
                         <Text as="b" mr={2}>
                           Additional Features:
                         </Text>{" "}
-                        {(props.otherFeatures || []).length > 1
+                        {props.otherFeatures?.length > 1
                           ? props.otherFeatures
                           : "None"}
                       </Text>
