@@ -19,7 +19,6 @@ import {
 
 import { useMutation } from "@apollo/client";
 import { ADD_BOAT } from "../utils/mutations";
-import Auth from "../utils/auth";
 
 function BoatForm() {
   const [image, setImage] = useState("");
@@ -31,9 +30,10 @@ function BoatForm() {
   const [occupancy, setOccupancy] = useState(1);
   const [foodServices, setFoodServices] = useState(false);
   const [music, setMusic] = useState(false);
+  const [otherFeatures, setOtherFeatures] = useState("")
   const [formError, setFormError] = useState(null);
 
-  const [addBoat, { error }] = useMutation(ADD_BOAT);
+  const [addBoat] = useMutation(ADD_BOAT);
   const toast = useToast()
 
   const boatTypes = [
@@ -80,15 +80,14 @@ function BoatForm() {
           destination,
           occupancy,
           foodServices,
-          music: false,
-          otherFeatures: ["Kayak", "Fishing gear"],
+          music,
+          otherFeatures
         }
       });
       console.log(data);
 
-
       toast({
-        title: `Boat ${title}  craeted.`,
+        title: `Boat ${title}  created.`,
         description: 'Thank you!',
         status: 'success',
         duration: 3000,
@@ -105,6 +104,7 @@ function BoatForm() {
        setOccupancy(1);
        setFoodServices(false);
        setMusic(false);
+       setOtherFeatures("")
        setFormError(null);
     } catch (e) {
       console.error(e);
@@ -128,12 +128,12 @@ function BoatForm() {
         <CardBody>
           <Box maxWidth="800px" margin="auto">
             <form onSubmit={handleSubmit}>
-              <FormControl id="image" /*isRequired*/>
+              <FormControl id="image" isRequired>
                 <FormLabel>Image</FormLabel>
                 <Input type="file" onChange={(e) => setImage(e.target.value)} />
                 <Image src={image} alt="" maxW="200px" my="4" />
               </FormControl>
-              <FormControl id="boatType" /*isRequired*/ mt="4">
+              <FormControl id="boatType" isRequired mt="4">
                 <FormLabel>Boat Type</FormLabel>
                 <Select placeholder="Select boat type" onChange={(e) => setBoatType(e.target.value)}>
                   {boatTypes.map((type) => (
@@ -167,7 +167,7 @@ function BoatForm() {
                   onChange={(e) => setPriceRate(Number(e.target.value))}
                 />
               </FormControl>
-              <FormControl id="description" /*isRequired*/ mt="4">
+              <FormControl id="description" isRequired mt="4">
                 <FormLabel>Description</FormLabel>
                 <Input
                   type="text"
@@ -176,7 +176,7 @@ function BoatForm() {
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </FormControl>
-              <FormControl id="destination" /*isRequired*/ mt="4">
+              <FormControl id="destination" isRequired mt="4">
                 <FormLabel>Destination</FormLabel>
                 <Input
                   type="text"
@@ -194,22 +194,29 @@ function BoatForm() {
                   onChange={(e) => setOccupancy(Number(e.target.value))}
                 />
               </FormControl>
-              <FormControl id="foodServices" /*isRequired*/ mt="4">
+              <FormControl id="foodServices" mt="4">
                 <FormLabel>Food Services</FormLabel>
                 <Checkbox
                   type="checkbox"
-                  placeholder="Enter food services"
                   value={foodServices}
                   onChange={(e) => setFoodServices(e.target.checked)}
                 />
               </FormControl>
-              <FormControl id="music" /*isRequired*/ mt="4">
+              <FormControl id="music" mt="4">
                 <FormLabel>Music</FormLabel>
                 <Checkbox
                   type="checkbox"
-                  placeholder="Enter music"
                   value={music}
                   onChange={(e) => setMusic(e.target.checked)}
+                />
+              </FormControl>
+              <FormControl id="other" mt="4">
+                <FormLabel>Other Features</FormLabel>
+                <Input
+                  type="text"
+                  placeholder="Add extra features"
+                  value={otherFeatures}
+                  onChange={(e) => {setOtherFeatures(e.target.value)}}
                 />
               </FormControl>
               <Button type="submit" mt="4">

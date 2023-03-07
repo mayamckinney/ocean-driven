@@ -5,6 +5,19 @@ const customTheme = extendTheme({
     colors: {
         // base --> https://smart-swatch.netlify.app/#2350ca
         primary: {
+          50: '#e9f2ff',
+          100: '#cbd4e8',
+          200: '#abb7d4',
+          300: '#8b9ac1',
+          400: '#6b7dae',
+          500: '#516394',
+          600: '#3e4d74',
+          700: '#2b3754',
+          800: '#192135',
+          900: '#050b18',
+        },
+        // base --> https://smart-swatch.netlify.app/#e0bbca
+        secondary: {
           50: '#e4eeff',
           100: '#bcccf9',
           200: '#90abef',
@@ -15,19 +28,6 @@ const customTheme = extendTheme({
           700: '#0f2b6f',
           800: '#051a45',
           900: '#00091d',
-        },
-        // base --> https://smart-swatch.netlify.app/#e0bbca
-        secondary: {
-          50: '#fcebf3',
-          100: '#e7cad6',
-          200: '#d5a8be',
-          300: '#c486a7',
-          400: '#b36493',
-          500: '#9a4b80',
-          600: '#783a67',
-          700: '#56294d',
-          800: '#351832',
-          900: '#160616',
         },
         // base --> https://smart-swatch.netlify.app/#b84ba7
         tertiary: {
@@ -44,16 +44,16 @@ const customTheme = extendTheme({
         },
         // base --> https://smart-swatch.netlify.app/#8947da
         quaternary: {
-          50: '#f3e8ff',
-          100: '#d7bef6',
-          200: '#bb94ec',
-          300: '#a06ae2',
-          400: '#8440d9',
-          500: '#6b26bf',
-          600: '#531d96',
-          700: '#3b146c',
-          800: '#240b43',
-          900: '#0f021b',
+          50: '#ebf1fd',
+          100: '#cfd4e5',
+          200: '#b0b8ce',
+          300: '#929bba',
+          400: '#727fa5',
+          500: '#59658c',
+          600: '#454f6d',
+          700: '#31384f',
+          800: '#1c2231',
+          900: '#080b17',
         },
     },
     fonts: {

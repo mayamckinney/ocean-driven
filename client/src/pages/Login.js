@@ -51,9 +51,20 @@ const Login = (props) => {
   };
 
   return (
-    <Box mt={[ 24, 32, 40 ]} mx="auto">
-      <Container maxW="750px" my="50px" centerContent boxShadow='lg' rounded='lg'>
-        <Container maxW="675px" my="25px" centerContent>
+    <Box
+    bgImage="url('/images/oceandrivenbglogin.png')"
+    bgPosition="bottom"
+    bgSize="cover"
+    bgRepeat="no-repeat"
+    w='100vw'
+    h='100vh'>
+      <Container 
+      mt={[ 24, 32, 40 ]} 
+      maxW='500px'
+      bgColor='white'
+      p={8}
+      boxShadow='lg'
+      borderRadius='md'>
           <form onSubmit={handleFormSubmit}>
             <FormControl isRequired>
               <FormLabel>Email address</FormLabel>
@@ -78,7 +89,6 @@ const Login = (props) => {
             </FormControl>
             <Button type="submit" w='full' mb={2}>Login</Button>
           </form>
-        </Container>
         <Text mb={5}>
           No account yet?{" "}
           <Link color="blue" href="../#/signup">
@@ -86,8 +96,8 @@ const Login = (props) => {
           </Link>{" "}
           instead!
         </Text>
-      </Container>
-    </Box>
+    </Container>
+  </Box>
   );
 };
 
