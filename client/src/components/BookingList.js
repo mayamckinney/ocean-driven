@@ -12,10 +12,10 @@ import {
     Button,
 } from "@chakra-ui/react";
 
-const BookingList = () => {
+const BookingList = ({ username }) => {
 
     return (
-        
+
         <Box mt={{ base: 4, md: 10 }}>
             <Heading as='h3' fontSize='2xl' mt={3}>Bookings:</Heading>
 

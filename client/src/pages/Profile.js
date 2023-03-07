@@ -17,6 +17,7 @@ import {
 import { Link } from "react-router-dom";
 import BoatCard from "../components/BoatCard";
 import BookingList from "../components/BookingList";
+import BoatList from "../components/BoatList";
 
 import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
@@ -37,7 +38,7 @@ const Profile = () => {
     }
 
     return (
-        <Flex mt={{base: 32, md: 40}} mx={4} flexDirection='column'>
+        <Flex mt={{ base: 32, md: 40 }} mx={4} flexDirection='column'>
             <Box>
                 <Heading as='h2' color='quaternary.700' fontSize='3xl' textAlign={{ base: 'center' }}>Profile</Heading>
             </Box>
@@ -103,29 +104,17 @@ const Profile = () => {
 
                 {/* Bookings/Boat List */}
                 <GridItem colSpan={{ base: 12, md: 4 }}>
-                    {/* Bookings */}
-                    <BookingList />
+
+                    {
+                        user.renter === false ? (
+                            <BookingList />
+                        ) : (
+                            <BoatList boats={user.boats} />
+                        )
+                    }
+
                 </GridItem>
             </Grid>
-
-
-            {/* Boats */}
-            <Box mt={4}>
-                <Heading as='h4' fontSize='2xl' mt={3}>Boats:</Heading>
-                {/* Load Boat Card that matches user ID */}
-
-                {(user.boats || []).length > 0
-                    ? (user.boats || []).map((boat, index) => {
-                        return (
-                            <div key={index}>
-                                <Text>{boat.title}</Text>
-                                {/* <BoatCard key={index} props={x}></BoatCard> */}
-                            </div>
-                        );
-                    })
-                    : <Text>You have no boats yet</Text>
-                    }
-            </Box>
 
         </Flex>
     );
