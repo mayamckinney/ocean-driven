@@ -60,8 +60,20 @@ console.log(event.target)
   };
 
   return (
-    <Box mt={[ 24, 32, 40 ]} mx="auto">
-      <Container maxW="750px" my="50px" centerContent boxShadow='lg'>
+    <Box
+    bgImage="url('/images/oceandrivenbgsignup.png')"
+    bgPosition="bottom"
+    bgSize="cover"
+    bgRepeat="no-repeat"
+    w='100vw'
+    h='100vh'>
+      <Container       
+      mt={[ 24, 32, 40 ]} 
+      maxW='500px'
+      bgColor='white'
+      p={8}
+      boxShadow='lg'
+      borderRadius='md'>
         <form onSubmit={handleFormSubmit}>
           <FormControl isRequired>
             <FormLabel>Email address</FormLabel>
