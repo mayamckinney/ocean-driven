@@ -60,7 +60,9 @@ const typeDefs = gql`
         addBoat(image: String!, boatType: String!, title: String!, priceRate: Int!, description: String!, destination: String!, occupancy: Int!, foodServices: Boolean!, music: Boolean!, otherFeatures: String!): Boat
         removeBoat(boatId: ID!): Boat
         addBooking(boatId: ID!, from: String!, to: String!, user: String!): Boat
-        removeBooking(boatId: ID!, bookingId: ID!): Boat
+
+        removeBooking(boatId: ID!, bookingId: ID!): Booking
+
         addReview(boatId: ID!, reviewText: String, reviewAuthor: String!): Boat
         removeReview(boatId: ID!, reviewId: ID!): Boat
     }

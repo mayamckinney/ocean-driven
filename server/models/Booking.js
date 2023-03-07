@@ -1,4 +1,6 @@
-const { Schema, model } = require('mongoose')
+ 
+ 
+ const { Schema, model } = require('mongoose')
 
 const bookingSchema = new Schema({
     from: {

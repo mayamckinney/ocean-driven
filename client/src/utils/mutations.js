@@ -90,28 +90,11 @@ export const ADD_BOOKING = gql`
 export const REMOVE_BOOKING = gql`
   mutation removeBooking($boatId: ID!, $bookingId: ID!) {
     removeBooking(boatId: $boatId, bookingId: $bookingId) {
-      _id
-      boatType
-      booked {
+        _id
         from
         to
-        user
-        _id
-      }
-      description
-      destination
-      foodServices
-      image
-      music
-      occupancy
-      priceRate
-      otherFeatures
-      reviews {
-        _id
-        reviewAuthor
-        reviewText
-      }
-      title 
+        user 
+
     }
   }
 `

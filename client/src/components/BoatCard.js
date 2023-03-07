@@ -1,8 +1,6 @@
 import {
   Card,
-  CardHeader,
   CardBody,
-  CardFooter,
   Heading,
   Text,
   Box,
