@@ -23,9 +23,9 @@ function BookingCalendar({ props }) {
   (bookings || []).forEach((booking) => {
     let event = {
       id: createEventId(),
-      title: booking.user,
-      start: booking.from,
-      end: booking.to,
+      title: "Booked",
+      start: `${booking.from} 08:00`,
+      end: `${booking.to} 20:00`,
     };
     bookingEvents.push(event);
   });

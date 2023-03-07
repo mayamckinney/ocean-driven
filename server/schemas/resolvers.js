@@ -101,7 +101,7 @@ const resolvers = {
       return boat;
     },
     addBooking: async (parent, { boatId, from, to, user }, context) => {
-      return await Boat.findOneAndUpdate(
+      await Boat.findOneAndUpdate(
         { _id: boatId },
         {
           $addToSet: {
@@ -109,6 +109,8 @@ const resolvers = {
           },
         }
       );
+
+      return await Boat.findOne({ _id: boatId }).populate("booked").populate("reviews");
     },
     removeBooking: async (parent, { boatId, bookingId }) => {
       return await Boat.findOneAndUpdate(
