@@ -21,5 +21,6 @@
     "concurrently": "^7.6.0"
   },
   "dependencies": {
+    "server": "^1.0.38"
   }
 }
