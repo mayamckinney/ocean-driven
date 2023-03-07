@@ -32,13 +32,13 @@ function ReviewForm({ props }) {
     setReviews(props.reviews);
   }, [props.reviews]);
 
-  console.log("props", props.reviews);
+ 
 
   const handleSubmit = async (event) => {
     let reviewAuthor = Auth.getProfile().data.username || "Anonymous";
     let reviewText = comment;
     event.preventDefault();
-    console.log("props", props);
+
     // do something with the comment and stars data, such as send it to a server
     try {
       const { data } = await addReview({

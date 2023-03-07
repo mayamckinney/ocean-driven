@@ -13,8 +13,8 @@ const BoatList = ({ boats }) => {
                 <Heading as='h4' fontSize='2xl' mt={3}>Boats:</Heading>
                 {/* Load Boat Card that matches user ID */}
 
-                {(boats || []).length > 0
-                    ? (boats || []).map((boat, index) => {
+                {boats?.length > 0
+                    ? boats?.map((boat, index) => {
                         return (
                             <div key={index}>
                                 <Text>{boat.title}</Text>

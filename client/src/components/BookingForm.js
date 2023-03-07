@@ -71,6 +71,13 @@ function BookingForm({ props }) {
       setBookings(bookings);
     } catch (err) {
       console.error(err);
+      toast({
+        title: "Booking rejected",
+        description: "Please make sure you are logged in and try again.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
@@ -131,7 +138,7 @@ function BookingForm({ props }) {
        <ModalCloseButton />
 
        <ModalBody>
-         <BookingCalendar props={props.booked} />
+         <BookingCalendar props={bookings} />
        </ModalBody>
 
        <ModalFooter>
