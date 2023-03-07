@@ -33,6 +33,9 @@ const BoatCard = ({ props }) => {
             <Heading size="md">
               {props.title}
             </Heading>
+            <Text fontSize={"sm"} pt="2">
+              {props.boatType}
+            </Text>
             <Text pt="2">
               {props.description}
             </Text>
