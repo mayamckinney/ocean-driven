@@ -3,28 +3,79 @@ import {
     Box,
     Heading,
     Text,
+    Button,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalBody,
+    ModalCloseButton,
+    Grid,
+    GridItem,
+    Flex,
 } from "@chakra-ui/react";
+import BoatForm from "./BoatForm";
 import BoatCard from "./BoatCard";
 
 const BoatList = ({ boats }) => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
-        <Box mt={4}>
-                <Heading as='h4' fontSize='2xl' mt={3}>Boats:</Heading>
-                {/* Load Boat Card that matches user ID */}
+        <Box>
 
+            <Flex justifyContent='space-between'>
+                <Heading as='h4' fontSize='2xl' mt={3}>Boats:</Heading>
+
+                {/* Add Boat Button --> opens modal */}
+                <Button onClick={onOpen} colorScheme='primary'>Add a Boat</Button>
+            </Flex>
+
+
+            {/* Boat Form Modal */}
+            <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+
+                    {/* Boat Form Header */}
+                    <ModalHeader bg='primary.100'>
+                        <Heading as='h4' fontSize='3xl' textAlign='center'>
+                            Add a Boat
+                        </Heading>
+                    </ModalHeader>
+                    <ModalCloseButton />
+
+                    {/* Boat Form */}
+                    <ModalBody>
+                        <BoatForm />
+                    </ModalBody>
+
+                </ModalContent>
+            </Modal>
+
+
+            {/* Load Boat Card that matches user ID */}
+            <Grid
+                templateColumns='repeat(12, 1fr)'
+                gap={2}
+            >
                 {boats?.length > 0
                     ? boats?.map((boat, index) => {
                         return (
-                            <div key={index}>
-                                <Text>{boat.title}</Text>
-                                {/* <BoatCard key={index} props={x}></BoatCard> */}
-                            </div>
+
+                            <GridItem colSpan={{ base: 12, md: 4 }}>
+                                <div key={index}>
+                                    <BoatCard key={index} props={boat}></BoatCard>
+                                </div>
+                            </GridItem>
+
                         );
                     })
                     : <Text>You have no boats yet</Text>
-                    }
-            </Box>
+                }
+            </Grid>
+
+        </Box>
     );
 };
 

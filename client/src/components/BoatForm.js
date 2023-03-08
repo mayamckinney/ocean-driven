@@ -111,26 +111,23 @@ function BoatForm() {
 
   return (
     <Box
-      mt={{ base: 18, md: 20, lg: 36 }}
-      borderWidth="1px"
       borderRadius="md"
-      borderColor={"secondary.100"}
-      padding="1"
+      my={4}
     >
       <Card>
-        <CardHeader>
-          <Heading margin="auto" textAlign={"center"}>
-            Boat Form
-          </Heading>
-        </CardHeader>
         <CardBody>
           <Box maxWidth="800px" margin="auto">
+
             <form onSubmit={handleSubmit}>
+
+              {/* Image Upload */}
               <FormControl id="image" isRequired>
                 <FormLabel>Image</FormLabel>
-                <Input type="file" onChange={(e) => setImage(e.target.value)} />
-                <Image src={image} alt="" maxW="200px" my="4" />
+                <Input type="file" variant='flushed' verticalAlign='center' onChange={(e) => setImage(e.target.value)} />
+                <Image src={image} alt="" maxW="200px" />
               </FormControl>
+
+              {/* Boat Type */}
               <FormControl id="boatType" isRequired mt="4">
                 <FormLabel>Boat Type</FormLabel>
                 <Select placeholder="Select boat type" onChange={(e) => setBoatType(e.target.value)}>
@@ -141,6 +138,8 @@ function BoatForm() {
                   ))}
                 </Select>
               </FormControl>
+
+              {/* Title */}
               <FormControl id="title" isRequired mt="4">
                 <FormLabel>Title</FormLabel>
                 <Input
@@ -156,6 +155,8 @@ function BoatForm() {
                   </FormErrorMessage>
                 )}
               </FormControl>
+
+              {/* Price Rate */}
               <FormControl id="priceRate" isRequired mt="4">
                 <FormLabel>Price Rate</FormLabel>
                 <Input
@@ -165,6 +166,8 @@ function BoatForm() {
                   onChange={(e) => setPriceRate(Number(e.target.value))}
                 />
               </FormControl>
+
+              {/* Description */}
               <FormControl id="description" isRequired mt="4">
                 <FormLabel>Description</FormLabel>
                 <Input
@@ -174,6 +177,8 @@ function BoatForm() {
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </FormControl>
+
+              {/* Destination */}
               <FormControl id="destination" isRequired mt="4">
                 <FormLabel>Destination</FormLabel>
                 <Input
@@ -183,6 +188,8 @@ function BoatForm() {
                   onChange={(e) => setDestination(e.target.value)}
                 />
               </FormControl>
+
+              {/* Occupancy */}
               <FormControl id="occupancy" isRequired mt="4">
                 <FormLabel>Occupancy</FormLabel>
                 <Input
@@ -192,6 +199,8 @@ function BoatForm() {
                   onChange={(e) => setOccupancy(Number(e.target.value))}
                 />
               </FormControl>
+
+              {/* Food Service */}
               <FormControl id="foodServices" mt="4">
                 <FormLabel>Food Services</FormLabel>
                 <Checkbox
@@ -200,6 +209,8 @@ function BoatForm() {
                   onChange={(e) => setFoodServices(e.target.checked)}
                 />
               </FormControl>
+
+              {/* Music */}
               <FormControl id="music" mt="4">
                 <FormLabel>Music</FormLabel>
                 <Checkbox
@@ -208,6 +219,8 @@ function BoatForm() {
                   onChange={(e) => setMusic(e.target.checked)}
                 />
               </FormControl>
+
+              {/* Other Features */}
               <FormControl id="other" mt="4">
                 <FormLabel>Other Features</FormLabel>
                 <Input
@@ -217,7 +230,9 @@ function BoatForm() {
                   onChange={(e) => {setOtherFeatures(e.target.value)}}
                 />
               </FormControl>
-              <Button type="submit" mt="4">
+
+              {/* Submit Button */}
+              <Button type="submit" mt="4" w='full'>
                 Submit
               </Button>
             </form>
