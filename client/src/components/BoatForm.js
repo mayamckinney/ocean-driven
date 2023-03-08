@@ -243,7 +243,7 @@ function BoatForm() {
               </FormControl>
 
               {/* Submit Button */}
-              <Button type="submit" mt="4" w='full'>
+              <Button type="submit" mt="4" w='full' onClick={() => {window.location.reload()}}>
                 Submit
               </Button>
             </form>
