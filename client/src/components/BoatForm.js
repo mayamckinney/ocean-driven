@@ -104,6 +104,9 @@ function BoatForm() {
        setMusic(false);
        setOtherFeatures("")
        setFormError(null);
+
+       // Go to profile page
+        window.location.assign('/profile');
     } catch (e) {
       console.error(e);
     }
