@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 const BoatCard = ({ props }) => {
 
   return (
-    <Card m={5}>
+    <Card m={5} maxW='xl'>
       <CardBody>
         <Stack divider={<StackDivider />} spacing="4">
           <Box bg={'white.100'}>

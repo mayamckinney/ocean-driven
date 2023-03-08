@@ -3,21 +3,8 @@ import { extendTheme, theme as base, withDefaultColorScheme, withDefaultVariant 
 
 const customTheme = extendTheme({
     colors: {
-        // base --> https://smart-swatch.netlify.app/#2350ca
+        // base --> https://smart-swatch.netlify.app/#849fc1
         primary: {
-          50: '#e9f2ff',
-          100: '#cbd4e8',
-          200: '#abb7d4',
-          300: '#8b9ac1',
-          400: '#6b7dae',
-          500: '#516394',
-          600: '#3e4d74',
-          700: '#2b3754',
-          800: '#192135',
-          900: '#050b18',
-        },
-        // base --> https://smart-swatch.netlify.app/#e0bbca
-        secondary: {
           50: '#e4eeff',
           100: '#bcccf9',
           200: '#90abef',
@@ -28,6 +15,19 @@ const customTheme = extendTheme({
           700: '#0f2b6f',
           800: '#051a45',
           900: '#00091d',
+        },
+        // base --> https://smart-swatch.netlify.app/#e0bbca
+        secondary: {
+          50: '#e7f1ff',
+          100: '#c9d5e9',
+          200: '#a9bcd5',
+          300: '#88a2c3',
+          400: '#6783b1',
+          500: '#4e6498',
+          600: '#3c4a77',
+          700: '#2a3156',
+          800: '#171b36',
+          900: '#040418',
         },
         // base --> https://smart-swatch.netlify.app/#b84ba7
         tertiary: {

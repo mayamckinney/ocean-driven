@@ -19,6 +19,8 @@ import {
 
 import { useMutation } from "@apollo/client";
 import { ADD_BOAT } from "../utils/mutations";
+import { boatTypes } from "../utils/types";
+
 
 function BoatForm() {
   const [image, setImage] = useState("");
@@ -35,17 +37,6 @@ function BoatForm() {
 
   const [addBoat] = useMutation(ADD_BOAT);
   const toast = useToast()
-
-  const boatTypes = [
-    "Sailboat",
-    "Powerboat",
-    "Fishing boat",
-    "Pontoon boat",
-    "Kayak/Canoe",
-    "Yacht",
-    "Catamaran",
-    "Houseboat",
-  ];
 
   function getFileName(filePath) {
     const filePathArray = filePath.split("\\");

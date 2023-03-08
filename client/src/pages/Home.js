@@ -4,8 +4,6 @@ import {
   Image,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
   Select,
   Button,
@@ -14,42 +12,13 @@ import {
 } from "@chakra-ui/react";
 
 import { useQuery } from "@apollo/client";
-import { QUERY_BOATS, QUERY_USERS } from "../utils/queries";
+import { QUERY_BOATS } from "../utils/queries";
 import { useEffect } from "react";
-import { useMutation } from "@apollo/client";
 
 // Test page to see if Chakra UI is working
 import BoatsTest from "./BoatsTest";
 
-const boatTypes = [
-  "Sailboat",
-  "Powerboat",
-  "Fishing boat",
-  "Pontoon boat",
-  "Kayak/Canoe",
-  "Yacht",
-  "Catamaran",
-  "Houseboat",
-];
-
-const destinations = [
-  "Baja California",
-  "Bahamas",
-  "Bermuda",
-  "Caribbean",
-  "Cancun",
-  "Cape Cod",
-  "Florida",
-  "Greece",
-  "Hawaii",
-  "Miami",
-  "New England",
-  "New York",
-  "Puerto Rico",
-  "San Diego",
-  "San Francisco",
-  "Tahiti",
-];
+import { boatTypes, destinations } from "../utils/types";
 
 const Home = () => {
   const [formState, setFormState] = useState({
@@ -97,6 +66,26 @@ const Home = () => {
           boat.destination === formState.destination &&
           boat.boatType === formState.boatType
       );
+    }
+
+    // Filter boats by booking dates
+    if (formState.from !== "" && formState.to !== "") {
+      const from = new Date(formState.from);
+      const to = new Date(formState.to);
+      result = result.filter((boat) => {
+        let available = true;
+        boat.booked?.forEach((booking) => {
+          const bookingFrom = new Date(booking.from);
+          const bookingTo = new Date(booking.to);
+          if (
+            (from >= bookingFrom && from <= bookingTo) ||
+            (to >= bookingFrom && to <= bookingTo)
+          ) {
+            available = false;
+          }
+        });
+        return available;
+      });
     }
     setBoats(result);
   };
