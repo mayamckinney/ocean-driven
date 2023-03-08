@@ -99,7 +99,7 @@ const BookingList = ({ username }) => {
                     userBookings.length > 0
                         ? userBookings.map(boat => {
                             return (
-                                <GridItem colSpan={{ base: 12, md: 3 }}>
+                                <GridItem colSpan={{ base: 12, md: 4 }}>
 
                                     <Card mt={6}>
                                         <CardBody>

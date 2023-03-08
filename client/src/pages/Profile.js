@@ -66,7 +66,7 @@ const Profile = () => {
                 </GridItem>
 
                 {/* Info */}
-                <GridItem colSpan={{ base: 12, md: 8, lg: 10 }}>
+                <GridItem colSpan={{ base: 12, md: 8, lg: 3 }}>
                     {/* User Info */}
                     <Card mt={{ base: 4, md: 10 }}>
                         <CardBody>
@@ -103,14 +103,16 @@ const Profile = () => {
                 {/* <GridItem colSpan={{ base: 0, md: 1, lg: 2 }} /> */}
 
                 {/* Bookings/Boat List */}
-                <GridItem colSpan={12}>
-                    {
-                        user.renter === false ? (
-                            <BookingList username={user.username} />
-                        ) : (
-                            <BoatList boats={user.boats} />
-                        )
-                    }
+                <GridItem colSpan={{base: 12, lg: 7}}>
+                    <Box border='1px' borderColor='blackAlpha.200' borderRadius='md' mt={{ base: 3, md: 10 }} p={4}>
+                        {
+                            user.renter === false ? (
+                                <BookingList username={user.username} />
+                            ) : (
+                                <BoatList boats={user.boats} />
+                            )
+                        }
+                    </Box>
                 </GridItem>
             </Grid>
 
