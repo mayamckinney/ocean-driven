@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Heading,
@@ -20,6 +20,16 @@ import BoatCard from "./BoatCard";
 
 const BoatList = ({ boats }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [boatData, setBoatData] = useState([]);
+
+    useEffect(()=> {
+        try {
+
+            
+        } catch (error) {
+            console.error(error)
+        }
+    }, [boats])
 
     return (
         <Box>
