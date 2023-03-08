@@ -8,11 +8,9 @@ import {
   StackDivider,
   Image,
   Badge,
-  Divider,
 } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
 
 const BoatCard = ({ props }) => {
 
