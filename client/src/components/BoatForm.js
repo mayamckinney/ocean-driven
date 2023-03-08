@@ -47,6 +47,11 @@ function BoatForm() {
     "Houseboat",
   ];
 
+  function getFileName(filePath) {
+    const filePathArray = filePath.split("\\");
+    return filePathArray.pop();
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -69,10 +74,12 @@ function BoatForm() {
       music,
     });
 
+    let demoImage = `images/${getFileName(image)}`
+
     try {
       const { data } = await addBoat({
         variables: {
-          image,
+          image: demoImage,
           title,
           boatType,
           priceRate,
