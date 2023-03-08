@@ -103,8 +103,7 @@ const Profile = () => {
                 {/* <GridItem colSpan={{ base: 0, md: 1, lg: 2 }} /> */}
 
                 {/* Bookings/Boat List */}
-                <GridItem colSpan={{ base: 12, md: 4 }}>
-
+                <GridItem colSpan={12}>
                     {
                         user.renter === false ? (
                             <BookingList username={user.username} />
@@ -112,7 +111,6 @@ const Profile = () => {
                             <BoatList boats={user.boats} />
                         )
                     }
-
                 </GridItem>
             </Grid>
 

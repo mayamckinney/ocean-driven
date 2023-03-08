@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Box,
     Heading,
@@ -10,6 +10,8 @@ import {
     UnorderedList,
     ListItem,
     Button,
+    Grid,
+    GridItem
 } from "@chakra-ui/react";
 
 import { useQuery, useMutation } from "@apollo/client";
@@ -19,6 +21,8 @@ import { REMOVE_BOOKING } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 const BookingList = ({ username }) => {
+    // State to manage user bookings
+    const [bookingData, setBookingData] = useState([]);
 
     // Queries server for boats
     const { data } = useQuery(QUERY_BOATS);
@@ -26,6 +30,7 @@ const BookingList = ({ username }) => {
 
     // Builds an array that only contains boats with bookings
     const bookedBoats = data?.boats.filter(boat => boat.booked?.length > 0) || [];
+
 
     // function to find books for this user
     const findUserBookings = (bookedBoats) => {
@@ -58,6 +63,7 @@ const BookingList = ({ username }) => {
 
     const userBookings = findUserBookings(bookedBoats);
 
+
     const handleDeleteBooking = async (boatId, bookingId) => {
 
         const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -73,6 +79,8 @@ const BookingList = ({ username }) => {
                     bookingId: bookingId
                 }
             })
+
+            window.location.reload();
         } catch (error) {
             console.error(error);
         }
@@ -83,62 +91,73 @@ const BookingList = ({ username }) => {
         <Box mt={{ base: 4, md: 10 }}>
             <Heading as='h3' fontSize='2xl' mt={3}>Bookings:</Heading>
 
-            {
-                userBookings.length > 0
-                    ? userBookings.map(boat => {
-                        return (
-                            <Card mt={6}>
-                                <CardBody>
+            <Grid
+                templateColumns='repeat(12, 1fr)'
+                gap={2}
+            >
+                {
+                    userBookings.length > 0
+                        ? userBookings.map(boat => {
+                            return (
+                                <GridItem colSpan={{ base: 12, md: 3 }}>
 
-                                    {/* Boat Name */}
-                                    <Heading as='h3' textAlign='center' fontSize='xl' mt={3}>{boat.title}</Heading>
+                                    <Card mt={6}>
+                                        <CardBody>
 
-                                    {/* Boat Type */}
-                                    <Text mb={2} textAlign='center'>{boat.boatType}</Text>
+                                            {/* Boat Name */}
+                                            <Heading as='h3' textAlign='center' fontSize='xl' mt={3}>{boat.title}</Heading>
 
-                                    <Divider />
+                                            {/* Boat Type */}
+                                            <Text mb={2} textAlign='center'>{boat.boatType}</Text>
 
-                                    {/* ADD --> Boat Image */}
-                                    <Image
-                                        src={boat.image} alt='a boat'
-                                        mt={6}
-                                    />
+                                            <Divider />
 
-                                    {/* Booking Date */}
-                                    <Box mt={6} border='1px' borderColor='gray.200' p={2}>
+                                            {/* ADD --> Boat Image */}
+                                            <Image
+                                                src={boat.image} alt='a boat'
+                                                mt={6}
+                                            />
 
-                                        <Heading as='h4' fontSize='lg'>Reservation Date:</Heading>
+                                            {/* Booking Date */}
+                                            <Box mt={6} border='1px' borderColor='gray.200' p={2}>
 
-                                        <UnorderedList listStyleType="none" mt={3}>
+                                                <Heading as='h4' fontSize='lg'>Reservation Date:</Heading>
 
-                                            {/* From */}
-                                            <ListItem>
-                                                <Text >
-                                                    <Text as='b' mr={2}>Check-in: </Text>
-                                                    {boat.from}
-                                                </Text>
-                                            </ListItem>
+                                                <UnorderedList listStyleType="none" mt={3}>
 
-                                            {/* To */}
-                                            <ListItem mt={3}>
-                                                <Text >
-                                                    <Text as='b' mr={2}>Check-out: </Text>{boat.to}
-                                                </Text>
-                                            </ListItem>
+                                                    {/* From */}
+                                                    <ListItem>
+                                                        <Text >
+                                                            <Text as='b' mr={2}>Check-in: </Text>
+                                                            {boat.from}
+                                                        </Text>
+                                                    </ListItem>
 
-                                        </UnorderedList>
+                                                    {/* To */}
+                                                    <ListItem mt={3}>
+                                                        <Text >
+                                                            <Text as='b' mr={2}>Check-out: </Text>{boat.to}
+                                                        </Text>
+                                                    </ListItem>
 
-                                    </Box>
+                                                </UnorderedList>
 
-                                    {/* Cancel Reservation */}
-                                    <Button fontSize='lg' colorScheme='red' mt={4} w='full' onClick={() => handleDeleteBooking(boat.boatId, boat.bookingId)}>Cancel Reservation</Button>
-                                </CardBody>
-                            </Card>
+                                            </Box>
 
-                        )
-                    })
-                    : <Text>You have not made any bookings yet.</Text>
-            }
+                                            {/* Cancel Reservation */}
+                                            <Button fontSize={{lg: 'lg'}} colorScheme='red' mt={4} w='full' onClick={() => handleDeleteBooking(boat.boatId, boat.bookingId)}>Cancel Reservation</Button>
+                                        </CardBody>
+                                    </Card>
+
+                                </GridItem>
+
+
+                            )
+                        })
+                        : <Text>You have not made any bookings yet.</Text>
+                }
+            </Grid>
+
         </Box >
     );
 };
