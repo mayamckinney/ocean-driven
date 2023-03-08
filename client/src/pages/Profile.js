@@ -111,7 +111,7 @@ const Profile = () => {
 
                 {/* Bookings/Boat List */}
                 <GridItem colSpan={{base: 12, lg: 7}}>
-                    <Box border='1px' borderColor='blackAlpha.200' borderRadius='md' mt={{ base: 3, md: 10 }} p={4}>
+                    <Box border='1px' borderColor='blackAlpha.200' boxShadow='md' borderRadius='md' bg='gray.50' mt={{ base: 3, md: 10 }} p={4}>
                         {
                             user.renter === false ? (
                                 <BookingList username={user.username} />
