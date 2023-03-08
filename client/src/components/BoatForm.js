@@ -19,7 +19,7 @@ import {
 
 import { useMutation } from "@apollo/client";
 import { ADD_BOAT } from "../utils/mutations";
-import { boatTypes } from "../utils/types";
+import { boatTypes, destinations } from "../utils/types";
 
 
 function BoatForm() {
@@ -184,12 +184,20 @@ function BoatForm() {
               {/* Destination */}
               <FormControl id="destination" isRequired mt="4">
                 <FormLabel>Destination</FormLabel>
-                <Input
-                  type="text"
-                  placeholder="Enter destination"
+                <Select
+                  placeholder="Select destination..."
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
-                />
+                >
+                  <option key={"All"} selected value={"All"}>
+                    {"All"}
+                  </option>
+                  {destinations.map((type) => (
+                    <option key={type} value={type}>
+                      {type}
+                    </option>
+                  ))}
+                </Select>
               </FormControl>
 
               {/* Occupancy */}
