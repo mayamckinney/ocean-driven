@@ -38,6 +38,13 @@ const Profile = () => {
     }
 
     return (
+    <Box
+        bgImage="url('/images/oceandrivenbg.png')"
+        bgPosition="bottom"
+        bgSize="cover"
+        bgRepeat="no-repeat"
+        w='100vw'
+        h='100vh'>
         <Flex mt={{ base: 32, md: 40 }} mx={4} flexDirection='column'>
             <Box>
                 <Heading as='h2' color='quaternary.700' fontSize='3xl' textAlign={{ base: 'center' }}>Profile</Heading>
@@ -117,6 +124,7 @@ const Profile = () => {
             </Grid>
 
         </Flex>
+    </Box>
     );
 };
 
