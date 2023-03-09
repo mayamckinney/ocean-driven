@@ -28,6 +28,7 @@ const Home = () => {
     boatType: "All",
   });
   const [boats, setBoats] = useState([]);
+  const [showResults, setShowResults] = useState(false);
 
   const { loading, error, data } = useQuery(QUERY_BOATS);
 
@@ -88,6 +89,7 @@ const Home = () => {
       });
     }
     setBoats(result);
+    setShowResults(true);
   };
 
   return (
@@ -196,8 +198,11 @@ const Home = () => {
           </Button>
         </form>
       </Box>
+      
+      {showResults && (
 
-      <BoatsTest boats={boats} />
+        <BoatsTest boats={boats} />
+      )}
     </Box>
   );
 };
