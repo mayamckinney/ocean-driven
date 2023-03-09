@@ -86,6 +86,8 @@ const resolvers = {
         { _id: context.user._id },
         { $addToSet: { boats: boat._id } }
       );
+
+      user = await User.findOne({ _id: context.user._id }).populate("boats");
       
       return boat;
     },
