@@ -3,7 +3,7 @@
 [![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://reactjs.org/)
 [![Apollo-GraphQL](https://img.shields.io/badge/-ApolloGraphQL-311C87?style=for-the-badge&logo=apollo-graphql)](https://www.apollographql.com/)
 ## Description 
-Welcome to Ocean Driven, a web application that allows users to book boats listed by other users. The goal for this project was to create a full MERN stack application with a major focus on user interaction and convenience. This was accomplished with the use of MongoDB for our database storage and React for our client-side rendering. This application also incorporates ChakraUI to create a visually appealing UI.
+Welcome to Ocean Driven, a web application that allows users to book boats listed by other users. The goal for this project was to create a full MERN stack PWA with a major focus on user interaction and convenience. This was accomplished with the use of MongoDB for our database storage and React for our client-side rendering. This application also incorporates ChakraUI to create a visually appealing UI.
 
 ## Installation
 Click this link to view the deployed application: https://ocean-driven.herokuapp.com/
