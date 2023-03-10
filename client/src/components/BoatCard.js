@@ -38,7 +38,7 @@ const BoatCard = ({ props }) => {
               {props.description}
             </Text>
             <Text pt="2">
-              Up to {props.occupancy} passangers
+              Up to {props.occupancy} passengers
             </Text>
           </Box>
           <Box></Box>
