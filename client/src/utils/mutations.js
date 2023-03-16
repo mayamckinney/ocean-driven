@@ -59,13 +59,15 @@ export const REMOVE_BOAT = gql`
 `
 
 export const ADD_BOOKING = gql`
-  mutation addBooking($boatId: ID!, $from: String!, $to: String!, $user: String!) {
-    addBooking(boatId: $boatId, from: $from, to: $to, user: $user) {
+  mutation addBooking($boatId: ID!, $from: String!, $to: String!, $startTime: String!, $endTime: String!, $user: String!) {
+    addBooking(boatId: $boatId, from: $from, to: $to, startTime: $startTime, endTime: $endTime, user: $user) {
       _id
       boatType
       booked {
         from
         to
+        startTime
+        endTime
         user
         _id
       }
@@ -93,6 +95,8 @@ export const REMOVE_BOOKING = gql`
         _id
         from
         to
+        startTime
+        endTime
         user 
 
     }
@@ -120,6 +124,8 @@ export const REMOVE_REVIEW = gql`
       booked {
         from
         to
+        startTime
+        endTime
         user
         _id
       }

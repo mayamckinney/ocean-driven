@@ -43,6 +43,8 @@ const typeDefs = gql`
         _id: ID
         from: String
         to: String
+        startTime: String
+        endTime: String
         user: String
     }
 
@@ -59,7 +61,7 @@ const typeDefs = gql`
         addUser(email: String!, password: String!, username: String!, renter: Boolean!): Auth
         addBoat(image: String!, boatType: String!, title: String!, priceRate: Int!, description: String!, destination: String!, occupancy: Int!, foodServices: Boolean!, music: Boolean!, otherFeatures: String!): Boat
         removeBoat(boatId: ID!): Boat
-        addBooking(boatId: ID!, from: String!, to: String!, user: String!): Boat
+        addBooking(boatId: ID!, from: String!, to: String!, startTime: String!, endTime: String!, user: String!): Boat
 
         removeBooking(boatId: ID!, bookingId: ID!): Booking
 

@@ -36,6 +36,8 @@ export const QUERY_BOATS = gql`
                 _id
                 from
                 to
+                startTime
+                endTime
                 user
             }
         }
@@ -82,6 +84,8 @@ query Me {
         booked {
           from
           to
+          startTime
+          endTime
           user
         }
         reviews {
