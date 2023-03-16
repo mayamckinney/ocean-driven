@@ -20,7 +20,8 @@ import {
   AccordionItem,
   AccordionButton,
   AccordionPanel,
-  AccordionIcon
+  AccordionIcon,
+  Text
 } from "@chakra-ui/react";
 
 import { useEffect } from "react";
@@ -184,6 +185,11 @@ function BookingForm({ props }) {
                     />
                   </FormControl>
                 </Flex>
+
+                <Text mt={4} fontSize='sm'>
+                  <Text as='b' mr={2}>Please Note:</Text>
+                  Bookings for single day trips must be a minimun of 4 hours long.
+                </Text>
               </AccordionPanel>
 
             </AccordionItem>
