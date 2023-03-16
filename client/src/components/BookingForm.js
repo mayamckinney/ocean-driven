@@ -34,6 +34,8 @@ import Auth from "../utils/auth";
 function BookingForm({ props }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [bookings, setBookings] = useState([]);
   const [addBooking] = useMutation(ADD_BOOKING);
   const toast = useToast();
@@ -56,12 +58,16 @@ function BookingForm({ props }) {
           boatId: props._id,
           from: `${startDate}`,
           to: `${endDate}`,
+          startTime: `${startTime}`,
+          endTime: `${startTime}`,
           user: Auth.getProfile().data.username,
         },
       });
 
       setStartDate("");
       setEndDate("");
+      setStartTime("");
+      setEndTime("");
       toast({
         title: "Booking submitted",
         description: "Thank you!",
@@ -98,12 +104,12 @@ function BookingForm({ props }) {
 
           <Accordion allowToggle>
 
-            {/* Long Trip */}
+            {/* Enter Date */}
             <AccordionItem border='none'>
 
               {/* Button/Label */}
               <AccordionButton>
-                <Heading as='h6' fontSize='sm'>Long Trip</Heading>
+                <Heading as='h6' fontSize='sm'>Enter Date</Heading>
                 <AccordionIcon />
               </AccordionButton>
 
@@ -138,12 +144,12 @@ function BookingForm({ props }) {
 
             </AccordionItem>
 
-            {/* Day Trip */}
+            {/* Enter Time */}
             <AccordionItem border='none'>
 
               {/* Button/Label */}
               <AccordionButton>
-                <Heading as='h4' fontSize='sm'>Day Trip Only</Heading>
+                <Heading as='h4' fontSize='sm'>Enter Time</Heading>
                 <AccordionIcon />
               </AccordionButton>
 
@@ -157,9 +163,9 @@ function BookingForm({ props }) {
                       type="time"
                       min='06:00'
                       max='11:00'
-                      // value={startDate}
-                      // onChange={(event) => setStartDate(event.target.value)}
-                      // required
+                      value={startTime}
+                      onChange={(event) => setStartTime(event.target.value)}
+                      required
                       bg="secondary.50"
                     />
                   </FormControl>
@@ -171,9 +177,9 @@ function BookingForm({ props }) {
                       type="time"
                       min='10:00'
                       max='18:00'
-                      // value={endDate}
-                      // onChange={(event) => setEndDate(event.target.value)}
-                      // required
+                      value={endTime}
+                      onChange={(event) => setEndTime(event.target.value)}
+                      required
                       bg="secondary.50"
                     />
                   </FormControl>
