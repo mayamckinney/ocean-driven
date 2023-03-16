@@ -7,8 +7,6 @@ import {
   Box,
   Flex,
   useToast,
-} from "@chakra-ui/react";
-import {
   Modal,
   ModalOverlay,
   ModalContent,
@@ -17,7 +15,12 @@ import {
   ModalBody,
   ModalFooter,
   Heading,
-  Icon
+  Icon,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon
 } from "@chakra-ui/react";
 
 import { useEffect } from "react";
@@ -39,7 +42,7 @@ function BookingForm({ props }) {
   const onCalendarClose = () => setIsCalendarOpen(false);
   const onCalendarOpen = () => setIsCalendarOpen(true);
 
-  
+
   useEffect(() => {
     setBookings(props.booked);
   }, [props.booked]);
@@ -83,72 +86,144 @@ function BookingForm({ props }) {
 
   return (
     <>
-    <Box
-      bg="secondary.400"
-      boxShadow="base"
-      mx="auto"
-      my={3}
-      p={4}
-      borderRadius={6}
-    >
-      <form onSubmit={handleSubmit}>
-        <Flex flexDirection={{ base: "column", md: "row" }}>
-          <FormControl>
-            <FormLabel>Start Date</FormLabel>
-            <Input
-              type="date"
-              value={startDate}
-              onChange={(event) => setStartDate(event.target.value)}
-              required
-              bg="secondary.50"
-            />
-          </FormControl>
-          <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
-            <FormLabel>End Date</FormLabel>
-            <Input
-              type="date"
-              value={endDate}
-              onChange={(event) => setEndDate(event.target.value)}
-              required
-              bg="secondary.50"
-            />
-          </FormControl>
-        </Flex>
-        <Button p={15} mt={3} w="full" type="submit">
-          Book
-          <Icon as={FaBookOpen} ml={2} />
-        </Button>
-        <Button p={15} mt={3} w="full" onClick={onCalendarOpen}>
-          Check Availability
-          <Icon as={FaCalendarAlt} ml={2} />
-        </Button>
-      </form>
-    </Box>
-     {/* Booking Calendar Modal */}
-     <Modal isOpen={isCalendarOpen} onClose={onCalendarClose} size={"3xl"}>
-     <ModalOverlay />
-     <ModalContent>
-       {/* Modal Header */}
-       <ModalHeader bg="secondary.100">
-         <Heading as="h3" fontSize="3xl">
-           Booking Calendar
-         </Heading>
-       </ModalHeader>
+      <Box
+        bg="secondary.400"
+        boxShadow="base"
+        mx="auto"
+        my={3}
+        p={4}
+        borderRadius={6}
+      >
+        <form onSubmit={handleSubmit}>
 
-       <ModalCloseButton />
+          <Accordion allowToggle>
 
-       <ModalBody>
-         <BookingCalendar props={bookings} />
-       </ModalBody>
+            {/* Long Trip */}
+            <AccordionItem border='none'>
 
-       <ModalFooter>
-         <Button mr={3} onClick={onCalendarClose}>
-           Close
-         </Button>
-       </ModalFooter>
-     </ModalContent>
-   </Modal>
-   </>
+              {/* Button/Label */}
+              <AccordionButton>
+                <Heading as='h6' fontSize='sm'>Long Trip</Heading>
+                <AccordionIcon />
+              </AccordionButton>
+
+              {/* Content (form items) */}
+              <AccordionPanel>
+                <Flex flexDirection={{ base: "column", md: "row" }}>
+                  {/* Start Date */}
+                  <FormControl>
+                    <FormLabel>Start Date</FormLabel>
+                    <Input
+                      type="date"
+                      value={startDate}
+                      onChange={(event) => setStartDate(event.target.value)}
+                      required
+                      bg="secondary.50"
+                    />
+                  </FormControl>
+
+                  {/* End Date */}
+                  <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
+                    <FormLabel>End Date</FormLabel>
+                    <Input
+                      type="date"
+                      value={endDate}
+                      onChange={(event) => setEndDate(event.target.value)}
+                      required
+                      bg="secondary.50"
+                    />
+                  </FormControl>
+                </Flex>
+              </AccordionPanel>
+
+            </AccordionItem>
+
+            {/* Day Trip */}
+            <AccordionItem border='none'>
+
+              {/* Button/Label */}
+              <AccordionButton>
+                <Heading as='h4' fontSize='sm'>Day Trip Only</Heading>
+                <AccordionIcon />
+              </AccordionButton>
+
+              {/* Content (form items) */}
+              <AccordionPanel>
+                <Flex flexDirection={{ base: "column", md: "row" }}>
+                  {/* Start Date */}
+                  <FormControl>
+                    <FormLabel>Start Time</FormLabel>
+                    <Input
+                      type="time"
+                      min='06:00'
+                      max='11:00'
+                      // value={startDate}
+                      // onChange={(event) => setStartDate(event.target.value)}
+                      // required
+                      bg="secondary.50"
+                    />
+                  </FormControl>
+
+                  {/* End Date */}
+                  <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
+                    <FormLabel>End Time</FormLabel>
+                    <Input
+                      type="time"
+                      min='10:00'
+                      max='18:00'
+                      // value={endDate}
+                      // onChange={(event) => setEndDate(event.target.value)}
+                      // required
+                      bg="secondary.50"
+                    />
+                  </FormControl>
+                </Flex>
+              </AccordionPanel>
+
+            </AccordionItem>
+          </Accordion>
+
+          {/* Booking Button */}
+          <Button p={15} mt={3} w="full" type="submit">
+            Book
+            <Icon as={FaBookOpen} ml={2} />
+          </Button>
+
+          {/* Check Availability Button */}
+          <Button p={15} mt={3} w="full" onClick={onCalendarOpen}>
+            Check Availability
+            <Icon as={FaCalendarAlt} ml={2} />
+          </Button>
+        </form>
+      </Box>
+
+      {/* Booking Calendar Modal */}
+      <Modal isOpen={isCalendarOpen} onClose={onCalendarClose} size={"3xl"}>
+        <ModalOverlay />
+        <ModalContent>
+
+          {/* Modal Header */}
+          <ModalHeader bg="secondary.100">
+            <Heading as="h3" fontSize="3xl">
+              Booking Calendar
+            </Heading>
+          </ModalHeader>
+
+          <ModalCloseButton />
+
+          {/* Calendar */}
+          <ModalBody>
+            <BookingCalendar props={bookings} />
+          </ModalBody>
+
+          <ModalFooter>
+            <Button mr={3} onClick={onCalendarClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 }
 
