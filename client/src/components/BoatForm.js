@@ -43,6 +43,21 @@ function BoatForm() {
     return filePathArray.pop();
   }
 
+  const setBoatImage = (e) => {
+    const imageFile = e.target.files[0];
+
+    if (imageFile) {
+      const formData = new FormData();
+      formData.append("image", imageFile);
+  
+      fetch("/api/boat/image", {
+        method: "POST",
+        body: formData,
+      }).then(() => {});
+    }
+    setImage(e.target.value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -126,7 +141,7 @@ function BoatForm() {
               {/* Image Upload */}
               <FormControl id="image" isRequired>
                 <FormLabel>Image</FormLabel>
-                <Input type="file" variant='flushed' verticalAlign='center' onChange={(e) => setImage(e.target.value)} />
+                <Input type="file" variant='flushed' verticalAlign='center' onChange={(e) => setBoatImage(e)} />
                 <Image src={image} alt="" maxW="200px" />
               </FormControl>
 
