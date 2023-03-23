@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import BoatCard from "../components/BoatCard";
 import BookingList from "../components/BookingList";
 import BoatList from "../components/BoatList";
+import Carousel from "../components/ImageCarousel";
 
 import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
