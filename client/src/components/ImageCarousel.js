@@ -13,9 +13,9 @@ const settings = {
   arrows: false,
   fade: true,
   infinite: true,
-  autoplay: true,
+  // autoplay: true,
   speed: 500,
-  autoplaySpeed: 5000,
+  // autoplaySpeed: 5000,
   slidesToShow: 1,
   slidesToScroll: 1,
 };
@@ -23,7 +23,7 @@ const settings = {
 export default function Carousel() {
   // As we have used custom buttons, we need a reference variable to
   // change the state
-  const [slider, setSlider] = React.useState < Slider | null > (null);
+  const [slider, setSlider] = React.useState(null);
 
   // These are the breakpoints which changes the position of the
   // buttons as the screen size changes
@@ -40,9 +40,11 @@ export default function Carousel() {
   return (
     <Box
       position={'relative'}
-      height={'600px'}
+      height={'300px'}
       width={'full'}
-      overflow={'hidden'}>
+      borderRadius={4}
+      overflow={'hidden'}
+    >
       {/* CSS files for react-slick */}
       <link
         rel="stylesheet"
@@ -86,7 +88,7 @@ export default function Carousel() {
 
       {/* Slider */}
       <Slider
-        {...settings} 
+        {...settings}
         ref={(slider) => setSlider(slider)}
       >
         {cards.map((url, index) => (
