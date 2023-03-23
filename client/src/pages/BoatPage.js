@@ -68,7 +68,7 @@ function BoatPage () {
 
                 {/* Boat Image --> ADD CAROUSEL HERE */}
                 {/* <Image src={props.image} width="100%" borderRadius={4} /> */}
-                <Carousel />
+                <Carousel images={props.image}/>
 
                 {/* Image Caption */}
                 <Text>

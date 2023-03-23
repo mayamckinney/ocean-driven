@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, IconButton, useBreakpointValue } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { Box, IconButton, useBreakpointValue, Image } from '@chakra-ui/react';
 
 // Here we have used react-icons package for the icons
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
@@ -20,14 +20,19 @@ const settings = {
   slidesToScroll: 1,
 };
 
-export default function Carousel() {
+export default function Carousel({ images }) {
   // As we have used custom buttons, we need a reference variable to
   // change the state
   const [slider, setSlider] = React.useState(null);
+  // const [imgData, setImgData] = useState('')
+
+  // useEffect(() => {
+  //   setImgData(image)
+  // }, [image]);
 
   // These are the breakpoints which changes the position of the
   // buttons as the screen size changes
-  const top = useBreakpointValue({ base: '90%', md: '50%' });
+  const top = useBreakpointValue({ base: '85%', md: '50%' });
   const side = useBreakpointValue({ base: '30%', md: '10px' });
 
   // These are the images used in the slide
@@ -40,9 +45,8 @@ export default function Carousel() {
   return (
     <Box
       position={'relative'}
-      height={'300px'}
+      // height={'300px'}
       width={'full'}
-      borderRadius={4}
       overflow={'hidden'}
     >
       {/* CSS files for react-slick */}
@@ -61,7 +65,7 @@ export default function Carousel() {
       {/* Left Icon */}
       <IconButton
         aria-label="left-arrow"
-        colorScheme="messenger"
+        colorScheme="secondary"
         borderRadius="full"
         position="absolute"
         left={side}
@@ -75,7 +79,7 @@ export default function Carousel() {
       {/* Right Icon */}
       <IconButton
         aria-label="right-arrow"
-        colorScheme="messenger"
+        colorScheme="secondary"
         borderRadius="full"
         position="absolute"
         right={side}
@@ -91,17 +95,15 @@ export default function Carousel() {
         {...settings}
         ref={(slider) => setSlider(slider)}
       >
-        {cards.map((url, index) => (
-          <Box
+
+        {/* Change image in model to array */}
+        {/* {images.map((image, index) => (
+          <Image
             key={index}
-            height={'6xl'}
-            position="relative"
-            backgroundPosition="center"
-            backgroundRepeat="no-repeat"
-            backgroundSize="cover"
-            backgroundImage={`url(${url})`}
+            src={image}
           />
-        ))}
+        ))} */}
+        <Image src={images} borderRadius={4} />
       </Slider>
     </Box>
   );
