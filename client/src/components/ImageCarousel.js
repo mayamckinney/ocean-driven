@@ -70,6 +70,7 @@ export default function Carousel({ images }) {
         position="absolute"
         left={side}
         top={top}
+        size='sm'
         transform={'translate(0%, -50%)'}
         zIndex={2}
         onClick={() => slider?.slickPrev()}>
@@ -84,6 +85,7 @@ export default function Carousel({ images }) {
         position="absolute"
         right={side}
         top={top}
+        size='sm'
         transform={'translate(0%, -50%)'}
         zIndex={2}
         onClick={() => slider?.slickNext()}>
