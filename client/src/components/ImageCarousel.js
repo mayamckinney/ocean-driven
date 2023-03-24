@@ -7,6 +7,8 @@ import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 // And react-slick as our Carousel Lib
 import Slider from 'react-slick';
 
+const imageFiles = require.context('../../public/images/', true, /\.(png|jpg|jpeg|gif)$/)
+
 // Settings for the slider
 const settings = {
   dots: true,
@@ -93,7 +95,13 @@ export default function Carousel({ images }) {
             src={image}
           />
         ))} */}
-        <Image src={images} borderRadius={4} />
+        {/* <Image src={images} borderRadius={4} /> */}
+        {imageFiles.map((image, index) => (
+          <Image
+            key={index}
+            src={image}
+          />
+        ))}
         
       </Slider>
     </Box>
