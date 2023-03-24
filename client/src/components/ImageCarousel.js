@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Box, IconButton, useBreakpointValue, Image } from '@chakra-ui/react';
 
 // Here we have used react-icons package for the icons
@@ -14,7 +14,7 @@ const settings = {
   fade: true,
   infinite: true,
   // autoplay: true,
-  speed: 500,
+  // speed: 500,
   // autoplaySpeed: 5000,
   slidesToShow: 1,
   slidesToScroll: 1,
@@ -24,25 +24,13 @@ export default function Carousel({ images }) {
   // As we have used custom buttons, we need a reference variable to
   // change the state
   const [slider, setSlider] = React.useState(null);
-  // const [imgData, setImgData] = useState('')
-
-  // useEffect(() => {
-  //   setImgData(image)
-  // }, [image]);
 
   // These are the breakpoints which changes the position of the
   // buttons as the screen size changes
   const top = useBreakpointValue({ base: '85%', md: '50%' });
   const side = useBreakpointValue({ base: '30%', md: '10px' });
 
-  // These are the images used in the slide
-  const cards = [
-    'https://images.unsplash.com/photo-1612852098516-55d01c75769a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
-    'https://images.unsplash.com/photo-1627875764093-315831ac12f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
-    'https://images.unsplash.com/photo-1571432248690-7fd6980a1ae2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60',
-  ];
-
-  return (
+   return (
     <Box
       position={'relative'}
       // height={'300px'}
@@ -98,7 +86,7 @@ export default function Carousel({ images }) {
         ref={(slider) => setSlider(slider)}
       >
 
-        {/* Change image in model to array */}
+        {/* Change after boats can have multiple images */}
         {/* {images.map((image, index) => (
           <Image
             key={index}
@@ -106,6 +94,7 @@ export default function Carousel({ images }) {
           />
         ))} */}
         <Image src={images} borderRadius={4} />
+        
       </Slider>
     </Box>
   );
