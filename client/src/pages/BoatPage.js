@@ -30,6 +30,7 @@ import {
   ModalFooter,
 } from "@chakra-ui/react";
 
+import Carousel from "../components/ImageCarousel";
 import BookingForm from "../components/BookingForm";
 import ReviewForm from "../components/ReviewForm";
 
@@ -60,18 +61,21 @@ function BoatPage () {
           <GridItem colSpan={{ base: 0, lg: 2 }} />
 
           <GridItem colSpan={{ base: 12, lg: 4 }}>
+
             {/* Boat Image Card */}
             <Box>
-              {/* Button Container */}
               <Box mx="auto" borderRadius={6}>
-                {/* Boat Image */}
-                <Image src={props.image} width="100%" borderRadius={4} />
+
+                {/* Boat Image --> ADD CAROUSEL HERE */}
+                {/* <Image src={props.image} width="100%" borderRadius={4} /> */}
+                <Carousel images={props.image}/>
 
                 {/* Image Caption */}
                 <Text>
                   🔹 Included onboard: water & soft drinks, ice, towels, and a
                   cooler
                 </Text>
+
                 {/* Booking Form */}
                 <BookingForm props={props} />
               </Box>
