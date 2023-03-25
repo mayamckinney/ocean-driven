@@ -94,7 +94,7 @@ export default function Carousel({ images }) {
           />
         ))} */}
         <Image src={images} borderRadius={4} />
-        
+             
       </Slider>
     </Box>
   );

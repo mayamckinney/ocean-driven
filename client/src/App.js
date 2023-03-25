@@ -15,6 +15,7 @@ import BoatPage from "./pages/BoatPage";
 import BoatForm from "./components/BoatForm";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Footer from "./components/Footer";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -49,6 +50,7 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
           </Routes>
+          <Footer />
         </div>
       </Router>
     </ApolloProvider>
