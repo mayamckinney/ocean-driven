@@ -21,6 +21,8 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  Checkbox,
+  CheckboxGroup,
   Text
 } from "@chakra-ui/react";
 
@@ -103,97 +105,72 @@ function BookingForm({ props }) {
       >
         <form onSubmit={handleSubmit}>
 
-          <Accordion allowToggle>
+          {/* isDayTrip */}
+          <FormControl mb={3}>
+            <Checkbox colorScheme='quaternary' fontWeight='bold'>Day-Trip Only</Checkbox>
+          </FormControl>
 
-            {/* Enter Date */}
-            <AccordionItem border='none'>
+          {/* Form - First Row */}
+          <Flex flexDirection={{ base: "column", md: "row" }}>
+            
+            {/* Start Date */}
+            <FormControl>
+              <FormLabel>Start Date</FormLabel>
+              <Input
+                type="date"
+                value={startDate}
+                onChange={(event) => setStartDate(event.target.value)}
+                required
+                bg="secondary.50"
+              />
+            </FormControl>
 
-              {/* Button/Label */}
-              <AccordionButton>
-                <Heading as='h6' fontSize='sm'>Enter Date</Heading>
-                <AccordionIcon />
-              </AccordionButton>
+            {/* End Date */}
+            <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
+              <FormLabel>End Date</FormLabel>
+              <Input
+                type="date"
+                value={endDate}
+                onChange={(event) => setEndDate(event.target.value)}
+                required
+                bg="secondary.50"
+              />
+            </FormControl>
+          </Flex>
 
-              {/* Content (form items) */}
-              <AccordionPanel>
-                <Flex flexDirection={{ base: "column", md: "row" }}>
-                  {/* Start Date */}
-                  <FormControl>
-                    <FormLabel>Start Date</FormLabel>
-                    <Input
-                      type="date"
-                      value={startDate}
-                      onChange={(event) => setStartDate(event.target.value)}
-                      required
-                      bg="secondary.50"
-                    />
-                  </FormControl>
+          {/* Form - Second Row */}
+          <Flex flexDirection={{ base: "column", md: "row" }} mt={4}>
 
-                  {/* End Date */}
-                  <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
-                    <FormLabel>End Date</FormLabel>
-                    <Input
-                      type="date"
-                      value={endDate}
-                      onChange={(event) => setEndDate(event.target.value)}
-                      required
-                      bg="secondary.50"
-                    />
-                  </FormControl>
-                </Flex>
-              </AccordionPanel>
+            {/* Passengers */}
+            <FormControl>
+              <FormLabel>Passengers</FormLabel>
+              <Input
+                type="number"
+                // value={startDate}
+                // onChange={(event) => setStartDate(event.target.value)}
+                required
+                bg="secondary.50"
+              />
+            </FormControl>
 
-            </AccordionItem>
+            {/* Hours */}
+            <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
+              <FormLabel>Hours (Day-Trips Only):</FormLabel>
+              <Input
+                type="number"
+                // value={startDate}
+                // onChange={(event) => setStartDate(event.target.value)}
+                placeholder="4"
+                min="4"
+                bg="secondary.50"
+              />
+            </FormControl>
+          </Flex>
 
-            {/* Enter Time */}
-            <AccordionItem border='none'>
-
-              {/* Button/Label */}
-              <AccordionButton>
-                <Heading as='h4' fontSize='sm'>Enter Time</Heading>
-                <AccordionIcon />
-              </AccordionButton>
-
-              {/* Content (form items) */}
-              <AccordionPanel>
-                <Flex flexDirection={{ base: "column", md: "row" }}>
-                  {/* Start Date */}
-                  <FormControl>
-                    <FormLabel>Start Time</FormLabel>
-                    <Input
-                      type="time"
-                      min='06:00'
-                      max='11:00'
-                      value={startTime}
-                      onChange={(event) => setStartTime(event.target.value)}
-                      required
-                      bg="secondary.50"
-                    />
-                  </FormControl>
-
-                  {/* End Date */}
-                  <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
-                    <FormLabel>End Time</FormLabel>
-                    <Input
-                      type="time"
-                      min='10:00'
-                      max='18:00'
-                      value={endTime}
-                      onChange={(event) => setEndTime(event.target.value)}
-                      required
-                      bg="secondary.50"
-                    />
-                  </FormControl>
-                </Flex>
-
-                <Text mt={4} fontSize='sm'>
-                  <Text as='b' mr={2}>Please Note:</Text>
-                  Bookings for single day trips must be a minimun of 4 hours long.
-                </Text>
-              </AccordionPanel>
-
-            </AccordionItem>
-          </Accordion>
+          <Text mt={4} fontSize='sm'>
+            <Text as='b' mr={2}>Please Note:</Text>
+            Bookings for single day trips must be a minimun of 4 hours long.
+          </Text>
 
           {/* Booking Button */}
           <Button p={15} mt={3} w="full" type="submit">
