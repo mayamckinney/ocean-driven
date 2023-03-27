@@ -16,9 +16,7 @@ import {
   ModalFooter,
   Heading,
   Icon,
-  Checkbox,
-  CheckboxGroup,
-  Text
+  Checkbox
 } from "@chakra-ui/react";
 
 import { useEffect } from "react";
@@ -67,18 +65,6 @@ function BookingForm({ props }) {
           },
         });
 
-        setStartDate("");
-        setEndDate("");
-        setHours("");
-        setPassengers("");
-        toast({
-          title: "Booking submitted",
-          description: "Thank you!",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-        });
-
         const bookings = data.addBooking.booked;
         setBookings(bookings);
 
@@ -95,21 +81,21 @@ function BookingForm({ props }) {
           },
         });
 
-        setStartDate("");
-        setEndDate("");
-        setHours("");
-        setPassengers("");
-        toast({
-          title: "Booking submitted",
-          description: "Thank you!",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-        });
-
         const bookings = data.addBooking.booked;
         setBookings(bookings);
       }
+
+      setStartDate("");
+      setEndDate("");
+      setHours("");
+      setPassengers("");
+      toast({
+        title: "Booking submitted",
+        description: "Thank you!",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
 
     } catch (err) {
       console.error(err);
