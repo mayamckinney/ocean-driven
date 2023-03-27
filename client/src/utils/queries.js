@@ -98,3 +98,11 @@ query Me {
     }
   }
 `;
+
+export const QUERY_CHECKOUT = gql`
+  query getCheckout($boatId: ID!, $from: String!, $to: String!, $startTime: String!, $endTime: String!) {
+    checkout(boatId: $boatId, from: $from, to: $to, startTime: $startTime, endTime: $endTime) {
+      session
+    }
+  }
+`;

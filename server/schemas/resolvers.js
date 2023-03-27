@@ -1,7 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Product, Category, Order, Boat } = require("../models");
+const { User, Boat } = require("../models");
 const { signToken } = require("../utils/auth");
-const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
+const stripe = require("stripe")("sk_test_51Mlkl2B4isP22xRkWTMu1vCNDtuqqhj5Hx4zLJrojyEGY5PIDdUmsjps1MuhBZlYRxT6lRXb5afIsrTKw0nhi71d00zGYigt5B");
 
 const resolvers = {
   Query: {
@@ -23,6 +23,50 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    checkout: async (parent, { boatId, from, to, startTime, endTime }, context) => {
+      const boat = await Boat.findOne({ _id: boatId })
+      console.log(boat)
+      const url = new URL(context.headers.referer).origin
+      console.log(url)
+      const line_items = []
+
+      const end = new Date(`${to} ${endTime}`)
+      const start = new Date(`${from} ${startTime}`)
+
+      console.log(end)
+      console.log(start)
+
+      const diffTime = Math.abs(end - start);
+      const diffhours = Math.ceil(diffTime / (1000 * 60 * 60))
+      console.log(diffhours)
+
+      const product = await stripe.products.create({
+        name: boat.title,
+        description: boat.description,
+        images: [`${url}/${boat.image}`]
+      })
+
+      const price = await stripe.prices.create({
+        product: product.id,
+        unit_amount: boat.priceRate * 100 * diffhours,
+        currency: `usd`
+      })
+
+      line_items.push({
+        price: price.id,
+        quantity: 1
+      });
+
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items,
+        mode: 'payment',
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`
+      });
+      
+      return { session: session.id };
+    }
   },
   Mutation: {
     login: async (parent, { email, password }) => {
