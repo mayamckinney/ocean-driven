@@ -16,11 +16,6 @@ import {
   ModalFooter,
   Heading,
   Icon,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
   Checkbox,
   CheckboxGroup,
   Text
@@ -37,8 +32,8 @@ import Auth from "../utils/auth";
 function BookingForm({ props }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
+  const [hours, setHours] = useState("");
+  const [passengers, setPassengers] = useState("");
   const [bookings, setBookings] = useState([]);
   const [addBooking] = useMutation(ADD_BOOKING);
   const toast = useToast();
@@ -46,7 +41,6 @@ function BookingForm({ props }) {
 
   const onCalendarClose = () => setIsCalendarOpen(false);
   const onCalendarOpen = () => setIsCalendarOpen(true);
-
 
   useEffect(() => {
     setBookings(props.booked);
@@ -61,16 +55,19 @@ function BookingForm({ props }) {
           boatId: props._id,
           from: `${startDate}`,
           to: `${endDate}`,
-          startTime: `${startTime}`,
-          endTime: `${startTime}`,
+          hours,
+          passengers,
           user: Auth.getProfile().data.username,
         },
       });
 
+      await console.log("DATA")
+      await console.log(data)
+
       setStartDate("");
       setEndDate("");
-      setStartTime("");
-      setEndTime("");
+      setHours("");
+      setPassengers("");
       toast({
         title: "Booking submitted",
         description: "Thank you!",
@@ -146,8 +143,8 @@ function BookingForm({ props }) {
               <FormLabel>Passengers</FormLabel>
               <Input
                 type="number"
-                // value={startDate}
-                // onChange={(event) => setStartDate(event.target.value)}
+                value={passengers}
+                onChange={(event) => setPassengers(Number(event.target.value))}
                 required
                 bg="secondary.50"
               />
@@ -158,8 +155,8 @@ function BookingForm({ props }) {
               <FormLabel>Hours (Day-Trips Only):</FormLabel>
               <Input
                 type="number"
-                // value={startDate}
-                // onChange={(event) => setStartDate(event.target.value)}
+                value={hours}
+                onChange={(event) => setHours(Number(event.target.value))}
                 placeholder="4"
                 min="4"
                 bg="secondary.50"

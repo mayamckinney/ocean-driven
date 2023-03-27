@@ -63,28 +63,29 @@ export const ADD_BOOKING = gql`
     addBooking(boatId: $boatId, from: $from, to: $to, hours: $hours, passengers: $passengers, user: $user) {
       _id
       boatType
+      title
+      description
+      destination
+      image
+      foodServices
+      music
+      occupancy
+      otherFeatures
+      priceRate
       booked {
+        _id
         from
         to
         hours
         passengers
         user
-        _id
       }
-      description
-      destination
-      foodServices
-      image
-      music
-      occupancy
-      priceRate
-      otherFeatures
       reviews {
         _id
+        createdAt
         reviewAuthor
         reviewText
       }
-      title
     }
   }
 `

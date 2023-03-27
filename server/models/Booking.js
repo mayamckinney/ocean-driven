@@ -13,13 +13,11 @@ const bookingSchema = new Schema({
     },
     hours: {
         type: Number,
-        required: true,
-        default: 4
+        required: true
     },
     passengers: {
         type: Number,
-        required: true,
-        default: 1
+        required: true
     },
     user: {
         type: String,
