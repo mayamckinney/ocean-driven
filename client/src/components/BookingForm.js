@@ -52,6 +52,7 @@ function BookingForm({ props }) {
     // Your booking logic here
     try {
 
+      // If isDayTrip from and to get value from startDate
       if (isDayTrip) {
 
         const { data } = await addBooking({
@@ -69,7 +70,7 @@ function BookingForm({ props }) {
         setBookings(bookings);
 
       } else {
-
+        // Value of startDate and endDate used for from and to; hours gets value of 99
         const { data } = await addBooking({
           variables: {
             boatId: props._id,
