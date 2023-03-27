@@ -35,6 +35,7 @@ import BookingForm from "../components/BookingForm";
 import BookingFormDaily from "../components/BookingFormDaily";
 import ReviewForm from "../components/ReviewForm";
 import useFetchData from "../hooks/useFetchData";
+import Weather from "../components/Weather";
 
 
 function BoatPage () {
@@ -48,7 +49,6 @@ function BoatPage () {
   const onCalendarClose = () => setIsCalendarOpen(false);
   const onCalendarOpen = () => setIsCalendarOpen(true);
 
-  
   const location = useLocation();
   const props = location.state.props;
 
@@ -58,7 +58,13 @@ function BoatPage () {
     if (!isLoading && response) {
       // Append the path to the image
       const imgs = response.map((image) => `images/${props._id}/${image}`);
-      setImages(imgs);
+      if(imgs.length > 0){
+        setImages(imgs);
+      }else{ 
+        setImages([props.image]);
+      }
+
+      console.log("Images: ", images)
     }
   }, [isLoading, response]);
 
@@ -184,6 +190,15 @@ function BoatPage () {
                     Write review
                     <Icon as={FaPen} ml={3} boxSize={3} />
                   </Button>
+                </CardBody>
+              </Card>
+              <Card mt={4}>
+                <CardBody>
+                  <Heading as="h3" fontSize="2xl" mt={2} mb={2}>
+                    Weather
+                  </Heading>
+                  <Divider />
+                  <Weather props={props} />
                 </CardBody>
               </Card>
             </Box>

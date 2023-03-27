@@ -184,9 +184,11 @@ const BoatEdit = () => {
                     </ListItem>
                     <ListItem mt={2} mb={4}>
                       <Button onClick={onImagesOpen} mt={4}>
-                        <Icon as={FaImages}/>
+                         Upload
+                         <Icon as={FaImages} ml={3} boxSize={3}/>
                       </Button>
                       <Button onClick={onOpen} mt={4}>
+                        Reviews
                         <Icon as={FaPen} ml={3} boxSize={3} />
                       </Button>
                     </ListItem>

@@ -46,7 +46,10 @@ router.post('/image/:id', imageUpload.single('image'), (req, res) => {
 router.get('/images/:id', (req, res) => {
   // Find the names of all files in the directory
   const dir = `../client/public/images/${req.params.id}`;
-  const files = fs.readdirSync(dir);
+  // Check if directory exists
+  let files = [];
+  if(fs.existsSync(dir)) 
+    files = fs.readdirSync(dir);
   // Send the names of the files in the directory
   res.json(files);
 });
