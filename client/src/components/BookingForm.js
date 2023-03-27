@@ -21,11 +21,12 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  Text
+  Text,
+  HStack
 } from "@chakra-ui/react";
 
 import { useEffect } from "react";
-import { FaCalendarAlt, FaBookOpen } from "react-icons/fa";
+import { FaCalendarAlt, FaBookOpen, FaWhatsapp } from "react-icons/fa";
 import BookingCalendar from "../components/BookingCalendar";
 
 import { useMutation } from "@apollo/client";
@@ -44,7 +45,10 @@ function BookingForm({ props }) {
 
   const onCalendarClose = () => setIsCalendarOpen(false);
   const onCalendarOpen = () => setIsCalendarOpen(true);
-
+  const onWhatsapp = () => {
+    const url = `https://wa.me/+15208330249?text=Hello,I'm interested in booking your boat ${props.title}. Please send me more information`
+    window.open(url, '_blank')
+  }
 
   useEffect(() => {
     setBookings(props.booked);
@@ -196,16 +200,24 @@ function BookingForm({ props }) {
           </Accordion>
 
           {/* Booking Button */}
-          <Button p={15} mt={3} w="full" type="submit">
-            Book
-            <Icon as={FaBookOpen} ml={2} />
-          </Button>
 
           {/* Check Availability Button */}
+          <Box>
+          <HStack>
           <Button p={15} mt={3} w="full" onClick={onCalendarOpen}>
             Check Availability
             <Icon as={FaCalendarAlt} ml={2} />
           </Button>
+          <Button p={15} mt={3} w="full" type="submit">
+            Submit Booking 
+            <Icon as={FaBookOpen} ml={2} />
+          </Button>
+          <Button as={"a"} p={15} mt={3} w="full" type="submit" onClick={onWhatsapp}>
+            Request Info
+            <Icon as={FaWhatsapp} ml={2} />
+          </Button>
+          </HStack>
+          </Box>
         </form>
       </Box>
 
