@@ -11,15 +11,25 @@ const bookingSchema = new Schema({
         type: String,
         required: true
     },
-    startTime: {
-        type: String,
+    // startTime: {
+    //     type: String,
+    //     required: true,
+    //     default: '06:00'
+    // },
+    // endTime: {
+    //     type: String,
+    //     required: true,
+    //     default: '18:00'
+    // },
+    hours: {
+        type: Number,
         required: true,
-        default: '06:00'
+        default: 4
     },
-    endTime: {
-        type: String,
+    passengers: {
+        type: Number,
         required: true,
-        default: '18:00'
+        default: 1
     },
     user: {
         type: String,
