@@ -71,6 +71,7 @@ query Me {
       email
       renter
       boats {
+        _id
         boatType
         destination
         description

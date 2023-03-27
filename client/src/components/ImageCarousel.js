@@ -87,13 +87,13 @@ export default function Carousel({ images }) {
       >
 
         {/* Change after boats can have multiple images */}
-        {/* {images.map((image, index) => (
+        {images.map((image, index) => (
           <Image
             key={index}
             src={image}
           />
-        ))} */}
-        <Image src={images} borderRadius={4} />
+        ))}
+        {/* <Image src={images} borderRadius={4} /> */}
              
       </Slider>
     </Box>

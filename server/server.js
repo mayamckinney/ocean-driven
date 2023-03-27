@@ -2,16 +2,23 @@ const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
 const path = require("path");
 const { authMiddleware } = require("./utils/auth");
+const fs = require("fs");
 
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
 
 const multer = require("multer");
 // Create multer object
+
 const imageUpload = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, "../client/public/images/");
+      const dir = `../client/public/images/${req.params.id}`;
+      // If directory does not exist, create it
+      if(!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+      }
+      cb(null, dir);
     },
     filename: function (req, file, cb) {
       cb(null, file.originalname);
@@ -32,9 +39,18 @@ const server = new ApolloServer({
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-router.post('/image', imageUpload.single('image'), (req, res) => { 
+router.post('/image/:id', imageUpload.single('image'), (req, res) => { 
   res.json('/image api'); 
 });
+
+router.get('/images/:id', (req, res) => {
+  // Find the names of all files in the directory
+  const dir = `../client/public/images/${req.params.id}`;
+  const files = fs.readdirSync(dir);
+  // Send the names of the files in the directory
+  res.json(files);
+});
+
 
 app.use("/api/boat/", router);
 // Serve up static assets

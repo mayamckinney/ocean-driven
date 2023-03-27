@@ -13,6 +13,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import BoatPage from "./pages/BoatPage";
 import BoatForm from "./components/BoatForm";
+import BoatEdit from "./pages/BoatEdit";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Footer from "./components/Footer";
@@ -49,6 +50,7 @@ function App() {
             <Route path="/boatform" element={<BoatForm />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
+            <Route path="/boat-edit" element={<BoatEdit />}></Route>
           </Routes>
           <Footer />
         </div>
