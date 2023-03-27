@@ -27,10 +27,13 @@ import {
 import { useEffect } from "react";
 import { FaCalendarAlt, FaBookOpen } from "react-icons/fa";
 import BookingCalendar from "../components/BookingCalendar";
+import { loadStripe } from '@stripe/stripe-js';
 
-import { useMutation } from "@apollo/client";
+import { useMutation, useLazyQuery } from "@apollo/client";
 import { ADD_BOOKING } from "../utils/mutations";
+import { QUERY_CHECKOUT } from "../utils/queries"
 import Auth from "../utils/auth";
+import { idbPromise } from "../utils/helpers";
 
 function BookingForm({ props }) {
   const [startDate, setStartDate] = useState("");
@@ -39,30 +42,40 @@ function BookingForm({ props }) {
   const [endTime, setEndTime] = useState("");
   const [bookings, setBookings] = useState([]);
   const [addBooking] = useMutation(ADD_BOOKING);
+  const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT)
   const toast = useToast();
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   const onCalendarClose = () => setIsCalendarOpen(false);
   const onCalendarOpen = () => setIsCalendarOpen(true);
 
-
+  const stripePromise = loadStripe('pk_test_51Mlkl2B4isP22xRkEuqoS88b0ddSQDJQrMPSoD0DWxh8EVIFNj7Zhwqu8g19n4OYucrw1Ld6yrtwURsJNXqHcQAR009eCt8weO');
   useEffect(() => {
     setBookings(props.booked);
   }, [props.booked]);
 
+  useEffect(() => {
+    if (data) {
+      stripePromise.then((res) => {
+        res.redirectToCheckout({ sessionId: data.checkout.session });
+      });
+    }
+  }, [data]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Your booking logic here
+    
+    idbPromise('booking', 'put', { boatId: props._id, from: `${startDate}`, to: `${endDate}`, startTime: `${startTime}`, endTime: `${endTime}`, user: Auth.getProfile().data.username })
     try {
-      const { data } = await addBooking({
-        variables: {
+      getCheckout({
+        variables: { 
           boatId: props._id,
           from: `${startDate}`,
           to: `${endDate}`,
           startTime: `${startTime}`,
-          endTime: `${startTime}`,
-          user: Auth.getProfile().data.username,
-        },
+          endTime: `${endTime}`,
+         },
       });
 
       setStartDate("");
