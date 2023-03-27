@@ -30,6 +30,7 @@ import { ADD_BOOKING } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 function BookingForm({ props }) {
+  const [isDayTrip, setIsDayTrip] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [hours, setHours] = useState("");
@@ -41,6 +42,8 @@ function BookingForm({ props }) {
 
   const onCalendarClose = () => setIsCalendarOpen(false);
   const onCalendarOpen = () => setIsCalendarOpen(true);
+
+  console.log("Day Trip: " + isDayTrip);
 
   useEffect(() => {
     setBookings(props.booked);
@@ -60,9 +63,6 @@ function BookingForm({ props }) {
           user: Auth.getProfile().data.username,
         },
       });
-
-      await console.log("DATA")
-      await console.log(data)
 
       setStartDate("");
       setEndDate("");
@@ -104,70 +104,103 @@ function BookingForm({ props }) {
 
           {/* isDayTrip */}
           <FormControl mb={3}>
-            <Checkbox colorScheme='quaternary' fontWeight='bold'>Day-Trip Only</Checkbox>
+            <Checkbox
+              colorScheme='quaternary'
+              fontWeight='bold'
+              value={isDayTrip}
+              onChange={() => { setIsDayTrip(!isDayTrip) }}
+            >Day-Trip Only</Checkbox>
           </FormControl>
 
-          {/* Form - First Row */}
-          <Flex flexDirection={{ base: "column", md: "row" }}>
-            
-            {/* Start Date */}
-            <FormControl>
-              <FormLabel>Start Date</FormLabel>
-              <Input
-                type="date"
-                value={startDate}
-                onChange={(event) => setStartDate(event.target.value)}
-                required
-                bg="secondary.50"
-              />
-            </FormControl>
+          {/* Changes form view if user wants to book day trip only */}
+          {
+            isDayTrip ? (
+              <Box>
+                {/* Date */}
+                <FormControl>
+                  <FormLabel>Date</FormLabel>
+                  <Input
+                    type="date"
+                    value={startDate}
+                    onChange={(event) => setStartDate(event.target.value)}
+                    required
+                    bg="secondary.50"
+                  />
+                </FormControl>
 
-            {/* End Date */}
-            <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
-              <FormLabel>End Date</FormLabel>
-              <Input
-                type="date"
-                value={endDate}
-                onChange={(event) => setEndDate(event.target.value)}
-                required
-                bg="secondary.50"
-              />
-            </FormControl>
-          </Flex>
+                <Flex flexDirection={{ base: "column", md: "row" }} ml={{ md: 2 }}>
 
-          {/* Form - Second Row */}
-          <Flex flexDirection={{ base: "column", md: "row" }} mt={4}>
+                  {/* Hours */}
+                  <FormControl mt={{ base: 3, md: 0 }}>
+                    <FormLabel>Hours (Day-Trips Only):</FormLabel>
+                    <Input
+                      type="number"
+                      value={hours}
+                      onChange={(event) => setHours(Number(event.target.value))}
+                      placeholder="4"
+                      min="4"
+                      bg="secondary.50"
+                    />
+                  </FormControl>
 
-            {/* Passengers */}
-            <FormControl>
-              <FormLabel>Passengers</FormLabel>
-              <Input
-                type="number"
-                value={passengers}
-                onChange={(event) => setPassengers(Number(event.target.value))}
-                required
-                bg="secondary.50"
-              />
-            </FormControl>
+                  {/* Passengers */}
+                  <FormControl mt={{ base: 3, md: 0 }}>
+                    <FormLabel>Passengers</FormLabel>
+                    <Input
+                      type="number"
+                      value={passengers}
+                      onChange={(event) => setPassengers(Number(event.target.value))}
+                      required
+                      bg="secondary.50"
+                    />
+                  </FormControl>
 
-            {/* Hours */}
-            <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
-              <FormLabel>Hours (Day-Trips Only):</FormLabel>
-              <Input
-                type="number"
-                value={hours}
-                onChange={(event) => setHours(Number(event.target.value))}
-                placeholder="4"
-                min="4"
-                bg="secondary.50"
-              />
-            </FormControl>
-          </Flex>
+                </Flex>
+              </Box>
+            ) : (
+              <Box>
+                {/* Form - First Row */}
+                <Flex flexDirection={{ base: "column", md: "row" }}>
 
-          <Text mt={4} fontSize='sm'>
-            <Text as='b' mr={2}>Please Note:</Text>
-            Bookings for single day trips must be a minimun of 4 hours long.
-          </Text>
+                  {/* Start Date */}
+                  <FormControl>
+                    <FormLabel>Start Date</FormLabel>
+                    <Input
+                      type="date"
+                      value={startDate}
+                      onChange={(event) => setStartDate(event.target.value)}
+                      required
+                      bg="secondary.50"
+                    />
+                  </FormControl>
+
+                  {/* End Date */}
+                  <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
+                    <FormLabel>End Date</FormLabel>
+                    <Input
+                      type="date"
+                      value={endDate}
+                      onChange={(event) => setEndDate(event.target.value)}
+                      required
+                      bg="secondary.50"
+                    />
+                  </FormControl>
+                </Flex>
+
+                {/* Passengers */}
+                <FormControl mt={{ base: 3, md: 0 }}>
+                  <FormLabel>Passengers</FormLabel>
+                  <Input
+                    type="number"
+                    value={passengers}
+                    onChange={(event) => setPassengers(Number(event.target.value))}
+                    required
+                    bg="secondary.50"
+                  />
+                </FormControl>
+              </Box>
+            )
+          }
 
           {/* Booking Button */}
           <Button p={15} mt={3} w="full" type="submit">

@@ -13,7 +13,7 @@ const NavBar = () => {
             justifyContent='space-between'
             pos='fixed'
             top={0}
-            zIndex={1}
+            zIndex={2}
             boxShadow='base'
             p={2}
             as="nav"
