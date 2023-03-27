@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link as RouteLink } from 'react-router-dom';
 import {
     Box,
     Heading,
@@ -14,6 +15,8 @@ import {
     Grid,
     GridItem,
     Flex,
+    Link,
+    Card
 } from "@chakra-ui/react";
 import BoatForm from "./BoatForm";
 import BoatCard from "./BoatCard";
@@ -73,9 +76,12 @@ const BoatList = ({ boats }) => {
                     ? boats?.map((boat, index) => {
                         return (
 
-                            <GridItem colSpan={{ base: 12, md: 4 }}>
+                            <GridItem key={index} colSpan={{ base: 12, md: 4 }}>
                                 <div key={index}>
+                                    <Card>
                                     <BoatCard key={index} props={boat}></BoatCard>
+                                    <Button colorScheme='secondary' as={RouteLink} state={boat} to="/boat-edit">Edit</Button>
+                                    </Card>
                                 </div>
                             </GridItem>
 

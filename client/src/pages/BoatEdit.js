@@ -16,7 +16,7 @@ import {
   Button,
   GridItem,
 } from "@chakra-ui/react";
-import { React, useEffect } from "react";
+import { React, useEffect} from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { FaMapMarkerAlt, FaUser, FaDollarSign, FaPen, FaImages } from "react-icons/fa";
@@ -32,25 +32,32 @@ import {
 
 import Carousel from "../components/ImageCarousel";
 import BookingForm from "../components/BookingForm";
-import BookingFormDaily from "../components/BookingFormDaily";
 import ReviewForm from "../components/ReviewForm";
+import ImageUploadForm from "../components/ImageUploadForm";
+import ImageGallery from "../components/ImageGallery";
+
 import useFetchData from "../hooks/useFetchData";
-import Weather from "../components/Weather";
 
+const BoatEdit = () => {
 
-function BoatPage () {
+  const location = useLocation();
+  const props = location.state;
+ 
   const [isOpen, setIsOpen] = useState(false);
+  const [isImagesOpen, setImagesIsOpen] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [images , setImages] = useState([]);
+  
 
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
 
+
+  const onImagesClose = () => setImagesIsOpen(false);
+  const onImagesOpen = () => setImagesIsOpen(true);
+
   const onCalendarClose = () => setIsCalendarOpen(false);
   const onCalendarOpen = () => setIsCalendarOpen(true);
-
-  const location = useLocation();
-  const props = location.state.props;
 
   const { isLoading, response, error } = useFetchData(`/api/boat/images/${props._id}`);
 
@@ -58,13 +65,7 @@ function BoatPage () {
     if (!isLoading && response) {
       // Append the path to the image
       const imgs = response.map((image) => `images/${props._id}/${image}`);
-      if(imgs.length > 0){
-        setImages(imgs);
-      }else{ 
-        setImages([props.image]);
-      }
-
-      console.log("Images: ", images)
+      setImages(imgs);
     }
   }, [isLoading, response]);
 
@@ -78,33 +79,30 @@ function BoatPage () {
           </Heading>
           <Text textAlign="center">{props.boatType}</Text>
         </Box>
-
+        <Box
+    boxShadow="md"
+    w={{ base: "90%", md: "75%" }}
+    mx="auto"
+    my={3}
+    px={5}
+    py={4}
+    borderRadius={6}
+  >
+        <ImageGallery images={images} />
         <Grid templateColumns="repeat(12, 1fr)" gap={2}>
-          <GridItem colSpan={{ base: 0, lg: 2 }} />
+          {/* <GridItem colSpan={{ base: 0, lg: 2 }} /> */}
 
-          <GridItem colSpan={{ base: 12, lg: 4 }}>
-
-            {/* Boat Image Card */}
+          {/* <GridItem colSpan={{ base: 12, lg: 4 }}>
             <Box>
               <Box mx="auto" borderRadius={6}>
-
-                {/* Boat Image --> ADD CAROUSEL HERE */}
-                {/* <Image src={props.image} width="100%" borderRadius={4} /> */}
-                <Carousel images={images}/>
-
-                {/* Image Caption */}
                 <Text>
                   🔹 Included onboard: water & soft drinks, ice, towels, and a
                   cooler
-                  {/* Add a small icon with a + sign to indicate that there are more */}
                 </Text>
-
-                {/* Booking Form */}
                 <BookingForm props={props} />
               </Box>
             </Box>
-          </GridItem>
-
+          </GridItem> */}
           <GridItem colSpan={{ base: 12, lg: 4 }}>
             {/* Boat Info Card */}
             <Box>
@@ -184,28 +182,25 @@ function BoatPage () {
                           : "None"}
                       </Text>
                     </ListItem>
+                    <ListItem mt={2} mb={4}>
+                      <Button onClick={onImagesOpen} mt={4}>
+                         Upload
+                         <Icon as={FaImages} ml={3} boxSize={3}/>
+                      </Button>
+                      <Button onClick={onOpen} mt={4}>
+                        Reviews
+                        <Icon as={FaPen} ml={3} boxSize={3} />
+                      </Button>
+                    </ListItem>
                   </UnorderedList>
-
-                  <Button onClick={onOpen} width="full" mt={4}>
-                    Write review
-                    <Icon as={FaPen} ml={3} boxSize={3} />
-                  </Button>
-                </CardBody>
-              </Card>
-              <Card mt={4}>
-                <CardBody>
-                  <Heading as="h3" fontSize="2xl" mt={2} mb={2}>
-                    Weather
-                  </Heading>
-                  <Divider />
-                  <Weather props={props} />
                 </CardBody>
               </Card>
             </Box>
           </GridItem>
 
-          <GridItem colSpan={{ base: 0, lg: 2 }} />
+          {/* <GridItem colSpan={{ base: 0, lg: 2 }} /> */}
         </Grid>
+        </Box>
       </Box>
       {/* Review Modal */}
       <Modal isOpen={isOpen} onClose={onClose} size={"3xl"}>
@@ -231,8 +226,27 @@ function BoatPage () {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      <Modal isOpen={isImagesOpen} onClose={onImagesClose} size={"3xl"}>
+        <ModalOverlay />
+        <ModalContent>
+          {/* Modal Header */}
+          <ModalHeader bg="secondary.100">
+            <Heading as="h3" fontSize="3xl">
+              Add Pictures
+            </Heading>
+          </ModalHeader>
+
+          <ModalCloseButton />
+
+          <ModalBody>
+            <ImageUploadForm props={props} />
+          </ModalBody>
+          <ModalFooter>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
 
-export default BoatPage;
+export default BoatEdit;

@@ -1,16 +1,19 @@
 export const boatTypes = [
-    "Sailboat",
+    // "Sailboat",
     "Powerboat",
     "Yacht",
     "Catamaran",
-    "Houseboat",
+    "Jet Ski",
+    // "Houseboat",
   ];
   
 export const destinations = [
-    "Bahamas",
-    "Cancun",
-    "Hawaii",
-    "Miami",
-    "San Diego",
-    "Tahiti",
+    // "Bahamas",
+    // "Cancun",
+    // "Hawaii",
+    // "Miami",
+    // "San Diego",
+    // "Tahiti",
+    "San Carlos",
+    "Mazatlan",
   ];
