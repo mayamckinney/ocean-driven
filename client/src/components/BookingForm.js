@@ -53,31 +53,64 @@ function BookingForm({ props }) {
     event.preventDefault();
     // Your booking logic here
     try {
-      const { data } = await addBooking({
-        variables: {
-          boatId: props._id,
-          from: `${startDate}`,
-          to: `${endDate}`,
-          hours,
-          passengers,
-          user: Auth.getProfile().data.username,
-        },
-      });
 
-      setStartDate("");
-      setEndDate("");
-      setHours("");
-      setPassengers("");
-      toast({
-        title: "Booking submitted",
-        description: "Thank you!",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
+      if (isDayTrip) {
 
-      const bookings = data.addBooking.booked;
-      setBookings(bookings);
+        const { data } = await addBooking({
+          variables: {
+            boatId: props._id,
+            from: `${startDate}`,
+            to: `${startDate}`,
+            hours,
+            passengers,
+            user: Auth.getProfile().data.username,
+          },
+        });
+
+        setStartDate("");
+        setEndDate("");
+        setHours("");
+        setPassengers("");
+        toast({
+          title: "Booking submitted",
+          description: "Thank you!",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+
+        const bookings = data.addBooking.booked;
+        setBookings(bookings);
+
+      } else {
+
+        const { data } = await addBooking({
+          variables: {
+            boatId: props._id,
+            from: `${startDate}`,
+            to: `${endDate}`,
+            hours: 99,
+            passengers,
+            user: Auth.getProfile().data.username,
+          },
+        });
+
+        setStartDate("");
+        setEndDate("");
+        setHours("");
+        setPassengers("");
+        toast({
+          title: "Booking submitted",
+          description: "Thank you!",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+
+        const bookings = data.addBooking.booked;
+        setBookings(bookings);
+      }
+
     } catch (err) {
       console.error(err);
       toast({
@@ -128,23 +161,23 @@ function BookingForm({ props }) {
                   />
                 </FormControl>
 
-                <Flex flexDirection={{ base: "column", md: "row" }} ml={{ md: 2 }}>
+                <Flex flexDirection={{ base: "column", md: "row" }} mt={4}>
 
                   {/* Hours */}
                   <FormControl mt={{ base: 3, md: 0 }}>
-                    <FormLabel>Hours (Day-Trips Only):</FormLabel>
+                    <FormLabel>Hours:</FormLabel>
                     <Input
                       type="number"
                       value={hours}
                       onChange={(event) => setHours(Number(event.target.value))}
-                      placeholder="4"
+                      placeholder="4 hour minimum"
                       min="4"
                       bg="secondary.50"
                     />
                   </FormControl>
 
                   {/* Passengers */}
-                  <FormControl mt={{ base: 3, md: 0 }}>
+                  <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
                     <FormLabel>Passengers</FormLabel>
                     <Input
                       type="number"
@@ -152,6 +185,7 @@ function BookingForm({ props }) {
                       onChange={(event) => setPassengers(Number(event.target.value))}
                       required
                       bg="secondary.50"
+                      placeholder="Number of passengers"
                     />
                   </FormControl>
 
@@ -188,14 +222,15 @@ function BookingForm({ props }) {
                 </Flex>
 
                 {/* Passengers */}
-                <FormControl mt={{ base: 3, md: 0 }}>
-                  <FormLabel>Passengers</FormLabel>
+                <FormControl mt={3}>
+                  <FormLabel>Passengers:</FormLabel>
                   <Input
                     type="number"
                     value={passengers}
                     onChange={(event) => setPassengers(Number(event.target.value))}
                     required
                     bg="secondary.50"
+                    placeholder="Enter number of passengers"
                   />
                 </FormControl>
               </Box>
