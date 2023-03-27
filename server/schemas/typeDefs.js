@@ -48,12 +48,17 @@ const typeDefs = gql`
         user: String
     }
 
+    type Checkout {
+        session: ID
+    }
+
     type Query {
         users: [User]
         user(username: String!): User
         boats: [Boat]
         boat(boatId: ID!): Boat
         me: User
+        checkout(boatId: ID!, from: String!, to: String!, startTime: String!, endTime: String!): Checkout
     }
 
     type Mutation {

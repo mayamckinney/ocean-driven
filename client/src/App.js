@@ -18,6 +18,7 @@ import BoatEdit from "./pages/BoatEdit";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Footer from "./components/Footer";
+import Success from "./pages/Success";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -52,6 +53,7 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/boat-edit" element={<BoatEdit />}></Route>
+            <Route path="/success" element={<Success />}></Route>
           </Routes>
           <Footer />
         </div>
