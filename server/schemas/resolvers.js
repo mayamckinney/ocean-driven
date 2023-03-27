@@ -102,12 +102,12 @@ const resolvers = {
       );
       return boat;
     },
-    addBooking: async (parent, { boatId, from, to, startTime, endTime, user }, context) => {
+    addBooking: async (parent, { boatId, from, to, hours, passengers, user }, context) => {
       await Boat.findOneAndUpdate(
         { _id: boatId },
         {
           $addToSet: {
-            booked: { from, to, startTime, endTime, user: context.user.username },
+            booked: { from, to, hours, passengers, user: context.user.username },
           },
         }
       );
