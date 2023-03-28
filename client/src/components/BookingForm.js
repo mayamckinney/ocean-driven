@@ -179,6 +179,7 @@ function BookingForm({ props }) {
         borderRadius={6}
       >
         <form onSubmit={handleSubmit}>
+
           {/* isDayTrip */}
           <FormControl mb={3}>
             <Checkbox
@@ -198,7 +199,7 @@ function BookingForm({ props }) {
           {isDayTrip ? (
             <Box>
               {/* Date */}
-              <HStack>
+              <Flex flexDirection={{ base: "column", md: "row" }}>
                 <FormControl>
                   <FormLabel>Date</FormLabel>
                   <Input
@@ -210,7 +211,8 @@ function BookingForm({ props }) {
                   />
                 </FormControl>
 
-                <FormControl>
+                {/* Time */}
+                <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
                   <FormLabel>Time</FormLabel>
                   <Input
                     type="time"
@@ -220,8 +222,10 @@ function BookingForm({ props }) {
                     bg="secondary.50"
                   />
                 </FormControl>
-              </HStack>
-              <HStack>
+              </Flex>
+
+              <Flex flexDirection={{ base: "column", md: "row" }} mt={2}>
+
                 {/* Hours */}
                 <FormControl>
                   <FormLabel>Duration:</FormLabel>
@@ -234,8 +238,9 @@ function BookingForm({ props }) {
                     bg="secondary.50"
                   />
                 </FormControl>
+
                 {/* Passengers */}
-                <FormControl>
+                <FormControl mt={{ base: 3, md: 0 }}  ml={{ md: 2 }}>
                   <FormLabel>Passengers</FormLabel>
                   <Input
                     type="number"
@@ -248,12 +253,14 @@ function BookingForm({ props }) {
                     placeholder="Number of passengers"
                   />
                 </FormControl>
-              </HStack>
+              </Flex>
             </Box>
           ) : (
             <Box>
+
               {/* Form - First Row */}
               <Flex flexDirection={{ base: "column", md: "row" }}>
+
                 {/* Start Date */}
                 <FormControl>
                   <FormLabel>Start Date</FormLabel>
