@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from "react";
 import {
-  Flex,
   Text,
   Image,
   Card,
   HStack,
   CardBody,
-  CardHeader,
   VStack,
-  Box,
   Divider,
   Heading,
-  Button,
-  Link,
-  FormControl,
-  FormLabel,
   Switch,
-  Grid,
-  GridItem
 } from "@chakra-ui/react";
 const lat = 27.9484684;
 const lon = -111.0555218;
@@ -115,12 +106,8 @@ function WeatherPanel() {
                 {/* Day of the week */}
                 <HStack>
                   <Text fontWeight="bold">{getDay(day.dt)}</Text>
-                </HStack>
-
-                {/* Temperature */}
-                <HStack>
-
-                  {/* temp */}
+                
+                  {/* Temperature */}              
                   <Text fontWeight="bold">{Math.round(day.temp.day)}°</Text>
 
                   {/* Weather Image */}
@@ -130,18 +117,18 @@ function WeatherPanel() {
                   />
                 </HStack>
 
-                {/* Day/Night time */}
+                {/* Sunset/Sunrise */}
                 <VStack>
-                  <Text color="black">🌚{getHourAMPM(day.sunset)}</Text>
-                  <Text color="black">🌞0{getHourAMPM(day.sunrise)}</Text>
+                  <Text as='b'>Sunset/Sunrise</Text>
+                  <Text color="black">🌇 {getHourAMPM(day.sunset)}</Text>
+                  <Text color="black">🌅 0{getHourAMPM(day.sunrise)}</Text>
                 </VStack>
 
                 {/* Max/Min Temperature */}
-                <HStack>
-                  <Text>{Math.round(day.temp.max)}° /</Text>
-                  <Text>{Math.round(day.temp.min)}°</Text>
-                </HStack>
-                {/* </Flex> */}
+                <VStack mt={3}>
+                  <Text as='b'>High/Low</Text>
+                  <Text>{Math.round(day.temp.max)}° / {Math.round(day.temp.min)}°</Text>
+                </VStack>     
               </CardBody>
             </Card>
 
