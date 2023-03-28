@@ -17,6 +17,7 @@ import { useEffect } from "react";
 
 // Test page to see if Chakra UI is working
 import BoatsTest from "./BoatsTest";
+import Map from "../components/Map";
 
 import { boatTypes, destinations } from "../utils/types";
 
@@ -198,11 +199,21 @@ const Home = () => {
           </Button>
         </form>
       </Box>
-      
       {showResults && (
 
         <BoatsTest boats={boats} />
       )}
+      <Box
+        boxShadow="md"
+        w={{ base: "90%", md: "75%" }}
+        mx="auto"
+        my={3}
+        px={5}
+        py={4}
+        borderRadius={6}
+      >
+       <Map />
+      </Box>
     </Box>
   );
 };

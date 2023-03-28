@@ -35,7 +35,7 @@ import BookingForm from "../components/BookingForm";
 import BookingFormDaily from "../components/BookingFormDaily";
 import ReviewForm from "../components/ReviewForm";
 import useFetchData from "../hooks/useFetchData";
-import Weather from "../components/Weather";
+import WeatherPanel from "../components/WeatherPanel";
 
 
 function BoatPage () {
@@ -192,15 +192,7 @@ function BoatPage () {
                   </Button>
                 </CardBody>
               </Card>
-              <Card mt={4}>
-                <CardBody>
-                  <Heading as="h3" fontSize="2xl" mt={2} mb={2}>
-                    Weather
-                  </Heading>
-                  <Divider />
-                  <Weather props={props} />
-                </CardBody>
-              </Card>
+              <WeatherPanel props={props} />
             </Box>
           </GridItem>
 
