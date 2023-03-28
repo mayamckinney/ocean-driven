@@ -96,14 +96,14 @@ const Login = (props) => {
               />
             </FormControl>
             <Button type="submit" w='full' mb={2}>Login</Button>
-          <HStack>
-            <Button w="full" mb={2} onClick={() => loginSSO("google")}>
+          <HStack  mb={2}>
+            <Button w="full" onClick={() => loginSSO("google")}>
               <Icon as={FaGoogle} mr={3} />
             </Button>
-            <Button w="full" mb={2} onClick={() => loginSSO("instagram")}>
+            <Button w="full" onClick={() => loginSSO("instagram")}>
               <Icon as={FaInstagram} mr={3} />
             </Button>
-            <Button w="full" mb={2} onClick={() => loginSSO("facebook")}>
+            <Button w="full" onClick={() => loginSSO("facebook")}>
               <Icon as={FaFacebook} mr={3} />
             </Button>
           </HStack>

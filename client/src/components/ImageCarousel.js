@@ -60,7 +60,7 @@ export default function Carousel({ images }) {
         top={top}
         size='sm'
         transform={'translate(0%, -50%)'}
-        zIndex={2}
+        zIndex={1}
         onClick={() => slider?.slickPrev()}>
         <BiLeftArrowAlt />
       </IconButton>
@@ -75,7 +75,7 @@ export default function Carousel({ images }) {
         top={top}
         size='sm'
         transform={'translate(0%, -50%)'}
-        zIndex={2}
+        zIndex={1}
         onClick={() => slider?.slickNext()}>
         <BiRightArrowAlt />
       </IconButton>

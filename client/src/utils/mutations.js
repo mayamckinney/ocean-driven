@@ -59,32 +59,33 @@ export const REMOVE_BOAT = gql`
 `
 
 export const ADD_BOOKING = gql`
-  mutation addBooking($boatId: ID!, $from: String!, $to: String!, $startTime: String!, $endTime: String!, $user: String!) {
-    addBooking(boatId: $boatId, from: $from, to: $to, startTime: $startTime, endTime: $endTime, user: $user) {
+  mutation addBooking($boatId: ID!, $from: String!, $to: String!, $hours: Int!, $passengers: Int!, $user: String!) {
+    addBooking(boatId: $boatId, from: $from, to: $to, hours: $hours, passengers: $passengers, user: $user) {
       _id
       boatType
-      booked {
-        from
-        to
-        startTime
-        endTime
-        user
-        _id
-      }
+      title
       description
       destination
-      foodServices
       image
+      foodServices
       music
       occupancy
-      priceRate
       otherFeatures
+      priceRate
+      booked {
+        _id
+        from
+        to
+        hours
+        passengers
+        user
+      }
       reviews {
         _id
+        createdAt
         reviewAuthor
         reviewText
       }
-      title
     }
   }
 `
@@ -95,8 +96,8 @@ export const REMOVE_BOOKING = gql`
         _id
         from
         to
-        startTime
-        endTime
+        hours
+        passengers
         user 
 
     }
@@ -124,8 +125,8 @@ export const REMOVE_REVIEW = gql`
       booked {
         from
         to
-        startTime
-        endTime
+        hours
+        passengers
         user
         _id
       }

@@ -41,7 +41,7 @@ const BoatList = ({ boats }) => {
                 <Heading as='h4' fontSize='2xl' mt={3}>Boats:</Heading>
 
                 {/* Add Boat Button --> opens modal */}
-                <Button onClick={onOpen} colorScheme='primary'>Add a Boat</Button>
+                <Button onClick={onOpen} colorScheme='secondary'>Add a Boat</Button>
             </Flex>
 
 
