@@ -16,29 +16,33 @@ import {
   ModalFooter,
   Heading,
   Icon,
-  Checkbox
+  Checkbox,
+  calc,
+  HStack,
 } from "@chakra-ui/react";
 
 import { useEffect } from "react";
 import { FaCalendarAlt, FaBookOpen } from "react-icons/fa";
 import BookingCalendar from "../components/BookingCalendar";
-import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe } from "@stripe/stripe-js";
 
 import { useMutation, useLazyQuery } from "@apollo/client";
 import { ADD_BOOKING } from "../utils/mutations";
-import { QUERY_CHECKOUT } from "../utils/queries"
+import { QUERY_CHECKOUT } from "../utils/queries";
 import Auth from "../utils/auth";
 import { idbPromise } from "../utils/helpers";
 
 function BookingForm({ props }) {
-  const [isDayTrip, setIsDayTrip] = useState(false);
+  const [isDayTrip, setIsDayTrip] = useState(true);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [hours, setHours] = useState("");
   const [passengers, setPassengers] = useState("");
   const [bookings, setBookings] = useState([]);
   const [addBooking] = useMutation(ADD_BOOKING);
-  const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT)
+  const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
   const toast = useToast();
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
@@ -46,7 +50,9 @@ function BookingForm({ props }) {
   const onCalendarOpen = () => setIsCalendarOpen(true);
 
   // Stripe (local storage?)
-  const stripePromise = loadStripe('pk_test_51Mlkl2B4isP22xRkEuqoS88b0ddSQDJQrMPSoD0DWxh8EVIFNj7Zhwqu8g19n4OYucrw1Ld6yrtwURsJNXqHcQAR009eCt8weO');
+  const stripePromise = loadStripe(
+    "pk_test_51Mlkl2B4isP22xRkEuqoS88b0ddSQDJQrMPSoD0DWxh8EVIFNj7Zhwqu8g19n4OYucrw1Ld6yrtwURsJNXqHcQAR009eCt8weO"
+  );
 
   useEffect(() => {
     setBookings(props.booked);
@@ -63,14 +69,11 @@ function BookingForm({ props }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Your booking logic here
-    
-    idbPromise('booking', 'put', { boatId: props._id, from: `${startDate}`, to: `${endDate}`, startTime: `${startTime}`, endTime: `${endTime}`, user: Auth.getProfile().data.username })
     try {
-
       // Booking Logic
       // If isDayTrip from and to get value from startDate
       if (isDayTrip) {
-
+        // End  date and time is start date and time + hours
         const { data } = await addBooking({
           variables: {
             boatId: props._id,
@@ -84,7 +87,6 @@ function BookingForm({ props }) {
 
         const bookings = data.addBooking.booked;
         setBookings(bookings);
-
       } else {
         // Value of startDate and endDate used for from and to; hours gets value of 99
         const { data } = await addBooking({
@@ -101,17 +103,46 @@ function BookingForm({ props }) {
         const bookings = data.addBooking.booked;
         setBookings(bookings);
       }
-      
-      // Stripe Logic
-      getCheckout({
-        variables: { 
-          boatId: props._id,
-          from: `${startDate}`,
-          to: `${endDate}`,
-          startTime: `${startTime}`,
-          endTime: `${endTime}`,
-         },
-      });
+
+      // Parse startDate starTime
+      const startDateTime = `${startDate}T${startTime}`;
+      const start = new Date(startDateTime);
+
+      // end date and time is start date and time + hours
+      const end = new Date(start);
+      end.setHours(start.getHours() + parseInt(hours));
+
+      const endDateString = end.toISOString().split("T")[0];
+      const endTimeString = end.toISOString().split("T")[1].split(".")[0];
+  
+      // Convert back to ISO string
+      setEndDate(endDateString);
+      setEndTime(endTimeString);
+
+      const stripeObj = {
+        _id: props._id,
+        from: `${startDate}`,
+        to: `${endDateString}`,
+        startTime: `${startTime}`,
+        endTime: `${endTimeString}`,
+        user: Auth.getProfile().data.username,
+      };
+      console.log("stripeObj: ", stripeObj);
+      try {
+        idbPromise("booking", "put", stripeObj);
+        // Stripe Logic
+        getCheckout({
+          variables: {
+            boatId: props._id,
+            from: `${startDate}`,
+            to: `${endDateString}`,
+            startTime: `${startTime}`,
+            endTime: `${endTimeString}`,
+          },
+        });
+      } catch (err) {
+        console.error("Error:", err);
+      }
 
       // Resets
       setStartDate("");
@@ -125,7 +156,6 @@ function BookingForm({ props }) {
         duration: 3000,
         isClosable: true,
       });
-
     } catch (err) {
       console.error(err);
       toast({
@@ -149,22 +179,26 @@ function BookingForm({ props }) {
         borderRadius={6}
       >
         <form onSubmit={handleSubmit}>
-
           {/* isDayTrip */}
           <FormControl mb={3}>
             <Checkbox
-              colorScheme='quaternary'
-              fontWeight='bold'
+              colorScheme="quaternary"
+              fontWeight="bold"
               value={isDayTrip}
-              onChange={() => { setIsDayTrip(!isDayTrip) }}
-            >Day-Trip Only</Checkbox>
+              isChecked={isDayTrip}
+              onChange={() => {
+                setIsDayTrip(!isDayTrip);
+              }}
+            >
+              Day-Trip Only
+            </Checkbox>
           </FormControl>
 
           {/* Changes form view if user wants to book day trip only */}
-          {
-            isDayTrip ? (
-              <Box>
-                {/* Date */}
+          {isDayTrip ? (
+            <Box>
+              {/* Date */}
+              <HStack>
                 <FormControl>
                   <FormLabel>Date</FormLabel>
                   <Input
@@ -176,81 +210,91 @@ function BookingForm({ props }) {
                   />
                 </FormControl>
 
-                <Flex flexDirection={{ base: "column", md: "row" }} mt={4}>
-
-                  {/* Hours */}
-                  <FormControl mt={{ base: 3, md: 0 }}>
-                    <FormLabel>Hours:</FormLabel>
-                    <Input
-                      type="number"
-                      value={hours}
-                      onChange={(event) => setHours(Number(event.target.value))}
-                      placeholder="4 hour minimum"
-                      min="4"
-                      bg="secondary.50"
-                    />
-                  </FormControl>
-
-                  {/* Passengers */}
-                  <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
-                    <FormLabel>Passengers</FormLabel>
-                    <Input
-                      type="number"
-                      value={passengers}
-                      onChange={(event) => setPassengers(Number(event.target.value))}
-                      required
-                      bg="secondary.50"
-                      placeholder="Number of passengers"
-                    />
-                  </FormControl>
-
-                </Flex>
-              </Box>
-            ) : (
-              <Box>
-                {/* Form - First Row */}
-                <Flex flexDirection={{ base: "column", md: "row" }}>
-
-                  {/* Start Date */}
-                  <FormControl>
-                    <FormLabel>Start Date</FormLabel>
-                    <Input
-                      type="date"
-                      value={startDate}
-                      onChange={(event) => setStartDate(event.target.value)}
-                      required
-                      bg="secondary.50"
-                    />
-                  </FormControl>
-
-                  {/* End Date */}
-                  <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
-                    <FormLabel>End Date</FormLabel>
-                    <Input
-                      type="date"
-                      value={endDate}
-                      onChange={(event) => setEndDate(event.target.value)}
-                      required
-                      bg="secondary.50"
-                    />
-                  </FormControl>
-                </Flex>
-
+                <FormControl>
+                  <FormLabel>Time</FormLabel>
+                  <Input
+                    type="time"
+                    value={startTime}
+                    onChange={(event) => setStartTime(event.target.value)}
+                    required
+                    bg="secondary.50"
+                  />
+                </FormControl>
+              </HStack>
+              <HStack>
+                {/* Hours */}
+                <FormControl>
+                  <FormLabel>Duration:</FormLabel>
+                  <Input
+                    type="number"
+                    value={hours}
+                    onChange={(event) => setHours(Number(event.target.value))}
+                    placeholder="4 hour minimum"
+                    min="4"
+                    bg="secondary.50"
+                  />
+                </FormControl>
                 {/* Passengers */}
-                <FormControl mt={3}>
-                  <FormLabel>Passengers:</FormLabel>
+                <FormControl>
+                  <FormLabel>Passengers</FormLabel>
                   <Input
                     type="number"
                     value={passengers}
-                    onChange={(event) => setPassengers(Number(event.target.value))}
+                    onChange={(event) =>
+                      setPassengers(Number(event.target.value))
+                    }
                     required
                     bg="secondary.50"
-                    placeholder="Enter number of passengers"
+                    placeholder="Number of passengers"
                   />
                 </FormControl>
-              </Box>
-            )
-          }
+              </HStack>
+            </Box>
+          ) : (
+            <Box>
+              {/* Form - First Row */}
+              <Flex flexDirection={{ base: "column", md: "row" }}>
+                {/* Start Date */}
+                <FormControl>
+                  <FormLabel>Start Date</FormLabel>
+                  <Input
+                    type="date"
+                    value={startDate}
+                    onChange={(event) => setStartDate(event.target.value)}
+                    required
+                    bg="secondary.50"
+                  />
+                </FormControl>
+
+                {/* End Date */}
+                <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
+                  <FormLabel>End Date</FormLabel>
+                  <Input
+                    type="date"
+                    value={endDate}
+                    onChange={(event) => setEndDate(event.target.value)}
+                    required
+                    bg="secondary.50"
+                  />
+                </FormControl>
+              </Flex>
+
+              {/* Passengers */}
+              <FormControl mt={3}>
+                <FormLabel>Passengers:</FormLabel>
+                <Input
+                  type="number"
+                  value={passengers}
+                  onChange={(event) =>
+                    setPassengers(Number(event.target.value))
+                  }
+                  required
+                  bg="secondary.50"
+                  placeholder="Enter number of passengers"
+                />
+              </FormControl>
+            </Box>
+          )}
 
           {/* Booking Button */}
           <Button p={15} mt={3} w="full" type="submit">
@@ -270,7 +314,6 @@ function BookingForm({ props }) {
       <Modal isOpen={isCalendarOpen} onClose={onCalendarClose} size={"3xl"}>
         <ModalOverlay />
         <ModalContent>
-
           {/* Modal Header */}
           <ModalHeader bg="secondary.100">
             <Heading as="h3" fontSize="3xl">

@@ -25,20 +25,16 @@ const resolvers = {
     },
     checkout: async (parent, { boatId, from, to, startTime, endTime }, context) => {
       const boat = await Boat.findOne({ _id: boatId })
-      console.log(boat)
+    
       const url = new URL(context.headers.referer).origin
-      console.log(url)
+    
       const line_items = []
 
       const end = new Date(`${to} ${endTime}`)
       const start = new Date(`${from} ${startTime}`)
 
-      console.log(end)
-      console.log(start)
-
       const diffTime = Math.abs(end - start);
       const diffhours = Math.ceil(diffTime / (1000 * 60 * 60))
-      console.log(diffhours)
 
       const product = await stripe.products.create({
         name: boat.title,
