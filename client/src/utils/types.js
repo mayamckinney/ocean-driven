@@ -2,7 +2,7 @@ export const boatTypes = [
     // "Sailboat",
     "Powerboat",
     "Yacht",
-    "Catamaran",
+    "Sailboat",
     "Jet Ski",
     // "Houseboat",
   ];

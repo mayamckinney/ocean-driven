@@ -15,26 +15,15 @@ db.once("open", async () => {
     await User.create(userSeeds);
     await Boat.create(boatSeeds);
 
-    let users = await User.find({});
-    console.log(users);
-
     let boats = await Boat.find({});
-    console.log(boats);
-
-    // Randomly add a boat to a user
-    for (let i = 0; i < users.length; i++) {
-      let randomBoat = boats[Math.floor(Math.random() * boats.length)];
-      console.log("randomBoat", randomBoat);
-      users[i].boats.push(randomBoat);
-      await users[i].save();     
+    // Load all users where renter is true
+    let users = await User.find({ renter: true });
+    console.log(users);
+    for(let i = 0; i < boats.length; i++) {
+      let randomUser = users[Math.floor(Math.random() * users.length)];
+      randomUser.boats.push(boats[i]);
+      await randomUser.save();    
     }
-
-    // await User.deleteMany({});
-
-    // await User.create(userSeeds);
-
-    // let users = await User.find({});
-    // console.log(users);
 
     users = await User.find({});
     console.log(users);

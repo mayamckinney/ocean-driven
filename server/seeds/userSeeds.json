@@ -13,20 +13,14 @@
   },
   {
     "username": "Kent Beck",
-    "email": "kbeck@oceandriven.com",
+    "email": "renter2@oceandriven.com",
     "password": "oceandriven01",
     "renter": true
   },
   {
     "username": "Edward V. Berard",
-    "email": "evberard@oceandriven.com",
+    "email": "customer2@oceandriven.com",
     "password": "oceandriven01",
-    "renter": true
-  },
-  {
-    "username": "Alan Kay",
-    "email": "akay@oceandriven.com",
-    "password": "oceandriven01",
-    "renter": true
+    "renter": false
   }
 ]
