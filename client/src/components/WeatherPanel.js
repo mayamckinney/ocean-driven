@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from "react";
 import {
-  Flex,
   Text,
   Image,
   Card,
   HStack,
   CardBody,
-  CardHeader,
   VStack,
-  Box,
   Divider,
   Heading,
-  Button,
-  Link,
-  FormControl,
-  FormLabel,
   Switch,
-  SimpleGrid,
 } from "@chakra-ui/react";
 const lat = 27.9484684;
 const lon = -111.0555218;
@@ -53,7 +45,7 @@ function WeatherPanel() {
     const date = new Date(dt * 1000);
     const hour = date.getHours();
     const min = date.getMinutes();
-    return `${hour}::${min}`;
+    return `${hour}:${min}`;
   };
 
   const [isChecked, setIsChecked] = useState(true);
@@ -66,10 +58,15 @@ function WeatherPanel() {
   return (
     <Card mt={4}>
       <CardBody>
+
+        {/* Header */}
         <HStack>
+
           <Heading as="h3" fontSize="2xl" mt={2} mb={2}>
             Weather
           </Heading>
+
+          {/* Fahrenheit to Celsius Switch */}
           <HStack>
             <Text>°F</Text>
             <Switch
@@ -81,33 +78,62 @@ function WeatherPanel() {
             <Text>°C</Text>
           </HStack>
         </HStack>
+
         <Divider />
-        <HStack>
+
+        <HStack
+          overflowX='scroll'
+          pb={1}
+          sx={{
+            '&::-webkit-scrollbar': {
+              width: '100%',
+              height: '10px',
+              borderRadius: '8px',
+              backgroundColor: `secondary.50`,
+            },
+            '&::-webkit-scrollbar-thumb': {
+              backgroundColor: `secondary.200`,
+              borderRadius: '8px',
+            },
+          }}
+        >
           {weather.map((day) => (
-            <Card bg={"secondary.300"} width={"100%"} height={"100%"}>
+
+            // Weather Card
+            <Card bg={"secondary.300"} minWidth='160px' height={"100%"}>
               <CardBody>
+
+                {/* Day of the week */}
                 <HStack>
                   <Text fontWeight="bold">{getDay(day.dt)}</Text>
-                </HStack>
-                <HStack>
+                
+                  {/* Temperature */}              
                   <Text fontWeight="bold">{Math.round(day.temp.day)}°</Text>
+
+                  {/* Weather Image */}
                   <Image
                     src={`http://openweathermap.org/img/w/${day.weather[0].icon}.png`}
                     alt={day.weather[0].description}
                   />
                 </HStack>
+
+                {/* Sunset/Sunrise */}
                 <VStack>
-                  <Text color="black">🌚{getHourAMPM(day.sunset)}</Text>
-                  <Text color="black">🌞0{getHourAMPM(day.sunrise)}</Text>
+                  <Text as='b'>Sunset/Sunrise</Text>
+                  <Text color="black">🌇 {getHourAMPM(day.sunset)}</Text>
+                  <Text color="black">🌅 0{getHourAMPM(day.sunrise)}</Text>
                 </VStack>
-                <HStack>
-                  <Text>{Math.round(day.temp.max)}° /</Text>
-                  <Text>{Math.round(day.temp.min)}°</Text>
-                </HStack>
-                {/* </Flex> */}
+
+                {/* Max/Min Temperature */}
+                <VStack mt={3}>
+                  <Text as='b'>High/Low</Text>
+                  <Text>{Math.round(day.temp.max)}° / {Math.round(day.temp.min)}°</Text>
+                </VStack>     
               </CardBody>
             </Card>
+
           ))}
+
         </HStack>
       </CardBody>
     </Card>
