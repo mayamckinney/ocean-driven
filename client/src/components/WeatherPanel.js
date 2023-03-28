@@ -16,7 +16,8 @@ import {
   FormControl,
   FormLabel,
   Switch,
-  SimpleGrid,
+  Grid,
+  GridItem
 } from "@chakra-ui/react";
 const lat = 27.9484684;
 const lon = -111.0555218;
@@ -53,7 +54,7 @@ function WeatherPanel() {
     const date = new Date(dt * 1000);
     const hour = date.getHours();
     const min = date.getMinutes();
-    return `${hour}::${min}`;
+    return `${hour}:${min}`;
   };
 
   const [isChecked, setIsChecked] = useState(true);
@@ -89,11 +90,26 @@ function WeatherPanel() {
 
         <Divider />
 
-        <HStack>
+        <HStack
+          overflowX='scroll'
+          pb={1}
+          sx={{
+            '&::-webkit-scrollbar': {
+              width: '100%',
+              height: '10px',
+              borderRadius: '8px',
+              backgroundColor: `secondary.50`,
+            },
+            '&::-webkit-scrollbar-thumb': {
+              backgroundColor: `secondary.200`,
+              borderRadius: '8px',
+            },
+          }}
+        >
           {weather.map((day) => (
 
             // Weather Card
-            <Card bg={"secondary.300"} width={"100%"} height={"100%"}>
+            <Card bg={"secondary.300"} minWidth='160px' height={"100%"}>
               <CardBody>
 
                 {/* Day of the week */}
@@ -128,7 +144,7 @@ function WeatherPanel() {
                 {/* </Flex> */}
               </CardBody>
             </Card>
-            
+
           ))}
 
         </HStack>
