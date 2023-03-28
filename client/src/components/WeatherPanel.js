@@ -66,10 +66,15 @@ function WeatherPanel() {
   return (
     <Card mt={4}>
       <CardBody>
+
+        {/* Header */}
         <HStack>
+
           <Heading as="h3" fontSize="2xl" mt={2} mb={2}>
             Weather
           </Heading>
+
+          {/* Fahrenheit to Celsius Switch */}
           <HStack>
             <Text>°F</Text>
             <Switch
@@ -81,25 +86,41 @@ function WeatherPanel() {
             <Text>°C</Text>
           </HStack>
         </HStack>
+
         <Divider />
+
         <HStack>
           {weather.map((day) => (
+
+            // Weather Card
             <Card bg={"secondary.300"} width={"100%"} height={"100%"}>
               <CardBody>
+
+                {/* Day of the week */}
                 <HStack>
                   <Text fontWeight="bold">{getDay(day.dt)}</Text>
                 </HStack>
+
+                {/* Temperature */}
                 <HStack>
+
+                  {/* temp */}
                   <Text fontWeight="bold">{Math.round(day.temp.day)}°</Text>
+
+                  {/* Weather Image */}
                   <Image
                     src={`http://openweathermap.org/img/w/${day.weather[0].icon}.png`}
                     alt={day.weather[0].description}
                   />
                 </HStack>
+
+                {/* Day/Night time */}
                 <VStack>
                   <Text color="black">🌚{getHourAMPM(day.sunset)}</Text>
                   <Text color="black">🌞0{getHourAMPM(day.sunrise)}</Text>
                 </VStack>
+
+                {/* Max/Min Temperature */}
                 <HStack>
                   <Text>{Math.round(day.temp.max)}° /</Text>
                   <Text>{Math.round(day.temp.min)}°</Text>
@@ -107,7 +128,9 @@ function WeatherPanel() {
                 {/* </Flex> */}
               </CardBody>
             </Card>
+            
           ))}
+
         </HStack>
       </CardBody>
     </Card>
