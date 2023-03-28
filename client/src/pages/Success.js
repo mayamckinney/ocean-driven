@@ -5,40 +5,32 @@ import { idbPromise } from '../utils/helpers';
 import { Box, Container, Text } from '@chakra-ui/react';
 
 const Success = (props) => {
-    const [addBooking] = useMutation(ADD_BOOKING)
     useEffect(() => {
-        async function saveBooking() {
-            const booking = await idbPromise('booking', 'get')
-            console.log(booking[0])
-            const { data } = await addBooking({
-                variables: {
-                    boatId: booking[0].boatId,
-                    from: booking[0].from,
-                    to: booking[0].to,
-                    startTime: booking[0].startTime,
-                    endTime: booking[0].endTime,
-                    user: booking[0].user
-                },
-            });
-
-            console.log(data)
-
             setTimeout(() => {
                 window.location.assign('/');
             }, 3000);
-        }
-
-        saveBooking()
-    }, [addBooking]);
+    }, []);
 
     return (
-        <Box>
-            <Container>
-                <Text>
-                    Thank You!
-                </Text>
-            </Container>
-        </Box>
+        <Box
+    bgImage="url('/images/oceandrivenbglogin.png')"
+    bgPosition="bottom"
+    bgSize="cover"
+    bgRepeat="no-repeat"
+    w='100vw'
+    h='100vh'>
+      <Container 
+      mt={[ 24, 32, 40 ]} 
+      maxW='500px'
+      bgColor='white'
+      p={8}
+      boxShadow='lg'
+      borderRadius='md'>
+          <Text>
+            Payment Successful, returning home
+          </Text>
+    </Container>
+  </Box>
     );
 }
 
