@@ -5,6 +5,7 @@ const { authMiddleware } = require("./utils/auth");
 const fs = require("fs");
 
 const { typeDefs, resolvers } = require("./schemas");
+const { getImages } = require("./utils/cloudinary");
 const db = require("./config/connection");
 
 const multer = require("multer");
@@ -53,6 +54,17 @@ router.get('/images/:id', (req, res) => {
   // Send the names of the files in the directory
   res.json(files);
 });
+
+router.get('/cloud/:id', async (req, res) => {
+  // Find the names of all files in the directory
+  try{
+    const urls = await getImages(req.params.id)
+    res.status(200).json(urls);
+  } catch (err) {
+    console.log("Error in cloud:",err);
+  }
+});
+
 
 
 app.use("/api/boat/", router);

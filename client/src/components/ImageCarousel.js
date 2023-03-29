@@ -91,6 +91,7 @@ export default function Carousel({ images }) {
           <Image
             key={index}
             src={image}
+            alt={image}
           />
         ))}
         {/* <Image src={images} borderRadius={4} /> */}

@@ -16,11 +16,6 @@ import {
   ModalFooter,
   Heading,
   Icon,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
   Text,
   HStack,
 } from "@chakra-ui/react";
