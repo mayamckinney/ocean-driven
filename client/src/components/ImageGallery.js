@@ -6,7 +6,7 @@ const ImageGallery = ({ images }) => {
     <SimpleGrid columns={[1, 2, 3]} spacing={4} mt={4}>
       {images.map((image, index) => (
         <Box key={index}>
-          <Image src={image} alt={image} />
+          <Image src={image} alt={image}/>
         </Box>
       ))}
     </SimpleGrid>

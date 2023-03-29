@@ -29,7 +29,7 @@ const Home = () => {
     boatType: "All",
   });
   const [boats, setBoats] = useState([]);
-  const [showResults, setShowResults] = useState(false);
+  const [showResults, setShowResults] = useState(true);
 
   const { loading, error, data } = useQuery(QUERY_BOATS);
 
