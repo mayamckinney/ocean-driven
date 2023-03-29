@@ -19,6 +19,7 @@ import {
   Checkbox,
   calc,
   HStack,
+  Select,
 } from "@chakra-ui/react";
 
 import { useEffect } from "react";
@@ -39,7 +40,7 @@ function BookingForm({ props }) {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [hours, setHours] = useState("");
-  const [passengers, setPassengers] = useState("");
+  const [passengers, setPassengers] = useState("10");
   const [bookings, setBookings] = useState([]);
   const [addBooking] = useMutation(ADD_BOOKING);
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
@@ -134,7 +135,7 @@ function BookingForm({ props }) {
 
       const endDateString = end.toISOString().split("T")[0];
       const endTimeString = end.toISOString().split("T")[1].split(".")[0];
-  
+
       // Convert back to ISO string
       setEndDate(endDateString);
       setEndTime(endTimeString);
@@ -199,7 +200,6 @@ function BookingForm({ props }) {
         borderRadius={6}
       >
         <form onSubmit={handleSubmit}>
-
           {/* isDayTrip */}
           <FormControl mb={3}>
             <Checkbox
@@ -245,7 +245,6 @@ function BookingForm({ props }) {
               </Flex>
 
               <Flex flexDirection={{ base: "column", md: "row" }} mt={2}>
-
                 {/* Hours */}
                 <FormControl>
                   <FormLabel>Duration:</FormLabel>
@@ -260,9 +259,20 @@ function BookingForm({ props }) {
                 </FormControl>
 
                 {/* Passengers */}
-                <FormControl mt={{ base: 3, md: 0 }}  ml={{ md: 2 }}>
+                <FormControl mt={{ base: 3, md: 0 }} ml={{ md: 2 }}>
                   <FormLabel>Passengers</FormLabel>
-                  <Input
+                  <Select
+                    placeholder="Select number of guests"
+                    bg="secondary.50"
+                    onChange={(event) => setPassengers(event.target.value)}
+                  >
+                    {Array.from(getGuestsCategories()).map((num) => (
+                      <option key={num} value={num}>
+                        {num}
+                      </option>
+                    ))}
+                  </Select>
+                  {/* <Input
                     type="number"
                     value={passengers}
                     onChange={(event) =>
@@ -271,16 +281,14 @@ function BookingForm({ props }) {
                     required
                     bg="secondary.50"
                     placeholder="Number of passengers"
-                  />
+                  /> */}
                 </FormControl>
               </Flex>
             </Box>
           ) : (
             <Box>
-
               {/* Form - First Row */}
               <Flex flexDirection={{ base: "column", md: "row" }}>
-
                 {/* Start Date */}
                 <FormControl>
                   <FormLabel>Start Date</FormLabel>

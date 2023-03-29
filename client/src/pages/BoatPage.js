@@ -34,14 +34,17 @@ import Carousel from "../components/ImageCarousel";
 import BookingForm from "../components/BookingForm";
 import BookingFormDaily from "../components/BookingFormDaily";
 import ReviewForm from "../components/ReviewForm";
-import useFetchData from "../hooks/useFetchData";
+import useCloudinary from "../hooks/useCloudinary";
 import WeatherPanel from "../components/WeatherPanel";
 
 
 function BoatPage () {
+  const location = useLocation();
+  const props = location.state.props;
   const [isOpen, setIsOpen] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [images , setImages] = useState([]);
+  // const [props , setProps] = useState([]);
 
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
@@ -49,22 +52,19 @@ function BoatPage () {
   const onCalendarClose = () => setIsCalendarOpen(false);
   const onCalendarOpen = () => setIsCalendarOpen(true);
 
-  const location = useLocation();
-  const props = location.state.props;
+  const { isLoading, response, error } = useCloudinary(props?.title);
 
-  const { isLoading, response, error } = useFetchData(`/api/boat/images/${props._id}`);
 
   useEffect(() => {
+
     if (!isLoading && response) {
       // Append the path to the image
-      const imgs = response.map((image) => `images/${props._id}/${image}`);
+      const imgs = response;
       if(imgs.length > 0){
-        setImages(imgs);
+        setImages([props.image,...response]);
       }else{ 
         setImages([props.image]);
       }
-
-      console.log("Images: ", images)
     }
   }, [isLoading, response]);
 
@@ -105,20 +105,20 @@ function BoatPage () {
             </Box>
           </GridItem>
 
-          <GridItem colSpan={{ base: 12, lg: 4 }}>
+          <GridItem colSpan={{ base: 12, lg: 4 }} height="100%">
             {/* Boat Info Card */}
             <Box>
               <Card>
-                <CardBody>
-                  {/* Boat Details */}
+                <CardHeader>
                   <Heading fontSize="2xl" mt={2} mb={2}>
                     Boat Details
                   </Heading>
+                </CardHeader>
+                <CardBody>
+                  {/* Boat Details */}
 
                   <Divider />
-
                   <Text mt={6}>{props.description}</Text>
-
                   <UnorderedList listStyleType="none" mt={4}>
                     {/* Destination */}
                     <ListItem mb={4}>
@@ -191,8 +191,10 @@ function BoatPage () {
                     <Icon as={FaPen} ml={3} boxSize={3} />
                   </Button>
                 </CardBody>
+                <CardFooter>
+                <WeatherPanel props={props} />
+                </CardFooter>
               </Card>
-              <WeatherPanel props={props} />
             </Box>
           </GridItem>
 

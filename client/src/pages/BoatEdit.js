@@ -15,11 +15,18 @@ import {
   Divider,
   Button,
   GridItem,
+  HStack,
 } from "@chakra-ui/react";
-import { React, useEffect} from "react";
+import { React, useEffect } from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { FaMapMarkerAlt, FaUser, FaDollarSign, FaPen, FaImages } from "react-icons/fa";
+import {
+  FaMapMarkerAlt,
+  FaUser,
+  FaDollarSign,
+  FaPen,
+  FaImages,
+} from "react-icons/fa";
 import {
   Modal,
   ModalOverlay,
@@ -35,23 +42,22 @@ import BookingForm from "../components/BookingForm";
 import ReviewForm from "../components/ReviewForm";
 import ImageUploadForm from "../components/ImageUploadForm";
 import ImageGallery from "../components/ImageGallery";
+import CloudinaryForm from "../components/CloudinaryForm";
 
 import useFetchData from "../hooks/useFetchData";
+import useCloudinary from "../hooks/useCloudinary";
 
 const BoatEdit = () => {
-
   const location = useLocation();
   const props = location.state;
- 
+
   const [isOpen, setIsOpen] = useState(false);
   const [isImagesOpen, setImagesIsOpen] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [images , setImages] = useState([]);
-  
+  const [images, setImages] = useState([]);
 
   const onClose = () => setIsOpen(false);
   const onOpen = () => setIsOpen(true);
-
 
   const onImagesClose = () => setImagesIsOpen(false);
   const onImagesOpen = () => setImagesIsOpen(true);
@@ -59,13 +65,13 @@ const BoatEdit = () => {
   const onCalendarClose = () => setIsCalendarOpen(false);
   const onCalendarOpen = () => setIsCalendarOpen(true);
 
-  const { isLoading, response, error } = useFetchData(`/api/boat/images/${props._id}`);
+  // const { isLoading, response, error } = useFetchData(`/api/boat/images/${props._id}`);
+  const { isLoading, response, error } = useCloudinary(props?.title);
 
   useEffect(() => {
     if (!isLoading && response) {
       // Append the path to the image
-      const imgs = response.map((image) => `images/${props._id}/${image}`);
-      setImages(imgs);
+      setImages(response);
     }
   }, [isLoading, response]);
 
@@ -80,34 +86,19 @@ const BoatEdit = () => {
           <Text textAlign="center">{props.boatType}</Text>
         </Box>
         <Box
-    boxShadow="md"
-    w={{ base: "90%", md: "75%" }}
-    mx="auto"
-    my={3}
-    px={5}
-    py={4}
-    borderRadius={6}
-  >
-        <ImageGallery images={images} />
-        <Grid templateColumns="repeat(12, 1fr)" gap={2}>
-          {/* <GridItem colSpan={{ base: 0, lg: 2 }} /> */}
-
-          {/* <GridItem colSpan={{ base: 12, lg: 4 }}>
-            <Box>
-              <Box mx="auto" borderRadius={6}>
-                <Text>
-                  🔹 Included onboard: water & soft drinks, ice, towels, and a
-                  cooler
-                </Text>
-                <BookingForm props={props} />
-              </Box>
-            </Box>
-          </GridItem> */}
-          <GridItem colSpan={{ base: 12, lg: 4 }}>
-            {/* Boat Info Card */}
-            <Box>
-              <Card>
-                <CardBody>
+          boxShadow="md"
+          w={{ base: "90%", md: "75%" }}
+          mx="auto"
+          my={3}
+          px={5}
+          py={4}
+          borderRadius={6}
+        >
+          <Box>
+            <Card>
+              {/* <CardBody> */}
+              <HStack>
+                <Box>
                   {/* Boat Details */}
                   <Heading fontSize="2xl" mt={2} mb={2}>
                     Boat Details
@@ -142,8 +133,9 @@ const BoatEdit = () => {
                       </Flex>
                     </ListItem>
                   </UnorderedList>
-
-                  {/* Features */}
+                </Box>
+                {/* Features */}
+                <Box>
                   <Heading as="h3" mt={10} mb={2} fontSize="2xl">
                     Features
                   </Heading>
@@ -183,24 +175,24 @@ const BoatEdit = () => {
                       </Text>
                     </ListItem>
                     <ListItem mt={2} mb={4}>
-                      <Button onClick={onImagesOpen} mt={4}>
-                         Upload
-                         <Icon as={FaImages} ml={3} boxSize={3}/>
+                      <Button onClick={onImagesOpen} width="full" mt={4}>
+                        Upload
+                        <Icon as={FaImages} ml={3} boxSize={3} />
                       </Button>
-                      <Button onClick={onOpen} mt={4}>
+                      {/* <Button onClick={onOpen} mt={4}>
                         Reviews
                         <Icon as={FaPen} ml={3} boxSize={3} />
-                      </Button>
+                      </Button> */}
                     </ListItem>
                   </UnorderedList>
-                </CardBody>
-              </Card>
-            </Box>
-          </GridItem>
-
-          {/* <GridItem colSpan={{ base: 0, lg: 2 }} /> */}
-        </Grid>
+                </Box>
+              </HStack>
+              {/* </CardBody> */}
+            </Card>
+          </Box>
+          <ImageGallery images={images} />
         </Box>
+        
       </Box>
       {/* Review Modal */}
       <Modal isOpen={isOpen} onClose={onClose} size={"3xl"}>
@@ -239,10 +231,9 @@ const BoatEdit = () => {
           <ModalCloseButton />
 
           <ModalBody>
-            <ImageUploadForm props={props} />
+            <CloudinaryForm props={props} />
           </ModalBody>
-          <ModalFooter>
-          </ModalFooter>
+          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
     </>

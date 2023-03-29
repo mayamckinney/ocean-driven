@@ -6,7 +6,7 @@
         "description": "Luxurious 46-ft sailboat with 3 cabins and a full kitchen",
         "destination": "San Carlos",
         "image": "images/martillo.png",
-        "occupancy": 20,
+        "occupancy": 25,
         "foodServices": true,
         "music": true,
         "otherFeatures": "Kayak"
@@ -30,7 +30,7 @@
         "description": "Spacious 48-ft yatch with 4 cabins, kitchen and a large deck",
         "destination": "San Carlos",
         "image": "images/dakota.png",
-        "occupancy": 6,
+        "occupancy": 25,
         "foodServices": true,
         "music": true,
         "otherFeatures": "Scuba gear"

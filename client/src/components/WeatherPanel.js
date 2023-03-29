@@ -28,7 +28,6 @@ function WeatherPanel() {
     fetch(getURL())
       .then((response) => response.json())
       .then((data) => {
-        console.log("data", data);
         setWeather(data.daily.slice(0, 5));
         // console.log("data", data.list.slice(0, 7));
       });
