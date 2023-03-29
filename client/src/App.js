@@ -7,6 +7,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { Flex } from "@chakra-ui/react"
 import './App.css';
 
 import NavBar from "./components/NavBar";
@@ -43,7 +44,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div>
+        <Flex flexDirection='column' flexGrow='1' justifyContent='space-between' minHeight='100vh'>
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -56,7 +57,7 @@ function App() {
             <Route path="/success" element={<Success />}></Route>
           </Routes>
           <Footer />
-        </div>
+        </Flex>
       </Router>
     </ApolloProvider>
   );

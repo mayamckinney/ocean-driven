@@ -29,7 +29,7 @@ const Home = () => {
     boatType: "All",
   });
   const [boats, setBoats] = useState([]);
-  const [showResults, setShowResults] = useState(true);
+  const [showResults, setShowResults] = useState(false);
 
   const { loading, error, data } = useQuery(QUERY_BOATS);
 
@@ -94,12 +94,12 @@ const Home = () => {
   };
 
   return (
-    <Box 
-    mt={[ 16, 24, 32 ]}
-    bgImage="url('/images/oceandrivenbghome.png')"
-    bgPosition="bottom"
-    bgSize="contain"
-    bgRepeat="no-repeat">
+    <Box
+      mt={[16, 24, 32]}
+      // bgImage="url('/images/oceandrivenbghome.png')"
+      bgPosition="bottom"
+      bgSize="contain"
+      bgRepeat="no-repeat">
       {/* Hero Image */}
       {/* Source: https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F5119297%2Fpexels-photo-5119297.jpeg&imgrefurl=https%3A%2F%2Fwww.pexels.com%2Fphoto%2Fsea-landscape-beach-vacation-5119297%2F&tbnid=UcSt2_Ng6zzlQM&vet=12ahUKEwjnwLavj779AhVwO0QIHYXfBDUQMygyegQIARBn..i&docid=aeYbV3eUbsRq4M&w=3264&h=2448&itg=1&q=tropical%20coast&hl=en&ved=2ahUKEwjnwLavj779AhVwO0QIHYXfBDUQMygyegQIARBn */}
       <Box>
@@ -199,11 +199,13 @@ const Home = () => {
           </Button>
         </form>
       </Box>
+
       {showResults && (
 
         <BoatsTest boats={boats} />
       )}
-      <Box
+
+      {/* <Box
         boxShadow="md"
         w={{ base: "90%", md: "75%" }}
         mx="auto"
@@ -212,8 +214,8 @@ const Home = () => {
         py={4}
         borderRadius={6}
       >
-       {/* <Map /> */}
-      </Box>
+        <Map />
+      </Box> */}
     </Box>
   );
 };
