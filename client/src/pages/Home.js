@@ -96,7 +96,7 @@ const Home = () => {
   return (
     <Box 
     mt={[ 16, 24, 32 ]}
-    bgImage="url('/images/oceandrivenbghome.png')"
+    // bgImage="url('/images/oceandrivenbghome.png')"
     bgPosition="bottom"
     bgSize="contain"
     bgRepeat="no-repeat">
@@ -212,7 +212,7 @@ const Home = () => {
         py={4}
         borderRadius={6}
       >
-       <Map />
+       {/* <Map /> */}
       </Box>
     </Box>
   );
