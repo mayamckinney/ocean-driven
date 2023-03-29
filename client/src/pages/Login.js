@@ -110,7 +110,7 @@ const Login = (props) => {
           </form>
         <Text mb={5}>
           No account yet?{" "}
-          <Link color="blue" href="../#/signup">
+          <Link color="blue" href="../signup">
             Sign up
           </Link>{" "}
           instead!
