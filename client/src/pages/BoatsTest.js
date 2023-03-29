@@ -10,7 +10,7 @@ function BoatTest({ boats }) {
       {/* Add link to BoatForm here */}
       {/* <Button onClick={handleSubmit}>Test Add a Boat</Button> */}
       <Box
-        boxShadow="md"
+        // boxShadow="md"
         w={{ base: "90%", md: "75%" }}
         mx="auto"
         my={3}

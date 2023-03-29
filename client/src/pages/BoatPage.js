@@ -71,6 +71,7 @@ function BoatPage () {
   return (
     <>
       <Box mt={36} mx={{ base: 2, lg: 0 }}>
+        
         {/* Heading Container */}
         <Box mb={2}>
           <Heading as="h3" fontSize="3xl" textAlign="center">
